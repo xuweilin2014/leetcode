@@ -1,14 +1,9 @@
 package xu.linkedlist;
 
+/**
+ * @author xuwei_000
+ */
 public class SinglyLinkedList {
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     public static void printList(ListNode p){
         while (p != null){
@@ -18,8 +13,13 @@ public class SinglyLinkedList {
         System.out.println();
     }
 
-    public static void addNode(ListNode head, int val){
-        ListNode node = new ListNode(val);
+    public static void addNode(ListNode head, int val, int type){
+        ListNode node = null;
+        if (type == 0){
+            node = new ListNode(val);
+        }else if (type == 1){
+            node = new Node(val);
+        }
         node.next = null;
         if (head == null)
             head = node;

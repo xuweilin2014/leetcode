@@ -27,12 +27,12 @@ public class Problem83 extends SinglyLinkedList {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
-        Problem83.addNode(head,1);
-        Problem83.addNode(head,1);
-        Problem83.addNode(head,1);
-        Problem83.addNode(head,1);
-        Problem83.addNode(head,1);
-        Problem83.addNode(head,1);
+        Problem83.addNode(head,1,0);
+        Problem83.addNode(head,1,0);
+        Problem83.addNode(head,1,0);
+        Problem83.addNode(head,1,0);
+        Problem83.addNode(head,1,0);
+        Problem83.addNode(head,1,0);
 
         Problem83.printList(head);
         new Problem83().deleteDuplicates(head);

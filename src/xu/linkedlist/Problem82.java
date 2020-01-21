@@ -36,12 +36,12 @@ public class Problem82 extends SinglyLinkedList {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
-        Problem82.addNode(head,1);
-        Problem82.addNode(head,1);
-        Problem82.addNode(head,1);
-        Problem82.addNode(head,1);
-        Problem82.addNode(head,1);
-        Problem82.addNode(head,1);
+        Problem82.addNode(head,1,0);
+        Problem82.addNode(head,1,0);
+        Problem82.addNode(head,1,0);
+        Problem82.addNode(head,1,0);
+        Problem82.addNode(head,1,0);
+        Problem82.addNode(head,1,0);
 
         Problem82.printList(head);
         ListNode node = new Problem82().deleteDuplicates(head);

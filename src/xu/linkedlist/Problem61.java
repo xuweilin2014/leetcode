@@ -7,8 +7,9 @@ package xu.linkedlist;
 public class Problem61 extends SinglyLinkedList {
 
     public static ListNode rotateRight(ListNode head, int k) {
-        if (head == null || head.next == null)
+        if (head == null || head.next == null) {
             return head;
+        }
         k = k % getLength(head);
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -51,10 +52,10 @@ public class Problem61 extends SinglyLinkedList {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
-        Problem61.addNode(head,2);
-        Problem61.addNode(head,3);
-        Problem61.addNode(head,4);
-        Problem61.addNode(head,5);
+        Problem61.addNode(head,2,0);
+        Problem61.addNode(head,3,0);
+        Problem61.addNode(head,4,0);
+        Problem61.addNode(head,5,0);
 
         Problem61.printList(head);
 

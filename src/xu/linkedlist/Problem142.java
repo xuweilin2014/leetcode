@@ -37,9 +37,9 @@ public class Problem142 extends SinglyLinkedList {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(3);
-        Problem83.addNode(head,2);
-        Problem83.addNode(head,0);
-        Problem83.addNode(head,4);
+        Problem83.addNode(head,2,0);
+        Problem83.addNode(head,0,0);
+        Problem83.addNode(head,4,0);
 
         /*ListNode p = head;
         ListNode target = head;
