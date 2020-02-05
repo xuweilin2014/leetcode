@@ -1,8 +1,5 @@
 package xu.linkedlist;
 
-import com.sun.corba.se.impl.naming.namingutil.CorbalocURL;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 /**
  * 206. Reverse Linked List
  */

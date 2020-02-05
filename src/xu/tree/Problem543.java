@@ -1,6 +1,5 @@
 package xu.tree;
 
-import com.sun.crypto.provider.DESParameters;
 
 public class Problem543 {
     private int max = 0;
