@@ -14,26 +14,11 @@ public class Problem951 {
         else if (cur1.val != cur2.val)
             return false;
 
-        if ((cur1.left == null && cur2.left != null) ||
-                (cur1.left != null && cur2.left == null) ||
-                (cur1.right == null && cur2.right != null) ||
-                (cur1.right != null && cur2.right == null)){
-            TreeNode tmp = cur1.left;
-            cur1.left = cur1.right;
-            cur1.right = tmp;
-        }
-
-        if (cur1.left != null && cur2.left != null && cur1.left.val != cur2.left.val){
-            if (cur1.right != null && cur2.right != null && cur1.right.val != cur2.right.val){
-                TreeNode tmp = cur1.left;
-                cur1.left = cur1.right;
-                cur1.right = tmp;
-            }
-        }
-
-        boolean left = func(cur1.left, cur2.left);
-        boolean right = func(cur1.right, cur2.right);
-        if (left && right)
+        boolean left1 = func(cur1.left, cur2.left);
+        boolean right1 = func(cur1.right, cur2.right);
+        boolean left2 = func(cur1.left, cur2.right);
+        boolean right2 = func(cur1.right, cur2.left);
+        if ((left1 && right1) || (left2 && right2))
             return true;
 
         return false;
