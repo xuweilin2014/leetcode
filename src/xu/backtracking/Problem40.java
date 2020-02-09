@@ -13,16 +13,32 @@ public class Problem40 {
             return new ArrayList<>();
 
         Arrays.sort(candidates);
-        int[] visited = new int[candidates.length];
-        dfs(candidates,0, target, 0, new ArrayList<>(), visited);
+        dfsFinal(candidates,0, target, 0, new ArrayList<>());
         return res;
     }
 
-    private void dfs(int[] candidates, int val, int target, int sum, List<Integer> list, int[] visited) {
+    private void dfsFinal(int[] candidates, int val, int target, int sum, List<Integer> list) {
         if (sum > target)
             return;
         else if (sum == target){
-            copyAndAdd(res, list);
+            res.add(new ArrayList<>(list));
+            return;
+        }
+
+        for (int i = val; i < candidates.length; i++) {
+            if (i > val && candidates[i] == candidates[i - 1])
+                continue;
+            list.add(candidates[i]);
+            dfsFinal(candidates, i + 1, target, sum + candidates[i], list);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    private void dfs1(int[] candidates, int val, int target, int sum, List<Integer> list, int[] visited) {
+        if (sum > target)
+            return;
+        else if (sum == target){
+            res.add(new ArrayList<>(list));
             return;
         }
 
@@ -31,23 +47,18 @@ public class Problem40 {
                 continue;
             if (candidates[i] < val || candidates[i] > target - sum)
                 continue;
-
+            if(i >= 1 && visited[i - 1] != 1 && candidates[i] == candidates[i - 1])
+                continue;
             list.add(candidates[i]);
             visited[i] = 1;
-            dfs(candidates, candidates[i], target, sum + candidates[i], list, visited);
+            dfs1(candidates, candidates[i], target, sum + candidates[i], list, visited);
             list.remove(list.size() - 1);
             visited[i] = 0;
         }
     }
 
-    private void copyAndAdd(List<List<Integer>> res, List<Integer> list) {
-        List<Integer> vals = new ArrayList<>();
-        vals.addAll(list);
-        res.add(vals);
-    }
-
     public static void main(String[] args) {
-        List<List<Integer>> lists = new Problem40().combinationSum2(new int[]{10,1,2,7,6,1,5}, 8);
+        List<List<Integer>> lists = new Problem40().combinationSum2(new int[]{2,5,2,1,2}, 5);
         for (List<Integer> list : lists) {
             System.out.println(list);
         }
