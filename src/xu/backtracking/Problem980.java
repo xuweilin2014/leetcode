@@ -4,71 +4,44 @@ import java.util.List;
 
 public class Problem980 {
 
-    private int zeroNum = 0;
-    private int pathNum = 0;
-
-    public int uniquePathsIII(int[][] grid) {
-        int startX = 0;
-        int startY = 0;
-        int rows = grid.length;
-        int cols = grid[0].length;
-
-        for (int i = 0; i < grid.length; i++){
-            for (int j = 0; j < grid[i].length; j++){
-                if (grid[i][j] == 0)
-                    zeroNum++;
-                if (grid[i][j] == 1){
-                    startX = i;
-                    startY = j;
+    private int res = 0, empty = 1, sx, sy, ex, ey;
+    private int uniquePathsIII(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] == 0) empty++;
+                else if (grid[i][j] == 1) {
+                    sx = i;
+                    sy = j;
+                } else if (grid[i][j] == 2) {
+                    ex = i;
+                    ey = j;
                 }
             }
         }
-
-        dfs(grid, new int[rows][cols],startY, startX, 0, rows, cols);
-        return pathNum;
+        dfs(grid, sx, sy);
+        return res;
     }
 
-    private void dfs(int[][] grid, int[][] visited, int x, int y, int zeroCounter, int rows, int cols) {
-        if (x < 0 || x > cols - 1 || y < 0 || y > rows - 1) {
+    public void dfs(int[][] grid, int x, int y) {
+        if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] < 0)
+            return;
+        if (x == ex && y == ey) {
+            if (empty == 0) res++;
             return;
         }
-
-        if (visited[y][x] == 1)
-            return;
-        else
-            visited[y][x] = 1;
-
-        if (grid[y][x] == -1)
-        {
-            visited[y][x] = 0;
-            return;
-        }
-
-        zeroCounter++;
-
-        if (grid[y][x] == 2){
-            if (zeroCounter == zeroNum)
-                pathNum++;
-            visited[y][x] = 0;
-            return;
-        }
-
-        int tmpX = x, tmpY = y;
-        for (int i = 0; i < 4; i++){
-            if (i == 0) y--;
-            else if (i == 1) x++;
-            else if (i == 2) y++;
-            else x--;
-            dfs(grid, visited,x, y, zeroCounter, rows, cols);
-            x = tmpX;
-            y = tmpY;
-        }
-        visited[y][x] = 0;
+        grid[x][y] = -2;
+        empty--;
+        dfs(grid, x + 1, y);
+        dfs(grid, x - 1, y);
+        dfs(grid, x, y + 1);
+        dfs(grid, x, y - 1);
+        grid[x][y] = 0;
+        empty++;
     }
-
     public static void main(String[] args) {
         int[][] maze = new int[][]{
-                {0,0,0,0,0,0,2,0,0,0},{0,0,0,0,0,0,0,0,1,0}
+               {1,0,0},{0,0,2}
         };
         System.out.println(new Problem980().uniquePathsIII(maze));
     }
