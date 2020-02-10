@@ -16,43 +16,26 @@ public class Problem60 {
     }
 
     public String solution2(int n, int k){
-        int[] visited = new int[n];
-        int f = getFactorial(n - 1);
-        int val = 0;
-        String res = "";
+        List<Integer> arr = new ArrayList<>();
+        int factorial = 1;
+        for (int i = 0; i < n; i++) {
+            arr.add(i + 1);
+            factorial *= (i + 1);
+        }
         int len = n;
-        int counter = 0;
-        while (res.length() != len){
-            if (k % f != 0) {
-                val = k / f + 1;
-            }else{
-                val = k / f;
-            }
-            if (val != 1)
-                k = k - f * (val - 1);
-            for (int i = 0; i < len; i++) {
-                if (visited[i] == 1)
-                    continue;
-                counter++;
-                if (counter == val) {
-                    res += i + 1;
-                    visited[i] = 1;
-                    break;
-                }
-            }
-            n--;
-            f = getFactorial(n - 1);
-            counter = 0;
+        int index = 0;
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() != len){
+            factorial /= n--;
+            if (k % factorial != 0)
+                index = k / factorial + 1;
+            else
+                index = k / factorial;
+            sb.append(String.valueOf(arr.get(index - 1)));
+            arr.remove(index - 1);
+            k = k - (index - 1) * factorial;
         }
-        return res;
-    }
-
-    private int getFactorial(int n) {
-        int val = 1;
-        for (int i = n; i > 0; i--) {
-            val *= i;
-        }
-        return val;
+        return sb.toString();
     }
 
     public String solution1(int n, int k) {
@@ -94,6 +77,6 @@ public class Problem60 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Problem60().getPermutation(3, 5));
+        System.out.println(new Problem60().getPermutation(4, 2));
     }
 }
