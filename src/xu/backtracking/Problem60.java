@@ -31,7 +31,7 @@ public class Problem60 {
                 index = k / factorial + 1;
             else
                 index = k / factorial;
-            sb.append(String.valueOf(arr.get(index - 1)));
+            sb.append(arr.get(index - 1));
             arr.remove(index - 1);
             k = k - (index - 1) * factorial;
         }
