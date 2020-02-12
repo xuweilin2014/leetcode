@@ -4,7 +4,7 @@ package algorithm_analysis_and_design.backtracking;
  * 使用回溯法解决 n 皇后问题
  */
 
-public class Queue {
+public class Queen {
 
     private static int[] pos;
 
@@ -38,7 +38,7 @@ public class Queue {
     }
 
     public static void main(String[] args) {
-        boolean flag = new Queue().getQueue(5);
+        boolean flag = new Queen().getQueue(5);
         if (flag){
             for (int i = 0; i < pos.length; i++) {
                 System.out.print(pos[i] + " ");
