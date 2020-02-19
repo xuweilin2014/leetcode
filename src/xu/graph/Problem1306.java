@@ -1,7 +1,5 @@
 package xu.graph;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

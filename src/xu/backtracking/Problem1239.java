@@ -1,7 +1,5 @@
 package xu.backtracking;
 
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
-
 import java.util.ArrayList;
 import java.util.List;
 
