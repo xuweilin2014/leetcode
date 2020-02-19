@@ -1,8 +1,9 @@
 package xu.union_find;
 
+
 public class UnionFind {
 
-    protected int[] parents;
+    public int[] parents;
 
     public UnionFind(int len) {
         parents = new int[len];
