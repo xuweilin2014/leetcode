@@ -74,14 +74,7 @@ public class Problem445 extends SinglyLinkedList{
 
     public static void main(String[] args) {
         ListNode l1 = new ListNode(7);
-        /*Problem445.addNode(l1, 2, 0);
-        Problem445.addNode(l1, 4, 0);
-        Problem445.addNode(l1, 3, 0);*/
-
         ListNode l2 = new ListNode(5);
-        /*Problem445.addNode(l2, 6, 0);
-        Problem445.addNode(l2, 4, 0);*/
-
         ListNode HEAD = Problem445.addTwoNumbers(l1, l2);
         Problem445.printList(HEAD);
     }

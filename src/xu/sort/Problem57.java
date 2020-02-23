@@ -2,15 +2,10 @@ package xu.sort;
 
 import java.util.*;
 
-/**
- * 本题的基本思想是对区间的start值进行排序，那么在这个排序的列表中可以合并的区间一定是连续的
- */
-
-public class Problem56 {
-    public int[][] merge(int[][] intervals) {
+public class Problem57 {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
         List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> interval = new HashMap<>();
-        int[] visited = new int[intervals.length];
         for (int i = 0; i < intervals.length; i++) {
             int key = intervals[i][0];
             if (interval.containsKey(key)){
@@ -20,9 +15,16 @@ public class Problem56 {
                 interval.put(intervals[i][0], intervals[i][1]);
             list.add(intervals[i][0]);
         }
+
+        list.add(newInterval[0]);
+        if (interval.containsKey(newInterval[0])){
+            if (interval.get(newInterval[0]) < newInterval[1])
+                interval.put(newInterval[0], newInterval[1]);
+        }else
+            interval.put(newInterval[0], newInterval[1]);
         Collections.sort(list);
         List<int[]> ans = new ArrayList<>();
-
+        int[] visited = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             if (visited[i] == 1)
                 continue;
@@ -49,9 +51,9 @@ public class Problem56 {
     }
 
     public static void main(String[] args) {
-        int[][] ints = new Problem56().merge(new int[][]{
-                {2, 3}, {5, 5}, {2, 2}, {3, 4},{3, 4}
-        });
+        int[][] ints = new Problem57().insert(new int[][]{
+                {1, 5}
+        }, new int[]{1, 7});
         for (int i = 0; i < ints.length; i++) {
             System.out.print("[" + ints[i][0] + ", " + ints[i][1] + "] ");
         }
