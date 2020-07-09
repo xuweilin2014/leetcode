@@ -1,5 +1,8 @@
 package algorithm_analysis_and_design.brute_force;
 
+/**
+ * 使用穷举法来求解子串匹配问题
+ */
 public class BFAlgorithm {
 
     public static void main(String[] args) {
