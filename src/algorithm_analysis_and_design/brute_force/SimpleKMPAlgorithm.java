@@ -10,7 +10,7 @@ import java.util.List;
 public class SimpleKMPAlgorithm {
 
     public static void main(String[] args) {
-        System.out.println(KMP("abcabcacb".toCharArray(), "z".toCharArray()));
+        System.out.println(KMP("mississippi".toCharArray(), "issip".toCharArray()));
     }
 
     // 获取模式字符串的next数组
@@ -38,21 +38,12 @@ public class SimpleKMPAlgorithm {
     }
 
     public static int KMP(char[] src, char[] target){
-        List<Integer> nexts = getNext(src);
-        int j = 0, i;
-        boolean isMatch = false;
-        for (i = 0; i < src.length;) {
-            while (j < target.length){
-                if (src[i] == target[j]){
-                    i++;
-                    j++;
-                }else
-                    break;
-            }
-
-            if (j == target.length){
-                isMatch = true;
-                break;
+        List<Integer> nexts = getNext(target);
+        int j = 0, i = 0;
+        while (i < src.length && j < target.length){
+            if (src[i] == target[j]){
+                i++;
+                j++;
             }else{
                 j = nexts.get(j);
                 if (j == -1){
@@ -61,7 +52,10 @@ public class SimpleKMPAlgorithm {
                 }
             }
         }
-        return isMatch ? i - target.length : -1;
+        if (j == target.length)
+            return i - target.length;
+        else
+            return -1;
     }
 
 }
