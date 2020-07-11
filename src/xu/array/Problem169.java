@@ -30,14 +30,16 @@ public class Problem169 {
         for (int i = 1; i < nums.length; i++) {
             if (candNum == nums[i]){
                 counter++;
-            }else{
-                counter--;
+                continue;
             }
 
             if (counter == 0){
                 candNum = nums[i];
                 counter = 1;
+                continue;
             }
+
+            counter--;
         }
 
         return candNum;
