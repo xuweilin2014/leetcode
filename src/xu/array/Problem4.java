@@ -18,7 +18,7 @@ package xu.array;
 public class Problem4 {
 
     public static void main(String[] args) {
-        System.out.println(findMedianSortedArrays(new int[]{1, 2, 3, 4, 5}, new int[]{5, 6, 7, 8, 9}));
+        System.out.println(findMedianSortedArrays(new int[]{11,13,15,17,19}, new int[]{2,4,10,15,20}));
     }
 
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
