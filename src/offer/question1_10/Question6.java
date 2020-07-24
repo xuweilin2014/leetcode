@@ -9,9 +9,6 @@ import java.util.List;
 
 public class Question6 {
 
-    public static void main(String[] args) {
-    }
-
     public int[] reversePrint(ListNode head) {
         List<Integer> arr = new LinkedList<>();
         doReverse(head, arr);
