@@ -40,6 +40,22 @@ public class SinglyLinkedList {
         return counter;
     }
 
+    public static ListNode buildLinkedList(int[] vals){
+        if (vals.length == 0)
+            return null;
+
+        ListNode head = new ListNode(vals[0]);
+        ListNode p = head;
+        for (int i = 1; i < vals.length; i++) {
+            ListNode node = new ListNode(vals[i]);
+            p.next = node;
+            p = node;
+        }
+
+        p.next = null;
+        return head;
+    }
+
     // 获取链表倒数第二个结点
     public static ListNode getBeforeTail(ListNode head){
         if(head == null || head.next == null)
