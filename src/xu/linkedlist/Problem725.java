@@ -7,7 +7,7 @@ import java.util.WeakHashMap;
 /**
  * 725. Split Linked List in Parts
  */
-public class Problem725 extends SinglyLinkedList {
+public class Problem725 extends SinglyLinkedListUtil {
 
     public static ListNode[] splitListToParts(ListNode root, int k) {
         ListNode[] results = new ListNode[k];

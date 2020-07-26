@@ -1,6 +1,6 @@
 package xu.linkedlist;
 
-public class Problem2 extends SinglyLinkedList {
+public class Problem2 extends SinglyLinkedListUtil {
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null)

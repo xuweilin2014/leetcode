@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * problem 147. Insertion Sort List
  */
-public class Problem147 extends SinglyLinkedList {
+public class Problem147 extends SinglyLinkedListUtil {
 
     public static ListNode insertionSortList(ListNode head) {
 

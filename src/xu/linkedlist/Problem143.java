@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 143. Reorder List
  */
-public class Problem143 extends SinglyLinkedList{
+public class Problem143 extends SinglyLinkedListUtil{
 
     public static void reorderList(ListNode head) {
         if (head == null || head.next == null

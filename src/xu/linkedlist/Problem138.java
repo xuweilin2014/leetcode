@@ -9,7 +9,7 @@ import java.util.Map;
  * 138. Copy List with Random Pointer
  */
 
-public class Problem138 extends SinglyLinkedList{
+public class Problem138 extends SinglyLinkedListUtil{
 
     public static Node copyRandomList(Node head) {
 

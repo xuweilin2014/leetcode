@@ -1,7 +1,7 @@
 package xu.sort;
 
 import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedList;
+import xu.linkedlist.SinglyLinkedListUtil;
 
 public class Problem148 {
     public ListNode sortList(ListNode head) {
@@ -50,10 +50,10 @@ public class Problem148 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(4);
-        SinglyLinkedList.addNode(head, 2, 0);
-        SinglyLinkedList.addNode(head, 1, 0);
-        SinglyLinkedList.addNode(head, 3, 0);
+        SinglyLinkedListUtil.addNode(head, 2, 0);
+        SinglyLinkedListUtil.addNode(head, 1, 0);
+        SinglyLinkedListUtil.addNode(head, 3, 0);
         ListNode node = new Problem148().sortList(head);
-        SinglyLinkedList.printList(node);
+        SinglyLinkedListUtil.printList(node);
     }
 }

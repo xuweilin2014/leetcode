@@ -3,7 +3,7 @@ package xu.linkedlist;
 /**
  * 24. Swap Nodes in Pairs
  */
-public class Problem24 extends SinglyLinkedList{
+public class Problem24 extends SinglyLinkedListUtil{
 
     public static ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode(0);

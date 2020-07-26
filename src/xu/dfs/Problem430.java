@@ -2,7 +2,7 @@ package xu.dfs;
 
 import xu.linkedlist.ListNode;
 import xu.linkedlist.Problem1171;
-import xu.linkedlist.SinglyLinkedList;
+import xu.linkedlist.SinglyLinkedListUtil;
 
 public class Problem430 {
 

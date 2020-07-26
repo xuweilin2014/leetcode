@@ -3,7 +3,7 @@ package xu.linkedlist;
 /**
  * 206. Reverse Linked List
  */
-public class Problem206 extends SinglyLinkedList{
+public class Problem206 extends SinglyLinkedListUtil{
 
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null)

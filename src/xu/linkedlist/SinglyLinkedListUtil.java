@@ -3,8 +3,9 @@ package xu.linkedlist;
 /**
  * @author xuwei_000
  */
-public class SinglyLinkedList {
+public class SinglyLinkedListUtil {
 
+    // 打印链表中各个节点的值
     public static void printList(ListNode p){
         while (p != null){
             System.out.print(p.val + " ");
@@ -30,6 +31,7 @@ public class SinglyLinkedList {
         p.next = node;
     }
 
+    // 获取链表的长度
     public static int getLength(ListNode head){
         ListNode p = head;
         int counter = 0;
@@ -40,6 +42,7 @@ public class SinglyLinkedList {
         return counter;
     }
 
+    // 根据用户传进来的数组，构造链表
     public static ListNode buildLinkedList(int[] vals){
         if (vals.length == 0)
             return null;
@@ -67,4 +70,19 @@ public class SinglyLinkedList {
         }
         return p;
     }
+
+    // 返回链表中值为 val 的节点
+    public static ListNode getNode(ListNode head, int val){
+        if (head == null)
+            return null;
+
+        ListNode ptr = head;
+        while (ptr != null && ptr.val != val){
+            ptr = ptr.next;
+        }
+
+        return ptr;
+    }
+
+
 }

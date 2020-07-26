@@ -4,7 +4,7 @@ package xu.linkedlist;
  *  Problem 61 Given a linked list, rotate the list to the right by k places, where k is non-negative.
  */
 
-public class Problem61 extends SinglyLinkedList {
+public class Problem61 extends SinglyLinkedListUtil {
 
     public static ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null) {

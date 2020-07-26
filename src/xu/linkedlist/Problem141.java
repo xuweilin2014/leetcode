@@ -4,7 +4,7 @@ package xu.linkedlist;
  * Problem 141 Linked List Cycle
  */
 
-public class Problem141 extends SinglyLinkedList {
+public class Problem141 extends SinglyLinkedListUtil {
 
     public boolean hasCycle(ListNode head) {
         if (head == null)

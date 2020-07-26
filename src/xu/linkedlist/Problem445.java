@@ -3,7 +3,7 @@ package xu.linkedlist;
 /**
  * 445. Add Two Numbers II
  */
-public class Problem445 extends SinglyLinkedList{
+public class Problem445 extends SinglyLinkedListUtil{
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null)

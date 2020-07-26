@@ -4,7 +4,7 @@ package xu.linkedlist;
  * problem 83. Remove Duplicates from Sorted List
  */
 
-public class Problem83 extends SinglyLinkedList {
+public class Problem83 extends SinglyLinkedListUtil {
 
 
     public ListNode deleteDuplicates(ListNode head) {

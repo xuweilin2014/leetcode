@@ -4,7 +4,7 @@ package xu.linkedlist;
  * 160. Intersection of Two Linked Lists
  */
 
-public class Problem160 extends SinglyLinkedList {
+public class Problem160 extends SinglyLinkedListUtil {
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null)

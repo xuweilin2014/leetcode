@@ -3,7 +3,7 @@ package xu.linkedlist;
 /**
  * 19. Remove Nth Node From End of List
  */
-public class Problem19 extends SinglyLinkedList {
+public class Problem19 extends SinglyLinkedListUtil {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null){

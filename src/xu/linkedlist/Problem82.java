@@ -6,7 +6,7 @@ import java.util.List;
  * problem 82. Remove Duplicates from Sorted List II
  */
 
-public class Problem82 extends SinglyLinkedList {
+public class Problem82 extends SinglyLinkedListUtil {
 
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummy = new ListNode(0);

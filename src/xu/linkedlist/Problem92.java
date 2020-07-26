@@ -4,7 +4,7 @@ package xu.linkedlist;
  * 92. Reverse Linked List II
  */
 
-public class Problem92 extends SinglyLinkedList{
+public class Problem92 extends SinglyLinkedListUtil{
 
     public static ListNode reverseBetween(ListNode head, int m, int n) {
         if (head == null || head.next == null || m == n)

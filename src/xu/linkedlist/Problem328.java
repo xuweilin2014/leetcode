@@ -4,7 +4,7 @@ package xu.linkedlist;
  * 328. Odd Even Linked List
  */
 
-public class Problem328 extends SinglyLinkedList {
+public class Problem328 extends SinglyLinkedListUtil {
 
     public static ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null){

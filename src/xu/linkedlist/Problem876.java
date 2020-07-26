@@ -4,7 +4,7 @@ package xu.linkedlist;
  * 876. Middle of the Linked List
  */
 
-public class Problem876 extends SinglyLinkedList{
+public class Problem876 extends SinglyLinkedListUtil{
     public ListNode middleNode(ListNode head) {
         if (head == null || head.next == null)
             return head;

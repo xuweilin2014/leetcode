@@ -1,6 +1,6 @@
 package xu.linkedlist;
 
-public class Problem1290 extends SinglyLinkedList{
+public class Problem1290 extends SinglyLinkedListUtil{
 
     public static int getDecimalValue(ListNode head) {
         if (head.next == null)
