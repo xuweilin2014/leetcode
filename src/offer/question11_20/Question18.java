@@ -1,7 +1,7 @@
 package offer.question11_20;
 
 import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedList;
+
 
 import java.util.List;
 
@@ -12,13 +12,11 @@ import java.util.List;
  * 除此之外，还有一种特殊情况：
  * 3.链表中只有一个节点，需要删除这个头节点/尾节点
  */
-public class Question18 extends SinglyLinkedList {
+public class Question18{
 
     public static void main(String[] args) {
         ListNode head = new ListNode(4);
-        Question18.addNode(head, 5, 0);
-        Question18.addNode(head, 7, 0);
-        Question18.addNode(head, 9, 0);
+
     }
 
     public static void deleteNode(ListNode head, ListNode target){

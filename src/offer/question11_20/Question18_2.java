@@ -1,7 +1,7 @@
 package offer.question11_20;
 
 import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedList;
+import xu.linkedlist.SinglyLinkedListUtil;
 import xu.tree.TreeNode;
 
 /**
@@ -9,7 +9,7 @@ import xu.tree.TreeNode;
  *
  * 下面的解法可以参考不需要进行修改
  */
-public class Question18_2 extends SinglyLinkedList {
+public class Question18_2 extends SinglyLinkedListUtil {
 
     public static void main(String[] args) {
         ListNode head = Question18_2.buildLinkedList(new int[]{1,3, 3, 4, 4, 5});
