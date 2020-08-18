@@ -1,6 +1,7 @@
 package xu.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TreeUtil {
@@ -41,6 +42,22 @@ public class TreeUtil {
         }
 
         return root;
+    }
+
+    public static TreeNode getTargetNode(TreeNode root, int val){
+        if (root == null)
+            return null;
+
+        if (root.val == val)
+            return root;
+
+        TreeNode left = getTargetNode(root.left, val);
+        TreeNode right = getTargetNode(root.right, val);
+
+        if (left != null)
+            return left;
+
+        return right;
     }
 
     public static void printTree(TreeNode root){
