@@ -40,6 +40,7 @@ public class Question32_3 {
             left = !left;
             res.add(line);
 
+            // queue 始终按照正常顺序保存下一层的子节点，line则按照从左到右或者从右到左的顺序读取
             for (TreeNode node : queue) {
                 if (node.left != null)
                     newQueue.add(node.left);

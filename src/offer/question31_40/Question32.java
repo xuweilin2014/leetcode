@@ -15,9 +15,9 @@ public class Question32 {
         System.out.println(PrintFromTopToBottom(node));
     }
 
-    public static ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+    public static int[] PrintFromTopToBottom(TreeNode root) {
         if (root == null)
-            return new ArrayList<>();
+            return null;
 
         Queue<TreeNode> queue = new ArrayDeque<>();
         ArrayList<Integer> res = new ArrayList<>();
@@ -34,7 +34,11 @@ public class Question32 {
             queue = newQueue;
         }
 
-        return res;
+        int[] vals = new int[res.size()];
+        for (int i = 0; i < vals.length; i++) {
+            vals[i] = res.get(i);
+        }
+        return vals;
     }
 
 }

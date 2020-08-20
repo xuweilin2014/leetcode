@@ -10,13 +10,13 @@ import java.util.List;
 public class Question34 {
 
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{10,5,12,4,7,null,null});
-        System.out.println(FindPath(node, 15));
+        TreeNode node = TreeUtil.buildTree(new Integer[]{5,4,8,11,null,13,4,7,2,null,null,5,1});
+        System.out.println(FindPath(node, 22));
     }
 
-    private static ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+    private static List<List<Integer>> res = new ArrayList<>();
 
-    public static ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+    public static List<List<Integer>> FindPath(TreeNode root, int target) {
         if (root == null)
             return new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class Question34 {
         return res;
     }
 
-    private static void doFind(TreeNode root, int target, ArrayList<Integer> path, int sum) {
+    private static void doFind(TreeNode root, int target, List<Integer> path, int sum) {
         if (root == null)
             return;
 
@@ -33,8 +33,6 @@ public class Question34 {
 
         if (sum == target && root.left == null && root.right == null)
             res.add(new ArrayList<>(path));
-        else if (sum > target)
-            return;
 
         doFind(root.left, target, path, sum );
         doFind(root.right, target, path, sum );

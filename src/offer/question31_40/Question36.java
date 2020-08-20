@@ -5,11 +5,9 @@ import xu.tree.TreeUtil;
 
 public class Question36 {
 
-    private static TreeNode prev = null;
-
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{4,2,5,1,3,null,null});
-        TreeNode treeNode = Convert(node);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{2,1,3});
+        TreeNode treeNode = new Question36().Convert(node);
         if (treeNode != null){
             while (treeNode.right != null){
                 System.out.print(treeNode.val + " ");
@@ -27,20 +25,31 @@ public class Question36 {
         }
     }
 
-    public static TreeNode Convert(TreeNode root){
+    // 递归要用到一个全局变量
+    public TreeNode prev;
+
+    public TreeNode Convert(TreeNode root){
         if (root == null)
             return null;
 
         doConvert(root);
-        while (root.left != null)
-            root = root.left;
 
-        root.left = prev;
-        prev.right = root;
-        return root;
+        TreeNode last = root;
+        TreeNode head = root;
+
+        while (last.right != null)
+            last = last.right;
+
+        while (head.left != null)
+            head = head.left;
+
+        head.left = last;
+        last.right = head;
+
+        return head;
     }
 
-    public static void doConvert(TreeNode root) {
+    public void doConvert(TreeNode root) {
         if (root == null)
             return;
 
