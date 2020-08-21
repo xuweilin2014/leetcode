@@ -3,15 +3,44 @@ package offer.question31_40;
 public class Question39 {
 
     public static void main(String[] args) {
-        System.out.println(MoreThanHalfNum_Solution(new int[]{1}));
+        System.out.println(new Question39().majorityElement(new int[]{3,2,3,2,3,3,3,3,3,2,2,3,3,5,4,2}));
+        System.out.println(new Question39().majorityElement(new int[]{1,2,3}));
     }
 
+    // 分治算法
     public static int MoreThanHalfNum_Solution(int [] array) {
         if (array.length == 1)
             return array[0];
         int index = func(array, array.length / 2, 0, array.length - 1);
         if (checkIsValid(array, array[index]))
             return array[index];
+        else
+            return 0;
+    }
+
+    // 摩尔投票法
+    public int majorityElement(int[] array) {
+        if (array == null || array.length == 0)
+            return 0;
+
+        int times = 1;
+        int val = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == val){
+                times++;
+            }else{
+                if (times == 0){
+                    times = 1;
+                    val = array[i];
+                }else {
+                    times--;
+                }
+            }
+        }
+
+        if (checkIsValid(array, val))
+            return val;
         else
             return 0;
     }
@@ -38,11 +67,11 @@ public class Question39 {
         arr[high] = pivot;
 
         if (k == high)
-            return pivot;
+            return k;
         else if (k > high)
-            return func(arr, k, left + 1, right);
+            return func(arr, k, high + 1, right);
         else
-            return func(arr, k, left, right - 1);
+            return func(arr, k, left, high - 1);
     }
 
     public static boolean checkIsValid(int[] arr, int target){
