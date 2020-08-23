@@ -23,10 +23,17 @@ public class Question29 {
         }));
     }
 
-    public static ArrayList<Integer> printMatrix(int [][] matrix) {
+    public static int[] printMatrix(int [][] matrix) {
         ArrayList<Integer> res = new ArrayList<>();
         doPrint(matrix, 0, matrix.length, matrix[0].length, res);
-        return res;
+
+        int[] finals = new int[res.size()];
+
+        for(int i = 0; i < finals.length; i++){
+            finals[i] = res.get(i);
+        }
+
+        return finals;
     }
 
     public static void doPrint(int[][] matrix, int begin, int rows, int cols, ArrayList<Integer> res){

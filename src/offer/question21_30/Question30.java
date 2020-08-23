@@ -1,22 +1,25 @@
 package offer.question21_30;
 
+import java.util.Map;
 import java.util.Stack;
 
 public class Question30 {
 
-    private static Stack<Integer> stack = new Stack<>();
+    private Stack<Integer> stack = new Stack<>();
 
-    private static Stack<Integer> minStack = new Stack<>();
+    private Stack<Integer> minStack = new Stack<>();
 
-    private static int min = Integer.MAX_VALUE;
+    public void push(int node) {
+        if (stack.isEmpty()) {
+            minStack.push(node);
+        }else{
+            minStack.push(Math.min(minStack.peek(), node));
+        }
 
-    public static void push(int node) {
-        minStack.push(Math.min(min, node));
-        min = Math.min(min, node);
         stack.push(node);
     }
 
-    public static void pop() {
+    public void pop() {
         if (!stack.isEmpty()){
             stack.pop();
         }
@@ -25,31 +28,34 @@ public class Question30 {
         }
     }
 
-    public static int top() {
+    public int top() {
         return stack.peek();
     }
 
-    public static int min() {
+    public int min() {
         return minStack.peek();
     }
 
     public static void main(String[] args) {
-        Question30.push(3);
-        System.out.println(Question30.min());
-        Question30.push(4);
-        System.out.println(Question30.min());
-        Question30.push(2);
-        System.out.println(Question30.min());
-        Question30.push(3);
-        System.out.println(Question30.min());
-        Question30.pop();
-        System.out.println(Question30.min());
-        Question30.pop();
-        System.out.println(Question30.min());
-        Question30.pop();
-        System.out.println(Question30.min());
-        Question30.push(0);
-        System.out.println(Question30.min());
+        Question30 q = new Question30();
+        q.push(-10);
+        q.push(14);
+        System.out.println(q.min());
+        System.out.println(q.min());
+        q.push(-20);
+        System.out.println(q.min());
+        System.out.println(q.min());
+        System.out.println(q.top());
+        System.out.println(q.min());
+        q.pop();
+        q.push(10);
+        q.push(-7);
+        System.out.println(q.min());
+        q.push(-7);
+        q.pop();
+        System.out.println(q.top());
+        System.out.println(q.min());
+        q.pop();
     }
 
 }

@@ -11,18 +11,20 @@ public class Question27 {
         TreeUtil.printTree(root);
     }
 
-    public static void Mirror(TreeNode root) {
+    public static TreeNode Mirror(TreeNode root) {
         if (root == null)
-            return;
+            return null;
 
         if (root.left == null && root.right == null)
-            return;
+            return root;
 
         TreeNode tmp = root.left;
         root.left = root.right;
         root.right = tmp;
         Mirror(root.left);
         Mirror(root.right);
+
+        return root;
     }
 
 }
