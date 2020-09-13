@@ -1,6 +1,5 @@
 package offer.question31_40;
 
-import org.jetbrains.annotations.Contract;
 import xu.tree.TreeNode;
 import xu.tree.TreeUtil;
 
@@ -16,7 +15,6 @@ public class Question32_3 {
         System.out.println(Print(node));
     }
 
-    @Contract("null -> new")
     public static ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
         if (pRoot == null)
             return new ArrayList<>();

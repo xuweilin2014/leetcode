@@ -20,29 +20,27 @@ public class Question39 {
 
     // 摩尔投票法
     public int majorityElement(int[] array) {
-        if (array == null || array.length == 0)
-            return 0;
+        if (array.length == 1)
+            return array[0];
 
-        int times = 1;
+        int counter = 1;
         int val = array[0];
 
         for (int i = 1; i < array.length; i++) {
+            if (counter == 0){
+                counter++;
+                val = array[i];
+                continue;
+            }
+
             if (array[i] == val){
-                times++;
+                counter++;
             }else{
-                if (times == 0){
-                    times = 1;
-                    val = array[i];
-                }else {
-                    times--;
-                }
+                counter--;
             }
         }
 
-        if (checkIsValid(array, val))
-            return val;
-        else
-            return 0;
+        return val;
     }
 
     public static int func(int[] arr, int k, int left, int right){

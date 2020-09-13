@@ -5,44 +5,32 @@ import java.util.Map;
 public class Question42 {
 
     public static void main(String[] args) {
-        System.out.println(FindGreatestSumOfSubArray(new int[]{-2}));
+        System.out.println(new Question42().maxSubArray(new int[]{-2,2,1}));
     }
 
-    public static int FindGreatestSumOfSubArray(int[] array) {
-        return doFind(array, 0, array.length - 1);
-    }
+    private int maxSubArray(int[] nums) {
+        if (nums.length == 0)
+            return 0;
+        if (nums.length == 1)
+            return nums[0];
 
-    private static int doFind(int[] array, int left, int right) {
-        if (left >= right)
-            return array[left];
+        int max = nums[0];
+        int sum = nums[0];
 
-        int mid = (left + right) / 2;
+        for (int i = 1; i < nums.length; i++) {
+            if (sum <= 0)
+                sum = nums[i];
+            else
+                sum += nums[i];
 
-        int midVal = getMaxValue(array, left, right, mid);
-        int leftVal = doFind(array, left, mid - 1);
-        int rightVal = doFind(array, mid + 1, right);
-
-        return Math.max(midVal, Math.max(leftVal, rightVal));
-    }
-
-    private static int getMaxValue(int[] array, int left, int right, int mid){
-        int maxRight = array[mid];
-        int sum = array[mid];
-        for (int i = mid + 1; i <= right; i++) {
-            sum += array[i];
-            if (sum > maxRight)
-                maxRight = sum;
+            if (sum > max)
+                max = sum;
         }
 
-        sum = array[mid];
-        int maxLeft = array[mid];
-        for (int i = mid - 1; i >= left; i--) {
-            sum += array[i];
-            if (sum > maxLeft)
-                maxLeft = sum;
-        }
-
-        return maxLeft + maxRight - array[mid];
+        return max;
     }
+
+
+
 
 }

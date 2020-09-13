@@ -4,31 +4,34 @@ import java.util.*;
 
 public class Question38 {
 
-    List<String> res = new LinkedList<>();
-    char[] c;
+    private List<String> res = new LinkedList<>();
+
+    private char[] c;
 
     public String[] permutation(String s) {
-        c = s.toCharArray();
-        dfs(0);
-        return res.toArray(new String[res.size()]);
+       c = s.toCharArray();
+       dfs(0);
+       return res.toArray(new String[0]);
     }
 
-    void dfs(int x) {
-        if(x == c.length - 1) {
-            res.add(String.valueOf(c)); // 添加排列方案
+    private void dfs(int x) {
+        if (x == c.length){
+            res.add(String.valueOf(c));
             return;
         }
-        HashSet<Character> set = new HashSet<>();
-        for(int i = x; i < c.length; i++) {
-            if(set.contains(c[i])) continue; // 重复，因此剪枝
-            set.add(c[i]);
-            swap(i, x);            // 交换，将 c[i] 固定在第 x 位
-            dfs(x + 1);         // 开启固定第 x + 1 位字符
-            swap(i, x);            // 恢复交换
+
+        Set<Character> dup = new HashSet<>();
+        for (int i = x; i < c.length; i++) {
+            if (dup.contains(c[i]))
+                continue;
+            dup.add(c[i]);
+            swap(x, i);
+            dfs(x + 1);
+            swap(i, x);
         }
     }
 
-    void swap(int a, int b) {
+    private void swap(int a, int b) {
         char tmp = c[a];
         c[a] = c[b];
         c[b] = tmp;
@@ -37,7 +40,7 @@ public class Question38 {
 
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Question38().permutation("abcdefghij")));
+        System.out.println(Arrays.toString(new Question38().permutation("abc")));
     }
 
 }

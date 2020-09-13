@@ -7,55 +7,47 @@ import java.util.Collections;
 public class Question40 {
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Question40().getLeastNumbers1(new int[]{0,0,1,2,4,2,2,3,1,4}, 8)));
+        System.out.println(Arrays.toString(new Question40().getLeastNumbers(new int[]{0,0,2,3,2,1,1,2,0,4}, 10)));
     }
 
     // 使用快排的思想
     public static int[] getLeastNumbers(int[] input, int k) {
-        if (k >= input.length){
-            return input;
+        k = Math.min(k, input.length);
+        int[] vals = new int[k];
+        partition(input, 0, input.length - 1, k);
+        for (int i = 0; i < k; i++) {
+            vals[i] = input[i];
         }
-
-        if (k == 0)
-            return new int[0];
-
-        int[] res = new int[k];
-        int index = getKthIntegers(input, k, 0, input.length - 1);
-        for (int i = 0; i < index; i++) {
-            res[i] = input[i];
-        }
-
-        return res;
+        return vals;
     }
 
-    public static int getKthIntegers(int[] arr, int target, int left, int right){
+    private static void partition(int[] arr, int left, int right, int k){
+        if (left >= right)
+            return;
+
         int val = arr[left];
         int low = left;
         int high = right;
         while (low < high){
-            while (low < high && val <= arr[high]){
+            while (low < high && arr[high] >= val)
                 high--;
-            }
-
             if (low < high)
                 arr[low] = arr[high];
 
-            while (low < high && val >= arr[low]){
+            while (low < high && arr[low] <= val)
                 low++;
-            }
-
             if (low < high)
                 arr[high] = arr[low];
         }
 
         arr[high] = val;
-
-        if (target == high)
-            return high;
-        else if (target > high)
-            return getKthIntegers(arr, target, high + 1, right);
-        else
-            return getKthIntegers(arr, target, left, high - 1);
+        if (high == k) {
+        }
+        else if (high < k){
+            partition(arr, high + 1, right, k);
+        }else{
+            partition(arr, left, high - 1, k);
+        }
     }
 
     // 使用最大堆的思想
