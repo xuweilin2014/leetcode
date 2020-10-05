@@ -4,50 +4,22 @@ import java.util.*;
 
 public class Question49 {
 
-    private static List<Integer> arr = new ArrayList<>();
-
     public static int nthUglyNumber(int n) {
-        arr.add(1);
-        arr.add(2);
-        arr.add(3);
+        int[] dp = new int[n];
 
-        if (n <= 3)
-            return arr.get(n - 1);
-
-        int p2 = 1;
-        int p3 = 1;
-        int p5 = 0;
-        int peek = 2;
-
-        for (int i = 3; i < n; i++) {
-            if (arr.get(p2).equals(arr.get(peek) / 2))
+        int p2 = 0, p3 = 0, p5 = 0;
+        dp[0] = 1;
+        for (int i = 1; i < dp.length; i++) {
+            dp[i] = Math.min(dp[p2] * 2, Math.min(dp[p3] * 3, dp[p5] * 5));
+            if (dp[i] == dp[p2])
                 p2++;
-            if (arr.get(p3).equals(arr.get(peek) / 3))
+            if (dp[i] == dp[p3])
                 p3++;
-            if (arr.get(p5).equals(arr.get(peek) / 5))
+            if (dp[i] == dp[p5])
                 p5++;
-
-            if (arr.get(p2) * 2 < arr.get(p3) * 3){
-                if (arr.get(p2) * 2 < arr.get(p5) * 5){
-                    arr.add(arr.get(p2) * 2);
-                    p2++;
-                }else{
-                    arr.add(arr.get(p5) * 5);
-                    p5++;
-                }
-            }else {
-                if (arr.get(p3) * 3 < arr.get(p5) * 5){
-                    arr.add(arr.get(p3) * 3);
-                    p3++;
-                }else{
-                    arr.add(arr.get(p5) * 5);
-                    p5++;
-                }
-            }
-            peek++;
         }
 
-        return arr.get(n - 1);
+        return dp[n-1];
     }
 
     public static void main(String[] args) {

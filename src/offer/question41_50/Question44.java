@@ -2,51 +2,44 @@ package offer.question41_50;
 
 public class Question44 {
 
-    private static long[] arr = new long[17];
-    private static long[] vals = new long[17];
-
-    static {
-        long arrInit = 9;
-        long valsInit = 1;
-        for (int i = 0; i < vals.length; i++) {
-            vals[i] = valsInit;
-            arr[i] = arrInit;
-            arrInit *= 10;
-            valsInit *= 10;
-        }
-    }
-
     public static void main(String[] args) {
-        System.out.println(findNthDigit(1000000000));
+        System.out.println(findNthDigit(498));
     }
 
     public static int findNthDigit(int n) {
-        if (n < 10)
-            return n;
+        if (n == 0)
+            return 0;
 
-        long val = n;
-        int counter = 0;
-        while (val > 0){
-            val -= arr[counter] * (counter + 1);
-            counter++;
-        }
+        int counter = 1;
+        int val = n;
+        while (true){
+            int nums = digitNums(counter);
 
-        val += arr[counter - 1] * counter;
-        long span = val / counter;
-        long bit = val % counter;
-        long tmp = vals[counter - 1];
-
-        if (bit == 0) {
-            tmp += span - 1;
-            return (int) (tmp % 10);
-        }
-        else{
-            tmp += span;
-            for (int i = 0; i < (counter - bit); i++) {
-                tmp /= 10;
+            if (val <= nums){
+                return doFindDigit(val, counter);
             }
-            return (int) (tmp % 10);
+
+            counter++;
+            val -= nums;
         }
+    }
+
+    private static int doFindDigit(int val, int digit) {
+        int len = val / digit;
+        int remainder = val % digit;
+        int base = (int) Math.pow(10, digit - 1);
+
+        char ch;
+        if (remainder == 0)
+            ch = String.valueOf(base + len - 1).charAt(digit - 1);
+        else
+            ch = String.valueOf(base + len).charAt(remainder - 1);
+
+        return ch - '0';
+    }
+
+    private static int digitNums(int counter) {
+        return (int) (9 * Math.pow(10, counter - 1) * counter);
     }
 
 }
