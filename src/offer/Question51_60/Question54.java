@@ -18,7 +18,6 @@ public class Question54 {
         if (root == null)
             return;
 
-
         doFind(root.right, k);
         counter++;
         if (k == counter){
