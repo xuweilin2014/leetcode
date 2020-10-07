@@ -4,41 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 异或运算
+ * 异或运算，并且将原数组分为两个数组
  */
 public class Question56_1 {
 
     public static void main(String[] args) {
-        int[] ints = new Question56_1().singleNumbers(new int[]{2, 4,2,1});
+        int[] ints = new Question56_1().singleNumbers(new int[]{4,1,4,6});
         for (int i = 0; i < ints.length; i++) {
             System.out.print(ints[i] + " ");
         }
     }
 
     public int[] singleNumbers(int[] nums) {
-        int val = nums[0];
+        int res = 0;
         int mask = 1;
 
-        for (int i = 1; i < nums.length; i++) {
-            val ^= nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            res ^= nums[i];
         }
 
-        while ((val & 1) != 1){
-            val >>= 1;
-            mask <<= 1;
+        while ((mask & res) == 0){
+            mask = mask << 1;
         }
 
-        int init0 = 0;
-        int init1 = 0;
+        int initial0 = 0;
+        int initial1 = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            if ((nums[i] & mask) == mask)
-                init1 ^= nums[i];
+            if ((nums[i] & mask) == 0)
+                initial0 ^= nums[i];
             else
-                init0 ^= nums[i];
+                initial1 ^= nums[i];
         }
 
-        return new int[]{init0, init1};
+        return new int[]{initial0, initial1};
     }
 
 }

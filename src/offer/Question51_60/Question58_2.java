@@ -6,17 +6,23 @@ public class Question58_2 {
         if (s == null || s.length() == 0)
             return s;
 
-        StringBuilder before = new StringBuilder();
-        StringBuilder after = new StringBuilder();
         char[] chs = s.toCharArray();
-        for (int i = 0; i < chs.length; i++) {
-            if (i < n)
-                before.append(chs[i]);
-            else
-                after.append(chs[i]);
-        }
+        doReverse(chs, 0, n - 1);
+        doReverse(chs, n, chs.length - 1);
+        doReverse(chs, 0, chs.length - 1);
 
-        return after.append(before).toString();
+        return new String(chs);
+    }
+
+    private void doReverse(char[] chs, int low, int high){
+        while (low < high){
+            char temp = chs[low];
+            chs[low] = chs[high];
+            chs[high] = temp;
+
+            low++;
+            high--;
+        }
     }
 
     public static void main(String[] args) {

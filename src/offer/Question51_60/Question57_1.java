@@ -4,23 +4,29 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 双指针，从数组的两头向中间移动
+ */
 public class Question57_1 {
 
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], i);
-            if (map.containsKey(target - nums[i]) &&
-                    map.get(target - nums[i]) != i){
-                return new int[]{nums[i], target - nums[i]};
-            }
+        int low = 0;
+        int high = nums.length - 1;
+        int res = nums[low] + nums[high];
+
+        while (res != target){
+            if (res > target && high > 0)
+                high--;
+            if (res < target)
+                low++;
+            res = nums[low] + nums[high];
         }
 
-        return null;
+        return new int[]{nums[low], nums[high]};
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Question57_1().twoSum(new int[]{10, 20, 30, 31, 47, 60}, 40)));
+        System.out.println(Arrays.toString(new Question57_1().twoSum(new int[]{5,5,10}, 10)));
     }
 
 }

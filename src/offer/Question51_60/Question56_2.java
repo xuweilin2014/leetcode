@@ -9,33 +9,30 @@ import java.util.List;
 public class Question56_2 {
 
     public int singleNumber(int[] nums) {
-        int mask = 1;
-        int bitOf1;
-        int val = 0;
         int max = Integer.MIN_VALUE;
+        int res = 0;
+        int mask = 1;
 
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > max)
-                max = nums[i];
+            max = Math.max(max, nums[i]);
         }
 
         while (max > 0){
-            bitOf1 = 0;
+            int bitOf1 = 0;
 
-            for (int i = 0; i < nums.length; i++) {
-                if ((mask & nums[i]) == mask)
+            for (int num : nums) {
+                if ((num & mask) != 0)
                     bitOf1++;
             }
 
-            if (bitOf1 % 3 != 0) {
-                val += mask;
-            }
+            if (bitOf1 % 3 != 0)
+                res = res | mask;
 
-            mask <<= 1;
-            max >>= 1;
+            mask = mask << 1;
+            max = max >> 1;
         }
 
-        return val;
+        return res;
     }
 
     public static void main(String[] args) {
