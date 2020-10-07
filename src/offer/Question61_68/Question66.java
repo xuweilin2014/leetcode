@@ -2,6 +2,9 @@ package offer.Question61_68;
 
 import java.util.Arrays;
 
+/**
+ * 使用矩阵
+ */
 public class Question66 {
 
     public int[] constructArr(int[] a) {

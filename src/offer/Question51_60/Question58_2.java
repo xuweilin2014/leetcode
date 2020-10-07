@@ -1,5 +1,8 @@
 package offer.Question51_60;
 
+/**
+ * 将待旋转的字符串分为 2 部分，分别进行翻转，一共翻转 3 次
+ */
 public class Question58_2 {
 
     public String reverseLeftWords(String s, int n) {
