@@ -1,6 +1,5 @@
 package xu.sort;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 public class Problem922 {
     public int[] sortArrayByParityII(int[] A) {

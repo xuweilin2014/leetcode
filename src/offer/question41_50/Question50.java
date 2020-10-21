@@ -1,8 +1,5 @@
 package offer.question41_50;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.*;
 import java.util.function.BiFunction;
 

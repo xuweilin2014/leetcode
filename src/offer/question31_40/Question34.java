@@ -1,6 +1,5 @@
 package offer.question31_40;
 
-import sun.security.krb5.internal.PAData;
 import xu.tree.TreeNode;
 import xu.tree.TreeUtil;
 
