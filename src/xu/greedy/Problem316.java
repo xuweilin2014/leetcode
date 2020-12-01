@@ -2,6 +2,9 @@ package xu.greedy;
 
 import java.util.*;
 
+/**
+ * 单调栈来解决字符串重复问题
+ */
 public class Problem316 {
 
     public String removeDuplicateLetters(String s) {
