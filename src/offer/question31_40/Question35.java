@@ -1,10 +1,6 @@
 package offer.question31_40;
 
-import xu.tree.Node;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Question35 {

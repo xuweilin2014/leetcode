@@ -1,7 +1,5 @@
 package xu.backtracking;
 
-import xu.tree.Problem508;
-
 import java.util.ArrayList;
 import java.util.List;
 
