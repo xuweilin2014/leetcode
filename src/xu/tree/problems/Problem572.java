@@ -1,4 +1,7 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.TreeNode;
+import xu.tree.TreeUtil;
 
 public class Problem572 {
     private boolean isSame = false;
