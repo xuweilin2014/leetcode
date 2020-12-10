@@ -1,7 +1,7 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+
 
 /**
  * 将有序（升序）数组转化为一棵高度平衡的二叉树。我们可以采用的方法是每次选取数组中间的元素作为根元素。

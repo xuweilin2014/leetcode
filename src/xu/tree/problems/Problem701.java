@@ -1,4 +1,6 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.problems.TreeNode;
 
 public class Problem701 {
     public static TreeNode insertIntoBST(TreeNode root, int val) {

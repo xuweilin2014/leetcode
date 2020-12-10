@@ -1,6 +1,6 @@
 package offer.question31_40;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

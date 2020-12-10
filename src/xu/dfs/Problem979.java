@@ -1,7 +1,7 @@
 package xu.dfs;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 /**
  * 此题对树采用后序遍历。基本思想是在每个结点判断结点上硬币的数目，如果大于1，则把多出来的硬币向父结点移动

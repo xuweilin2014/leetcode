@@ -1,4 +1,4 @@
-package xu.tree;
+package xu.tree.problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

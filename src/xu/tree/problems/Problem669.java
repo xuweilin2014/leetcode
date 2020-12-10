@@ -1,4 +1,6 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.problems.TreeNode;
 
 /**
  * 当root的值位于L和R之间，则递归修剪其左右子树，返回root。

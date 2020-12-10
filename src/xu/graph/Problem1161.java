@@ -1,7 +1,7 @@
 package xu.graph;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,7 +1,7 @@
 package offer.question1_10;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 import java.util.HashMap;
 

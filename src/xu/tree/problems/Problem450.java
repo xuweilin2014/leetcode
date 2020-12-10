@@ -1,7 +1,7 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 public class Problem450 {
     public TreeNode deleteNode(TreeNode root, int key) {

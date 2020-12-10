@@ -1,7 +1,8 @@
 package offer.question21_30;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
+
 
 /**
  * 输入两棵二叉树 A, B, 判断 B 树是否为 A 树的子树

@@ -1,8 +1,11 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.problems.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class Problem1123 {
     private int maxDepth = 0;

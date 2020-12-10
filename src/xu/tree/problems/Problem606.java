@@ -1,4 +1,6 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.problems.TreeNode;
 
 import java.text.DateFormatSymbols;
 

@@ -1,6 +1,6 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 public class Problem112 {
     private boolean flag = false;

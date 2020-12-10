@@ -1,4 +1,4 @@
-package xu.tree;
+package xu.tree.problems;
 
 public class TreeNode {
     public int val;

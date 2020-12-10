@@ -1,4 +1,4 @@
-package xu.tree;
+package xu.tree.problems;
 
 public class Problem1261 {
     TreeNode root;

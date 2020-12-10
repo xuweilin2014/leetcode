@@ -1,6 +1,6 @@
 package xu.bfs;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

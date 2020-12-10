@@ -1,6 +1,6 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 public class Problem100 {
     public boolean isSameTree(TreeNode p, TreeNode q) {

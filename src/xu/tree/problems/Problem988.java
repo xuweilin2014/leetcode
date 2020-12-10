@@ -1,8 +1,8 @@
-package xu.tree;
+package xu.tree.problems;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import xu.tree.problems.TreeNode;
 /**
  * 只能暴力求解
  */

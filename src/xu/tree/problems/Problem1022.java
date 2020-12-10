@@ -1,4 +1,6 @@
-package xu.tree;
+package xu.tree.problems;
+
+import xu.tree.problems.TreeNode;
 
 public class Problem1022 {
     public static int sumRootToLeaf(TreeNode root) {

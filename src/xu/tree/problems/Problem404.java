@@ -1,6 +1,6 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 public class Problem404 {
     public int sumOfLeftLeaves(TreeNode root) {

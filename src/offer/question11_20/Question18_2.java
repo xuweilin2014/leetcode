@@ -2,7 +2,7 @@ package offer.question11_20;
 
 import xu.linkedlist.ListNode;
 import xu.linkedlist.SinglyLinkedListUtil;
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 /**
  * 删除链表中重复节点

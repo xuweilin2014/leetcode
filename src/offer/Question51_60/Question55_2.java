@@ -1,7 +1,7 @@
 package offer.Question51_60;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 /**
  * 后序遍历，对树中的每一个节点只遍历一次

@@ -1,7 +1,7 @@
 package offer.question21_30;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 /**
  * 前序遍历访问顺序为：左子树、根结点、右子树

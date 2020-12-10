@@ -1,7 +1,7 @@
 package xu.dfs;
 
-import xu.tree.TreeNode;
-import xu.tree.TreeUtil;
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 public class Problem98 {
     public boolean isValidBST(TreeNode root) {

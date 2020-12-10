@@ -1,6 +1,6 @@
 package xu.tree.problems;
 
-import xu.tree.TreeNode;
+import xu.tree.problems.TreeNode;
 
 public class Problem230 {
     private int counter = 0;

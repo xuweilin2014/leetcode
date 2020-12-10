@@ -1,4 +1,4 @@
-package xu.tree;
+package xu.tree.problems;
 
 public class Problem998 {
     public TreeNode insertIntoMaxTree(TreeNode root, int val) {
