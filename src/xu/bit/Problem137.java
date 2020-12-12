@@ -1,16 +1,7 @@
-package offer.Question51_60;
+package xu.bit;
 
-import xu.bit.Problem137;
+public class Problem137 {
 
-import java.util.Arrays;
-import java.util.List;
-
-/**
- * 位运算
- */
-public class Question56_2 {
-
-    @SuppressWarnings("DuplicatedCode")
     public int singleNumber(int[] nums) {
         if (nums.length == 1)
             return nums[0];
@@ -40,8 +31,9 @@ public class Question56_2 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Question56_2().singleNumber(new int[]{9, 100, 7, 9, 7, 9, 7}));
-        System.out.println(new Question56_2().singleNumber(new int[]{-2,-2,1,1,4,1,4,4,-4,-2}));
+        System.out.println(new Problem137().singleNumber(new int[]{0,1,0,1,0,1,99}));
+        System.out.println(new Problem137().singleNumber(new int[]{2,2,5,2}));
+        System.out.println(new Problem137().singleNumber(new int[]{-2,-2,1,1,4,1,4,4,-4,-2}));
     }
 
 }
