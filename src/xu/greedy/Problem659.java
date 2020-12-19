@@ -1,7 +1,5 @@
 package xu.greedy;
 
-import xu.dp.Problem650;
-
 import java.util.HashMap;
 import java.util.Map;
 
