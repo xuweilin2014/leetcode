@@ -1,4 +1,4 @@
-package xu.greedy;
+package xu.greedy.problems;
 
 import java.util.ArrayList;
 import java.util.List;

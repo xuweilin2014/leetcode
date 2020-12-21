@@ -1,11 +1,7 @@
-package xu.greedy;
+package xu.greedy.problems;
 
-import xu.hashtable.Problem438;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 // 贪心算法经典题目
 // 1.从区间集合 intvs 中选择一个区间 x，这个 x 是在当前所有区间中结束最早的（end 最小）。

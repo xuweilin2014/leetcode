@@ -1,4 +1,4 @@
-package xu.greedy;
+package xu.greedy.problems;
 
 import java.util.HashMap;
 import java.util.Map;

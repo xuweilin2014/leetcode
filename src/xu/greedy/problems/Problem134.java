@@ -1,4 +1,4 @@
-package xu.greedy;
+package xu.greedy.problems;
 
 public class Problem134 {
 

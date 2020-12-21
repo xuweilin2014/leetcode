@@ -1,4 +1,4 @@
-package xu.greedy;
+package xu.greedy.problems;
 
 /**
  * 从后往前遍历，如果某一个元素可以跳到末尾，那么往前遍历时就直接判断前面的节点是否可以到达此元素，如不行，则将
