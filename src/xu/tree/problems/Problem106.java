@@ -1,9 +1,5 @@
 package xu.tree.problems;
 
-import xu.tree.problems.TreeNode;
-import xu.tree.problems.TreeUtil;
-import xu.two_pointer.Problem1052;
-
 public class Problem106 {
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {

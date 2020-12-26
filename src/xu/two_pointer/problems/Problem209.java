@@ -1,4 +1,4 @@
-package xu.two_pointer;
+package xu.two_pointer.problems;
 
 public class Problem209 {
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// 最长等差数列
 public class Problem1027 {
 
     public int longestArithSeqLength(int[] A) {

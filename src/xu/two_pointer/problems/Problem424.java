@@ -1,7 +1,4 @@
-package xu.two_pointer;
-
-import algorithm_analysis_and_design.divide_and_conquer.MaxSubSum;
-import xu.stack.Problem42;
+package xu.two_pointer.problems;
 
 public class Problem424 {
 
