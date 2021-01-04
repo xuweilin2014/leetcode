@@ -1,7 +1,7 @@
 package offer.question21_30;
 
-import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedListUtil;
+import xu.linkedlist.problems.ListNode;
+import xu.linkedlist.problems.SinglyLinkedListUtil;
 
 public class Question24 {
 

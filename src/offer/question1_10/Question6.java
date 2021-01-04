@@ -1,9 +1,7 @@
 package offer.question1_10;
 
-import xu.linkedlist.ListNode;
+import xu.linkedlist.problems.ListNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 

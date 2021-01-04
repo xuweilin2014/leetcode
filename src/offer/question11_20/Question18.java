@@ -1,9 +1,6 @@
 package offer.question11_20;
 
-import xu.linkedlist.ListNode;
-
-
-import java.util.List;
+import xu.linkedlist.problems.ListNode;
 
 /**
  * 此题即在O(1)的时间内删除链表中的一个结点，需要分情况讨论：

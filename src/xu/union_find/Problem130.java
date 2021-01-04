@@ -1,7 +1,5 @@
 package xu.union_find;
 
-import xu.linkedlist.ListNode;
-
 import java.util.*;
 
 public class Problem130 {

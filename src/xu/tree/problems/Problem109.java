@@ -1,12 +1,7 @@
 package xu.tree.problems;
 
-import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedListUtil;
-import xu.tree.problems.TreeNode;
-import xu.tree.problems.TreeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import xu.linkedlist.problems.ListNode;
+import xu.linkedlist.problems.SinglyLinkedListUtil;
 
 // 快慢指针来确定链表的中点
 public class Problem109 {

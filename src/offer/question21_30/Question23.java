@@ -1,7 +1,7 @@
 package offer.question21_30;
 
-import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedListUtil;
+import xu.linkedlist.problems.ListNode;
+import xu.linkedlist.problems.SinglyLinkedListUtil;
 
 /**
  * 找出链表中环的入口节点分为以下两个步骤：

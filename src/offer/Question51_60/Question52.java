@@ -1,6 +1,6 @@
 package offer.Question51_60;
 
-import xu.linkedlist.ListNode;
+import xu.linkedlist.problems.ListNode;
 
 public class Question52 {
 

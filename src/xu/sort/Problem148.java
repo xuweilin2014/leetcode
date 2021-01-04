@@ -1,7 +1,7 @@
 package xu.sort;
 
-import xu.linkedlist.ListNode;
-import xu.linkedlist.SinglyLinkedListUtil;
+import xu.linkedlist.problems.ListNode;
+import xu.linkedlist.problems.SinglyLinkedListUtil;
 
 public class Problem148 {
     public ListNode sortList(ListNode head) {

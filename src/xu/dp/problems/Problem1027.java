@@ -1,7 +1,5 @@
 package xu.dp.problems;
 
-import xu.linkedlist.ListNode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
