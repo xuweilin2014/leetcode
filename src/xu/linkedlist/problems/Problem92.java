@@ -3,52 +3,43 @@ package xu.linkedlist.problems;
 /**
  * 92. Reverse Linked List II
  */
+public class Problem92{
 
-public class Problem92 extends SinglyLinkedListUtil{
-
-    public static ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
         if (head == null || head.next == null || m == n)
             return head;
 
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode beforeFirst = dummy;
-        ListNode cur = head;
-        int i = 1;
-        while (i < m){
-            beforeFirst = cur;
-            cur = cur.next;
-            i++;
+        ListNode prev = dummy;
+        ListNode p = dummy.next;
+        int counter = 0;
+        while (counter < m - 1){
+            prev = prev.next;
+            p = p.next;
+            counter++;
         }
 
-        ListNode prev = null;
-        ListNode next;
-        while ( i <= n){
-            next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
-            i++;
+        ListNode begin = p;
+        p = p.next;
+        while (counter < n - 1){
+            ListNode tmp = p.next;
+            p.next = prev.next;
+            prev.next = p;
+            p = tmp;
+            counter++;
         }
-
-        beforeFirst.next.next = cur;
-        beforeFirst.next = prev;
-
+        begin.next = p;
         return dummy.next;
     }
 
     public static void main(String[] args) {
-        ListNode head1 = new ListNode(1);
-        Problem92.addNode(head1, 2, 0);
-        Problem92.addNode(head1, 3, 0);
-        Problem92.addNode(head1, 4, 0);
-        Problem92.addNode(head1, 5, 0);
-        Problem92.addNode(head1, 6, 0);
-        Problem92.addNode(head1, 7, 0);
-
-        head1 = Problem92.reverseBetween(head1, 1, 7);
-
-        Problem92.printList(head1);
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem92().reverseBetween(node, 2, 4));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem92().reverseBetween(node, 1, 4));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem92().reverseBetween(node, 1, 5));
     }
 
 }

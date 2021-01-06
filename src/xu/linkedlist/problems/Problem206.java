@@ -11,16 +11,21 @@ public class Problem206 extends SinglyLinkedListUtil{
 
         ListNode prev = null;
         ListNode cur = head;
-        ListNode next;
-
         while (cur != null){
-            next = cur.next;
+            ListNode p = cur.next;
             cur.next = prev;
             prev = cur;
-            cur = next;
+            cur = p;
         }
 
         return prev;
+    }
+
+    public static void main(String[] args) {
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem206().reverseList(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2});
+        SinglyLinkedListUtil.printList(new Problem206().reverseList(node));
     }
 
 }

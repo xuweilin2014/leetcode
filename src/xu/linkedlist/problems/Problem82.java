@@ -3,47 +3,45 @@ package xu.linkedlist.problems;
 /**
  * problem 82. Remove Duplicates from Sorted List II
  */
-
-public class Problem82 extends SinglyLinkedListUtil {
+public class Problem82{
 
     public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        boolean flag = false;
         ListNode prev = dummy;
         ListNode p = head;
-        ListNode pnext = null;
-
-        while (p != null && p.next != null){
-            pnext = p.next;
-            while (pnext != null && pnext.val == p.val){
-                p.next = pnext.next;
-                pnext = pnext.next;
-                flag = true;
+        ListNode pp = head.next;
+        while (pp != null){
+            if (p.val != pp.val){
+                if (p.next == pp){
+                    p = p.next;
+                    prev = prev.next;
+                }else {
+                    prev.next = pp;
+                    p = pp;
+                }
             }
-            if (flag){
-                prev.next = p.next;
-                flag = false;
-            }else {
-                prev = p;
-            }
-            p = p.next;
+            pp = pp.next;
         }
+
+        if (p.next != null && p.val == p.next.val)
+            prev.next = null;
+
         return dummy.next;
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        Problem82.addNode(head,1,0);
-        Problem82.addNode(head,1,0);
-        Problem82.addNode(head,1,0);
-        Problem82.addNode(head,1,0);
-        Problem82.addNode(head,1,0);
-        Problem82.addNode(head,1,0);
-
-        Problem82.printList(head);
-        ListNode node = new Problem82().deleteDuplicates(head);
-        Problem82.printList(node);
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 3, 4, 4, 5, 5, 5});
+        SinglyLinkedListUtil.printList(new Problem82().deleteDuplicates(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 1, 2, 3, 3, 4, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem82().deleteDuplicates(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 1, 2, 3, 3, 4, 5, 5, 5, 5});
+        SinglyLinkedListUtil.printList(new Problem82().deleteDuplicates(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 1, 2, 3, 3, 4});
+        SinglyLinkedListUtil.printList(new Problem82().deleteDuplicates(node));
     }
 
 }
