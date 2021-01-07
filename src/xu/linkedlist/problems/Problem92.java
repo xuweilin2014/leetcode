@@ -13,8 +13,8 @@ public class Problem92{
         dummy.next = head;
         ListNode prev = dummy;
         ListNode p = dummy.next;
-        int counter = 0;
-        while (counter < m - 1){
+        int counter = 1;
+        while (counter < m){
             prev = prev.next;
             p = p.next;
             counter++;
@@ -22,7 +22,7 @@ public class Problem92{
 
         ListNode begin = p;
         p = p.next;
-        while (counter < n - 1){
+        while (counter < n){
             ListNode tmp = p.next;
             p.next = prev.next;
             prev.next = p;
