@@ -3,63 +3,31 @@ package xu.linkedlist.problems;
 /**
  * Problem 142 Linked List Cycle II Important
  */
-
-public class Problem142 extends SinglyLinkedListUtil {
+public class Problem142{
 
     public static ListNode detectCycle(ListNode head) {
-        if (head == null)
+        if (head == null || head.next == null)
             return null;
 
-        ListNode pf = head;
-        ListNode ps = head;
-
-        do{
-            ps = ps.next;
-            pf = pf.next;
-            if (pf == null)
-                return null;
-            pf= pf.next;
-            if (ps == pf)
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow)
                 break;
-        }while (pf != null);
-
-        if (ps != pf)
-            return null;
-        else{
-            ps = head;
-            while (ps != pf){
-                ps = ps.next;
-                pf = pf.next;
-            }
         }
-        return ps;
-    }
 
-    public static void main(String[] args) {
-        ListNode head = new ListNode(3);
-        Problem83.addNode(head,2,0);
-        Problem83.addNode(head,0,0);
-        Problem83.addNode(head,4,0);
+        if (fast == null || fast.next == null)
+            return null;
 
-        /*ListNode p = head;
-        ListNode target = head;
-        int counter = 0;
-        int pos = 1;
-        while (p != null){
-            if(p.next == null){
-                p.next = target;
-                break;
-            }
-            if (counter == pos){
-                target = p;
-            }
-            p = p.next;
-            counter++;
-        }*/
+        ListNode cur = head;
+        while (cur != fast){
+            cur = cur.next;
+            fast = fast.next;
+        }
 
-        ListNode node = Problem142.detectCycle(head);
-        System.out.println(node != null ? node.val : "无环");
-
+        return cur;
     }
 
 }

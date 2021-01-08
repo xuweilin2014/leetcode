@@ -1,27 +1,24 @@
 package xu.linkedlist.problems;
 
 /**
- * Problem 141 Linked List Cycle
+ * Problem 141 Linked List Cycles
  */
-
 public class Problem141 extends SinglyLinkedListUtil {
 
     public boolean hasCycle(ListNode head) {
-        if (head == null)
+        if (head == null || head.next == null)
             return false;
 
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode p = head;
-        ListNode prev = dummy;
-        while (p.next != null){
-            if (p.next.next == dummy){
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow){
                 return true;
             }
-            prev = p;
-            p = p.next;
-            prev.next = dummy;
         }
+
         return false;
     }
 

@@ -2,95 +2,60 @@ package xu.linkedlist.problems;
 
 /**
  * problem 147. Insertion Sort List
+ * 插入排序，思想比较直接，就是对每一个节点都遍历一次链表，找到插入位置，然后插入链表
  */
-public class Problem147 extends SinglyLinkedListUtil {
+public class Problem147{
 
-    public static ListNode insertionSortList(ListNode head) {
-
-        if (head == null)
-            return null;
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
 
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode prev = head;
-        ListNode node = head.next;
-        ListNode nextNode = node;
 
-        while (nextNode != null){
-            nextNode = node.next;
-            insertSortOneRound(dummy, prev, node);
-            node = nextNode;
-            if (prev.next != node){
+        ListNode p = head.next;
+        ListNode prev = head;
+        while (p != null){
+            if (p.val >= prev.val){
+                p = p.next;
                 prev = prev.next;
+            }else {
+                ListNode tmp = p.next;
+                prev.next = p.next;
+                insertOneRound(dummy, p);
+                p = tmp;
             }
         }
 
         return dummy.next;
     }
 
-    private static void insertSortOneRound(ListNode dummy, ListNode prevNode ,ListNode node) {
-
-        ListNode anode = dummy.next;
+    private void insertOneRound(ListNode dummy, ListNode node) {
         ListNode prev = dummy;
-
-        while (anode != prevNode.next){
-            if (node.val < anode.val){
-                prevNode.next = node.next;
+        while (prev.next != null){
+            ListNode tmp = prev.next;
+            if (node.val < prev.next.val){
                 node.next = prev.next;
                 prev.next = node;
-                return;
+                break;
             }
-            prev = anode;
-            anode = anode.next;
+            prev = tmp;
         }
 
-        prevNode.next = node.next;
-        node.next = prev.next;
-        prev.next = node;
-
-    }
-
-    public static ListNode insertionSortListFinal(ListNode head) {
-
-        if (head == null)
-            return null;
-
-        ListNode dummy = new ListNode(0);
-        dummy.next = null;
-        ListNode pre = dummy;
-        ListNode cur = head;
-        ListNode next = null;
-
-        while (cur != null){
-
-            next = cur.next;
-            pre = dummy;
-
-            while (pre.next != null && cur.val > pre.next.val){
-                pre = pre.next;
-            }
-
-            cur.next = pre.next;
-            pre.next = cur;
-            cur = next;
-
+        if (prev.next == null){
+            node.next = null;
+            prev.next = node;
         }
-
-        return dummy.next;
     }
+
 
     public static void main(String[] args) {
-        ListNode head = new Node(-1);
-        Problem147.addNode(head, 5, 0);
-        Problem147.addNode(head, 3, 0);
-        Problem147.addNode(head, 4, 0);
-        Problem147.addNode(head, 0, 0);
-
-        Problem147.printList(head);
-
-        ListNode newHead = Problem147.insertionSortList(head);
-
-        Problem147.printList(newHead);
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{-1, 5, 3, 8, 0});
+        SinglyLinkedListUtil.printList(new Problem147().insertionSortList(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{4,2,1,3});
+        SinglyLinkedListUtil.printList(new Problem147().insertionSortList(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{4,3,2,1});
+        SinglyLinkedListUtil.printList(new Problem147().insertionSortList(node));
     }
 
 }

@@ -7,94 +7,48 @@ import java.util.Map;
 
 /**
  * 138. Copy List with Random Pointer
+ * 复制带随机指针的链表，最直接的办法是使用哈希表，存储原来链表 node 节点和新链表 node 节点
+ * 的对应关系
  */
+public class Problem138{
 
-public class Problem138 extends SinglyLinkedListUtil{
+    class Node {
+        int val;
+        Node next;
+        Node random;
 
-    public static Node copyRandomList(Node head) {
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
+    }
 
-        if (head == null){
+    public Node copyRandomList(Node head) {
+        if (head == null)
             return null;
+
+        Map<Node, Node> nodes = new HashMap<>();
+        Node dummy = new Node(0);
+        Node p = dummy;
+        Node cur = head;
+        while (cur != null){
+            Node node = new Node(cur.val);
+            p.next = node;
+            p = node;
+            nodes.put(cur, node);
+            cur = cur.next;
+        }
+        p.next = null;
+
+        cur = head;
+        p = dummy.next;
+        while (cur != null){
+            p.random = nodes.get(cur.random);
+            p = p.next;
+            cur = cur.next;
         }
 
-        List<Node> randomPointers = new ArrayList<>();
-        List<Node> nodeAddre = new ArrayList<>();
-        List<Node> nodes = new ArrayList<>();
-        Node node = (Node) head.next;
-        randomPointers.add(head.random);
-        nodeAddre.add(head);
-        Node oldNode = new Node(head.val);
-        nodes.add(oldNode);
-
-        while (node != null){
-            randomPointers.add(node.random);
-            nodeAddre.add(node);
-            Node newNode = new Node(node.val);
-            nodes.add(newNode);
-            node = (Node) node.next;
-        }
-
-        for (long i = 0; i < nodes.size(); i++) {
-            long randomIndex = getRandomIndex(randomPointers.get((int) i), nodeAddre);
-            if (randomIndex == -1){
-                nodes.get((int) i).random = null;
-            }else{
-                nodes.get((int) i).random = nodes.get((int) randomIndex);
-            }
-        }
-
-        for (int i = 0; i < nodes.size() - 1; i++){
-            nodes.get(i).next = nodes.get(i + 1);
-        }
-
-        return nodes.get(0);
-
+        return dummy.next;
     }
-
-    private static long getRandomIndex(Node node, List<Node> nodeAddre) {
-
-        if (node == null){
-            return -1;
-        }else {
-            return nodeAddre.indexOf(node);
-        }
-
-    }
-
-    public Node copyRandomListFinal(Node head){
-        if (head == null){
-            return null;
-        }
-
-        Map<Node, Node> map = new HashMap<>();
-        Node node = head;
-
-        while (node != null){
-            Node anode = new Node(node.val);
-            map.put(node, anode);
-            node = (Node) node.next;
-        }
-
-        node = head;
-        while (node != null){
-            map.get(node).next = map.get(node.next);
-            map.get(node).random = map.get(node.random);
-            node = (Node) node.next;
-        }
-
-        return map.get(head);
-    }
-
-    public static void main(String[] args) {
-        Node head = new Node(3);
-        Problem138.addNode(head, 3, 1);
-        Problem138.addNode(head, 3, 1);
-
-        Problem138.printList(head);
-
-        Node newHead = Problem138.copyRandomList(head);
-
-        Problem138.printList(newHead);
-    }
-
 }
