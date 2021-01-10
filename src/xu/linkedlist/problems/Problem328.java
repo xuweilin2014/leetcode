@@ -3,7 +3,6 @@ package xu.linkedlist.problems;
 /**
  * 328. Odd Even Linked List
  */
-
 public class Problem328 extends SinglyLinkedListUtil {
 
     public static ListNode oddEvenList(ListNode head) {

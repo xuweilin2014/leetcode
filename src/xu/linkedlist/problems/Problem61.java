@@ -1,67 +1,45 @@
 package xu.linkedlist.problems;
 
 /**
- *  Problem 61 Given a linked list, rotate the list to the right by k places, where k is non-negative.
+ *  Problem 61 Rotate List
+ *  将链表进行旋转，其实本质上是将尾部向前数第K个元素作为头，原来的头接到原来的尾上
  */
-
 public class Problem61 extends SinglyLinkedListUtil {
 
-    public static ListNode rotateRight(ListNode head, int k) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        k = k % getLength(head);
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        for (int i = 0; i < k; i++) {
-             ListNode beforeTail = getBeforeTail(dummy.next);
-             ListNode tail = beforeTail.next;
-             tail.next = dummy.next;
-             beforeTail.next = null;
-             dummy.next = tail;
-        }
-        return dummy.next;
-
-    }
-
-    public static ListNode rotateRightFinal(ListNode head,int k){
+    public ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null)
             return head;
 
-        int len = getLength(head);
-        k = k % len;
-
+        int length = 0;
+        for (ListNode cur = head; cur != null; cur = cur.next){
+            length++;
+        }
+        k = k % length;
         if (k == 0)
             return head;
 
-        int counter = 1;
-        ListNode left = head;
-        ListNode right = head;
-        while (right.next != null){
-            if(counter < len - k){
-                counter++;
-                left = left.next;
-            }
-            right = right.next;
+        int target = length - k;
+        int counter = 0;
+        ListNode cur = head;
+        while (counter < target - 1){
+            cur = cur.next;
+            counter++;
         }
-        ListNode node = left.next;
-        right.next = head;
-        left.next = null;
-        return node;
+        ListNode p = cur.next;
+        ListNode pp = cur.next;
+        cur.next = null;
+        for (; pp.next != null; pp = pp.next){
+        }
+        pp.next = head;
+        return p;
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        Problem61.addNode(head,2,0);
-        Problem61.addNode(head,3,0);
-        Problem61.addNode(head,4,0);
-        Problem61.addNode(head,5,0);
-
-        Problem61.printList(head);
-
-        head = Problem61.rotateRightFinal(head,3);
-
-        Problem61.printList(head);
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem61().rotateRight(node, 2));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4, 5});
+        SinglyLinkedListUtil.printList(new Problem61().rotateRight(node, 5));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{0,1,2});
+        SinglyLinkedListUtil.printList(new Problem61().rotateRight(node, 4));
     }
-
 }

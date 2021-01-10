@@ -5,58 +5,38 @@ import java.util.*;
 /**
  * 1171. Remove Zero Sum Consecutive Nodes from Linked List
  */
-public class Problem1171 extends SinglyLinkedListUtil {
+public class Problem1171{
 
-    public static ListNode removeZeroSumSublists(ListNode head) {
+    public ListNode removeZeroSumSublists(ListNode head) {
         if (head == null){
-            return head;
+            return null;
         }
 
+        Map<Integer, ListNode> prefix = new HashMap<>();
+        int sum = 0;
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        List<ListNode> nodes = new ArrayList<>();
-        List<Integer> preIndex = new ArrayList<>();
-        ListNode cur = dummy;
-        int sum = 0;
 
-        while (cur != null){
+        for (ListNode cur = dummy; cur != null; cur = cur.next){
             sum += cur.val;
-            nodes.add(cur);
-            preIndex.add(sum);
-            cur = cur.next;
+            prefix.put(sum, cur);
         }
 
-        for (int i = 0; i < preIndex.size(); i++) {
-            int aPreIndex = preIndex.get(i);
-            int indexOf = preIndex.lastIndexOf(aPreIndex);
-            if (indexOf == i)
-                continue;
-            nodes.get(i).next = nodes.get(indexOf).next;
+        sum = 0;
+        for (ListNode cur = dummy; cur != null; cur = cur.next){
+            sum += cur.val;
+            cur.next = prefix.get(sum).next;
         }
 
         return dummy.next;
     }
 
-
-
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        SinglyLinkedListUtil.addNode(head, 3, 0);
-        SinglyLinkedListUtil.addNode(head, 2, 0);
-        SinglyLinkedListUtil.addNode(head, -3, 0);
-        SinglyLinkedListUtil.addNode(head, -2, 0);
-        SinglyLinkedListUtil.addNode(head, 5, 0);
-        SinglyLinkedListUtil.addNode(head, 5, 0);
-        SinglyLinkedListUtil.addNode(head, -5, 0);
-        SinglyLinkedListUtil.addNode(head, 1, 0);
-
-        SinglyLinkedListUtil.printList(head);
-
-        head = Problem1171.removeZeroSumSublists(head);
-
-        SinglyLinkedListUtil.printList(head);
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, -3, 3, -3, 4, -2, -2, 7});
+        SinglyLinkedListUtil.printList(new Problem1171().removeZeroSumSublists(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, -3, 4, -2, -2});
+        SinglyLinkedListUtil.printList(new Problem1171().removeZeroSumSublists(node));
+        node = SinglyLinkedListUtil.buildLinkedList(new int[]{1,3,2,-3,-2,5,5,-5,1});
+        SinglyLinkedListUtil.printList(new Problem1171().removeZeroSumSublists(node));
     }
-
-
-
 }
