@@ -1,8 +1,7 @@
 package xu.linkedlist.problems;
 
 //problem 707
-
-public class MyLinkedList {
+public class Problem707 {
 
     private Node head;
     private int length;
@@ -13,7 +12,7 @@ public class MyLinkedList {
     }
 
     /** Initialize your data structure here. */
-    public MyLinkedList() {
+    public Problem707() {
         head = new Node();
         head.next = null;
         length = 0;

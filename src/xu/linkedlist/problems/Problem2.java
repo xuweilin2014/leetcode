@@ -1,76 +1,68 @@
 package xu.linkedlist.problems;
 
-public class Problem2 extends SinglyLinkedListUtil {
+/**
+ * problem 2:Add Two Numbers
+ */
+public class Problem2{
 
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null)
-            return l1 == null ? l2 : l1;
+            return null;
 
+        ListNode cur1 = l1;
+        ListNode cur2 = l2;
+        int carry = 0;
+        int sum = 0;
         ListNode dummy = new ListNode(0);
-        ListNode last = dummy;
-        ListNode node1 = l1, node2 = l2;
-        long nextVal = 0;
-        long val = 0;
-
-        while (node1 != null && node2 != null){
-            val = node1.val + node2.val + nextVal;
-            nextVal = val / 10;
-            val = val % 10;
-            ListNode anode = new ListNode((int) val);
-            last.next = anode;
-            anode.next = null;
-            last = anode;
-            node1 = node1.next;
-            node2 = node2.next;
-            val = 0;
+        ListNode ans = dummy;
+        while (cur1 != null && cur2 != null){
+            sum = cur1.val + cur2.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            ListNode tmp = new ListNode(sum);
+            ans.next = tmp;
+            ans = tmp;
+            cur1 = cur1.next;
+            cur2 = cur2.next;
         }
 
-        while (node1 != null){
-            val = node1.val + nextVal;
-            nextVal = val / 10;
-            val = val % 10;
-            ListNode anode = new ListNode((int) val);
-            last.next = anode;
-            anode.next = null;
-            last = anode;
-            node1 = node1.next;
-            val = 0;
+        while (cur1 != null){
+            sum = cur1.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            ListNode tmp = new ListNode(sum);
+            ans.next = tmp;
+            ans = tmp;
+            cur1 = cur1.next;
         }
 
-        while (node2 != null){
-            val = node2.val + nextVal;
-            nextVal = val / 10;
-            val = val % 10;
-            ListNode anode = new ListNode((int) val);
-            last.next = anode;
-            anode.next = null;
-            last = anode;
-            node2 = node2.next;
-            val = 0;
+        while (cur2 != null){
+            sum = cur2.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            ListNode tmp = new ListNode(sum);
+            ans.next = tmp;
+            ans = tmp;
+            cur2 = cur2.next;
         }
 
-        if (nextVal != 0){
-            ListNode anode = new ListNode((int) nextVal);
-            last.next = anode;
-            anode.next = null;
-            last = anode;
+        if (carry != 0){
+            ans.next = new ListNode(carry);
         }
 
         return dummy.next;
     }
 
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(7);
-        /*Problem445.addNode(l1, 2, 0);
-        Problem445.addNode(l1, 4, 0);
-        Problem445.addNode(l1, 3, 0);*/
-
-        ListNode l2 = new ListNode(5);
-        /*Problem445.addNode(l2, 6, 0);
-        Problem445.addNode(l2, 4, 0);*/
-
-        ListNode HEAD = Problem2.addTwoNumbers(l1, l2);
-        Problem2.printList(HEAD);
+        ListNode node1 = SinglyLinkedListUtil.buildLinkedList(new int[]{2, 4, 3});
+        ListNode node2 = SinglyLinkedListUtil.buildLinkedList(new int[]{5, 6, 4});
+        SinglyLinkedListUtil.printList(new Problem2().addTwoNumbers(node1, node2));
+        node1 = SinglyLinkedListUtil.buildLinkedList(new int[]{0});
+        node2 = SinglyLinkedListUtil.buildLinkedList(new int[]{0});
+        SinglyLinkedListUtil.printList(new Problem2().addTwoNumbers(node1, node2));
+        node1 = SinglyLinkedListUtil.buildLinkedList(new int[]{9,9,9,9,9,9,9});
+        node2 = SinglyLinkedListUtil.buildLinkedList(new int[]{9,9,9,9});
+        SinglyLinkedListUtil.printList(new Problem2().addTwoNumbers(node1, node2));
     }
 
 }
