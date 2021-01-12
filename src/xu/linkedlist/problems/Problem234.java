@@ -3,38 +3,36 @@ package xu.linkedlist.problems;
 public class Problem234 {
 
     public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null)
-            return true;
+       if (head == null || head.next == null)
+           return true;
 
-        ListNode fast = head;
-        ListNode slow = head;
-        while (fast.next != null && fast.next.next != null){
-            fast = fast.next.next;
-            slow = slow.next;
-        }
+       ListNode slow = head;
+       ListNode fast = head;
+       ListNode prev = null;
+       while (fast != null && fast.next != null){
+           fast = fast.next.next;
+           slow = slow.next;
+       }
 
-        ListNode prev = slow;
-        slow = slow.next;
-        while (slow != null){
-            ListNode tmp = slow.next;
-            slow.next = prev;
-            prev = slow;
-            slow = tmp;
-        }
+       prev = slow;
+       slow = slow.next;
+       while (slow != null){
+           ListNode tmp = slow.next;
+           slow.next = prev;
+           prev = slow;
+           slow = tmp;
+       }
 
-        ListNode last = prev;
-        ListNode first = head;
-        while (last != first && first.next != last){
-            if (last.val != first.val)
-                return false;
-            last = last.next;
-            first = first.next;
-        }
+       ListNode p1 = head;
+       ListNode p2 = prev;
+       while (p1 != p2 && p1.next != p2){
+           if (p1.val != p2.val)
+               return false;
+           p1 = p1.next;
+           p2 = p2.next;
+       }
 
-        if (first.next == last)
-            return first.val == last.val;
-
-        return true;
+       return p1.val == p2.val;
     }
 
     public static void main(String[] args) {
