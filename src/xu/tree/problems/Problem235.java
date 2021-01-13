@@ -1,12 +1,8 @@
 package xu.tree.problems;
 
 
-import xu.tree.problems.TreeNode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Problem235 {
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null)
             return null;
@@ -14,20 +10,37 @@ public class Problem235 {
         return func(root, p, q);
     }
 
-    private TreeNode func(TreeNode cur, TreeNode p, TreeNode q) {
-        if (cur == null)
+    private TreeNode func(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null)
             return null;
 
-        if (cur.val < p.val && cur.val > q.val)
-            return cur;
-        else if (cur.val > p.val && cur.val < q.val)
-            return cur;
-        else if (cur == p || cur == q)
-            return cur;
-        else if (cur.val < p.val && cur.val < q.val)
-            return func(cur.right, p, q);
+        int min = Math.min(p.val, q.val);
+        int max = Math.max(p.val, q.val);
+        if (root.val > max)
+            return func(root.left, p, q);
+        else if (root.val < min)
+            return func(root.right, p, q);
         else
-            return func(cur.left, p , q);
+            return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = TreeUtil.buildTree(new Integer[]{6, 2, 8, 0, 4, 7, 9, null, null, 3, 5});
+        TreeNode node1 = TreeUtil.getTargetNode(root, 3);
+        TreeNode node2 = TreeUtil.getTargetNode(root, 7);
+        System.out.println(new Problem235().lowestCommonAncestor(root, node1, node2));
+
+        node1 = TreeUtil.getTargetNode(root, 3);
+        node2 = TreeUtil.getTargetNode(root, 5);
+        System.out.println(new Problem235().lowestCommonAncestor(root, node1, node2));
+
+        node1 = TreeUtil.getTargetNode(root, 0);
+        node2 = TreeUtil.getTargetNode(root, 5);
+        System.out.println(new Problem235().lowestCommonAncestor(root, node1, node2));
+
+        node1 = TreeUtil.getTargetNode(root, 4);
+        node2 = TreeUtil.getTargetNode(root, 5);
+        System.out.println(new Problem235().lowestCommonAncestor(root, node1, node2));
     }
 
 }

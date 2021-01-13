@@ -1,29 +1,19 @@
 package xu.tree.problems;
 
-import xu.tree.problems.TreeNode;
-
 public class Problem951 {
 
     public boolean flipEquiv(TreeNode root1, TreeNode root2) {
-        return func(root1, root2);
-    }
-
-    private boolean func(TreeNode cur1, TreeNode cur2) {
-        if (cur1 == null && cur2 == null)
+        if (root1 == null && root2 == null)
             return true;
-        else if (cur1 == null || cur2 == null)
+        if (root1 == null || root2 == null)
             return false;
-        else if (cur1.val != cur2.val)
+        if (root1.val != root2.val)
             return false;
 
-        boolean left1 = func(cur1.left, cur2.left);
-        boolean right1 = func(cur1.right, cur2.right);
-        boolean left2 = func(cur1.left, cur2.right);
-        boolean right2 = func(cur1.right, cur2.left);
-        if ((left1 && right1) || (left2 && right2))
-            return true;
+        boolean flip = flipEquiv(root1.right, root2.left) && flipEquiv(root1.left, root2.right);
+        boolean noflip = flipEquiv(root1.right, root2.right) && flipEquiv(root1.left, root2.left);
 
-        return false;
+        return flip || noflip;
     }
 
     public static void main(String[] args) {
