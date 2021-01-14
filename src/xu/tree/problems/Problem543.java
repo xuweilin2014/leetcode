@@ -5,6 +5,7 @@ import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
 public class Problem543 {
+
     private int max = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {
@@ -15,21 +16,18 @@ public class Problem543 {
         return max;
     }
 
-    private int func(TreeNode cur) {
-        if (cur == null)
+    private int func(TreeNode root) {
+        if (root.left == null && root.right == null)
             return 0;
 
-        int left = func(cur.left);
-        int right = func(cur.right);
-
+        int left = root.left == null ? 0 : func(root.left);
+        int right = root.right == null ? 0 : func(root.right) + 1;
         max = Math.max(left + right, max);
-        return Math.max(left, right) + 1;
+        return Math.max(left, right);
     }
 
     public static void main(String[] args) {
-        TreeNode root1 = TreeUtil.buildTree(new Integer[]{4,-7,-3,null,null,-9,-3,9,-7,-4,null,6,null,-6,-6,null,null,0,6,5,null,9,null,null,-1,-4,null,null,null,-2,null});
-        TreeNode r2 = TreeUtil.buildTree(new Integer[]{1});
-        System.out.println(new Problem543().diameterOfBinaryTree(root1));
+        TreeNode node = TreeUtil.buildTree(new Integer[]{1, 2, 3, 4, 5});
+        System.out.println(new Problem543().diameterOfBinaryTree(node));
     }
-
 }
