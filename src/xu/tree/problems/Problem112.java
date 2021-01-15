@@ -1,31 +1,31 @@
 package xu.tree.problems;
 
-import xu.tree.problems.TreeNode;
-
 public class Problem112 {
-    private boolean flag = false;
 
     public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null)
+            return false;
+
+        return func(root, sum, 0);
+    }
+
+    private boolean func(TreeNode root, int target, int path){
         if (root == null){
             return false;
         }
 
-        func(root, sum, 0);
-        return flag;
+        if (root.left == null && root.right == null)
+            return root.val + path == target;
+
+        return func(root.left, target, path + root.val)
+                || func(root.right, target, path + root.val);
     }
 
-    private void func(TreeNode root, int target, int sum) {
-        if (root == null)
-            return;
-
-        sum += root.val;
-        if (root.left == null && root.right == null){
-            if (sum == target){
-                flag = true;
-                return;
-            }
-        }
-        func(root.left, target, sum);
-        func(root.right, target, sum);
+    public static void main(String[] args) {
+        TreeNode root = TreeUtil.buildTree(new Integer[]{3, 5, 1, 6, 2, 0, 8, null, null, 7, 4});
+        System.out.println(new Problem112().hasPathSum(root, 14));
+        root = TreeUtil.buildTree(new Integer[]{1,2,null});
+        System.out.println(new Problem112().hasPathSum(root, 1));
     }
+
 }
