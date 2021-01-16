@@ -8,41 +8,42 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Problem113 {
-    private List<List<Integer>> result = new LinkedList<>();
+
+    private List<List<Integer>> ans = new ArrayList<>();
 
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         if (root == null)
-            return result;
+            return new ArrayList<>();
 
-        List<Integer> list = new ArrayList<>();
-        func(root, 0, list, sum);
-        return result;
+        List<Integer> path = new ArrayList<>();
+        func(root, sum, path, 0);
+        return ans;
     }
 
-    private void func(TreeNode cur, int sum, List<Integer> list, int target) {
-        if (cur == null)
+    private void func(TreeNode root, int target, List<Integer> path, int sum) {
+        if (root == null) {
             return;
-
-        list.add(cur.val);
-        sum += cur.val;
-        if (sum == target){
-            if (cur.left == null && cur.right == null)
-                copyAndAdd(list);
         }
-        func(cur.left, sum, list, target);
-        func(cur.right,sum,list,target);
-        list.remove(list.size() - 1);
+
+        if (root.left == null && root.right == null){
+            if (sum + root.val == target){
+                path.add(root.val);
+                ans.add(new ArrayList<>(path));
+                path.remove(path.size() - 1);
+                return;
+            }
+        }
+
+        path.add(root.val);
+        func(root.left, target, path, sum + root.val);
+        func(root.right, target, path, sum + root.val);
+        path.remove(path.size() - 1);
     }
 
-    private void copyAndAdd(List<Integer> list) {
-        List<Integer> vals = new ArrayList<>();
-        vals.addAll(list);
-        result.add(vals);
-    }
 
     public static void main(String[] args) {
         TreeNode cur = TreeUtil.buildTree(new Integer[]{5,4,8,11,null,13,4,7,2,null,null,5,1});
-        List<List<Integer>> lists = new Problem113().pathSum(cur, 22);
+        List<List<Integer>> lists = new Problem113().pathSum(cur, 26);
         for (List<Integer> list : lists) {
             System.out.println(list);
         }

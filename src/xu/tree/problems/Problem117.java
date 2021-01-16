@@ -1,5 +1,8 @@
 package xu.tree.problems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem117 {
 
     static class Node {
@@ -26,73 +29,21 @@ public class Problem117 {
         if (root == null)
             return null;
 
-        root.next = null;
-        Node start = root.left == null ? root.right : root.left;
-        Node lastLayerCur = root;
-        Node lastLayerPrev = root;
-        Node prev = null;
-        while (start != null){
-            start = null;
-            boolean flag = false;
-            while (lastLayerCur != null) {
-                if (lastLayerPrev != lastLayerCur && prev != null){
-                    if (lastLayerCur.left != null)
-                        prev.next = lastLayerCur.left;
-                    else if (lastLayerCur.right != null)
-                        prev.next = lastLayerCur.right;
-                }
-                if (lastLayerCur.left != null && lastLayerCur.right != null){
-                    lastLayerCur.left.next = lastLayerCur.right;
-                    prev = lastLayerCur.right;
-                    if (!flag){
-                        flag = true;
-                        start = lastLayerCur.left;
-                    }
-                }else if (lastLayerCur.left != null || lastLayerCur.right != null){
-                    prev = lastLayerCur.right == null ? lastLayerCur.left : lastLayerCur.right;
-                    if (!flag){
-                        flag = true;
-                        start = prev;
-                    }
-                }
-                lastLayerPrev = lastLayerCur;
-                lastLayerCur = lastLayerCur.next;
+        List<Node> layer = new ArrayList<>();
+        layer.add(root);
+        while (!layer.isEmpty()){
+            List<Node> copy = new ArrayList<>();
+            for (int i = 0; i < layer.size(); i++) {
+                Node node = layer.get(i);
+                if (node.left != null)
+                    copy.add(node.left);
+                if (node.right != null)
+                    copy.add(node.right);
+                if (i + 1 < layer.size())
+                    node.next = layer.get(i + 1);
             }
-            lastLayerCur = start;
-            lastLayerPrev = start;
-            prev = null;
-        }
-        return root;
-    }
-
-    public Node funcFinal(Node root){
-        Node head = root;
-        Node prev = null;
-        Node cur = null;
-
-        while (head != null){
-            prev = null;
-            cur = head;
-            head = null;
-            while (cur != null){
-                if (cur.left != null){
-                    if (prev == null){
-                        head = cur.left;
-                    }else{
-                        prev.next = cur.left;
-                    }
-                    prev = cur.left;
-                }
-                if (cur.right != null){
-                    if (prev == null){
-                        head = cur.right;
-                    }else{
-                        prev.next = cur.right;
-                    }
-                    prev = cur.right;
-                }
-                cur = cur.next;
-            }
+            layer.clear();
+            layer.addAll(copy);
         }
 
         return root;

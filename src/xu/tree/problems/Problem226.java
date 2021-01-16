@@ -4,15 +4,8 @@ import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
 public class Problem226 {
-    public static TreeNode invertTree(TreeNode root) {
-        if (root == null)
-            return null;
 
-        root = func(root);
-        return root;
-    }
-
-    private static TreeNode func(TreeNode root) {
+    public TreeNode invertTree(TreeNode root) {
         if (root == null)
             return null;
 
@@ -20,8 +13,8 @@ public class Problem226 {
         root.left = root.right;
         root.right = tmp;
 
-        root.left = func(root.left);
-        root.right = func(root.right);
+        root.left = invertTree(root.left);
+        root.right = invertTree(root.right);
 
         return root;
     }
@@ -30,7 +23,7 @@ public class Problem226 {
         TreeNode root = TreeUtil.buildTree(new Integer[]{4,2,7,1,3,6,9});
         TreeUtil.printTree(root);
         System.out.println();
-        root = Problem226.invertTree(root);
+        root = new Problem226().invertTree(root);
         TreeUtil.printTree(root);
     }
 

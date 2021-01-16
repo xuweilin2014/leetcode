@@ -3,29 +3,35 @@ package xu.tree.problems;
 import xu.tree.problems.TreeNode;
 
 public class Problem538 {
+
+    private int sum = 0;
+
     public TreeNode convertBST(TreeNode root) {
         if (root == null)
-            return root;
+            return null;
 
-        int sum = 0;
-        DFS(root, sum);
+        func(root);
         return root;
     }
 
-    private int DFS(TreeNode root, int sum) {
+    private void func(TreeNode root) {
         if (root == null)
-            return sum;
+            return ;
 
-        sum = DFS(root.right, sum);
-        int val = root.val;
-        root.val += sum;
-        sum += val;
-        sum = DFS(root.left, sum);
-        return sum;
+        if (root.left == null && root.right == null){
+            sum += root.val;
+            root.val = sum;
+            return;
+        }
+
+        func(root.right);
+        sum += root.val;
+        root.val = sum;
+        func(root.left);
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{2,1,3});
+        TreeNode root = TreeUtil.buildTree(new Integer[]{4,1,6,0,2,5,7,null,null,null,3,null,null,null,8});
         TreeUtil.printTree(root);
         TreeNode treeNode = new Problem538().convertBST(root);
         System.out.println();

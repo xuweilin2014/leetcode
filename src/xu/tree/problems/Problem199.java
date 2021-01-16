@@ -9,34 +9,29 @@ import java.util.List;
 import java.util.Queue;
 
 public class Problem199 {
+
     public List<Integer> rightSideView(TreeNode root) {
         if (root == null)
             return new ArrayList<>();
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<Integer> list = new ArrayList<>();
-        int layerLen = 1;
+        List<Integer> ans = new ArrayList<>();
+        List<TreeNode> queue = new ArrayList<>();
         queue.add(root);
         while (!queue.isEmpty()){
-            TreeNode last = null;
-            int counter = 0;
-            for (int i = 0; i < layerLen; i++) {
-                last = queue.poll();
-                if (last.left != null){
-                    queue.offer(last.left);
-                    counter++;
-                }
-                if (last.right != null) {
-                    queue.offer(last.right);
-                    counter++;
-                }
+            List<TreeNode> copy = new ArrayList<>();
+            ans.add(queue.get(queue.size() - 1).val);
+            for (int i = 0; i < queue.size(); i++) {
+                TreeNode node = queue.get(i);
+                if (node.left != null)
+                    copy.add(node.left);
+                if (node.right != null)
+                    copy.add(node.right);
             }
-            if (last != null)
-                list.add(last.val);
-            layerLen = counter;
+            queue.clear();
+            queue.addAll(copy);
         }
 
-        return list;
+        return ans;
     }
 
     public static void main(String[] args) {
