@@ -2,39 +2,35 @@ package xu.tree.problems;
 
 import xu.tree.problems.TreeNode;
 
-public class Problem1022 {
-    public static int sumRootToLeaf(TreeNode root) {
-        if (root == null){
-            return 0;
-        }
+import java.util.ArrayList;
 
-        int val = 0;
-        int sum = 0;
-        sum = DFS(root, val, sum);
+public class Problem1022 {
+
+    private int sum = 0;
+
+    public int sumRootToLeaf(TreeNode root) {
+        if (root == null)
+            return 0;
+
+        func(root, 0);
         return sum;
     }
 
-    private static int DFS(TreeNode root, int val, int sum) {
+    private void func(TreeNode root, int presum) {
         if (root == null)
-            return sum;
-
-        val = val << 1 | root.val;
+            return;
+        presum = presum * 2 + root.val;
         if (root.left == null && root.right == null){
-            sum += val;
-            return sum;
+            sum += presum;
+            return;
         }
-
-        sum = DFS(root.left, val, sum);
-        sum = DFS(root.right, val, sum);
-
-        return sum;
+        func(root.left, presum);
+        func(root.right, presum);
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{1,0,1,0,1,0,1});
-        int sum = Problem1022.sumRootToLeaf(root);
-        System.out.println(sum);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{1, 0, 1, 0, 1, 0, 1});
+        System.out.println(new Problem1022().sumRootToLeaf(node));
     }
-
 
 }

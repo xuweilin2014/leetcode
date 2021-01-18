@@ -5,36 +5,36 @@ import xu.tree.problems.TreeUtil;
 
 public class Problem687 {
 
-    private int path = 0;
-
+    private int max;
 
     public int longestUnivaluePath(TreeNode root) {
         if (root == null)
             return 0;
-        dfs(root);
-        return path;
+
+        func(root, root.val);
+        return max;
     }
 
-    private int dfs(TreeNode root) {
+    private int func(TreeNode root, int val) {
         if (root == null)
             return 0;
+        if (root.left == null && root.right == null){
+            return root.val == val ? 1 : 0;
+        }
+        int left = func(root.left, root.val);
+        int right = func(root.right, root.val);
+        max = Math.max(left + right, max);
 
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-        int newLeft = 0, newRight = 0;
-        if (root.left != null && root.val == root.left.val){
-            newLeft = left + 1;
-        }
-        if (root.right != null && root.val == root.right.val){
-            newRight = right + 1;
-        }
-        path = Math.max(path, newRight + newLeft);
-        return Math.max(newRight, newLeft);
+        int ans = Math.max(left, right);
+        return root.val == val ? ans + 1 : 0;
     }
 
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{2,2,2,2,2,2, null});
+        TreeNode node = TreeUtil.buildTree(new Integer[]{5, 4, 5, 1, 1, null, 5});
+        System.out.println(new Problem687().longestUnivaluePath(node));
+        node = TreeUtil.buildTree(new Integer[]{1,4,5,4,4,null,5});
+        System.out.println(new Problem687().longestUnivaluePath(node));
+        node = TreeUtil.buildTree(new Integer[]{5,4,5,4,4,5,3,4,4,null,null,null,4,null,null,4,null,null,4,null,4,4,null,null,4,4,null});
         System.out.println(new Problem687().longestUnivaluePath(node));
     }
-
 }
