@@ -4,34 +4,35 @@ package xu.tree.problems;
 public class Problem1008 {
 
     public TreeNode bstFromPreorder(int[] preorder) {
-        if (preorder.length == 0)
+        if (preorder == null || preorder.length == 0)
             return null;
 
-        TreeNode root = null;
-        for (int i = 0; i < preorder.length; i++) {
-            root = InsertBST(root, preorder[i]);
+        TreeNode root = new TreeNode(preorder[0]);
+        for (int i = 1; i < preorder.length; i++) {
+            TreeNode node = new TreeNode(preorder[i]);
+            func(root, node);
         }
+
         return root;
     }
 
-    private TreeNode InsertBST(TreeNode cur, int val) {
-        if (cur == null){
-            cur = new TreeNode(val);
-            cur.left = cur.right = null;
-            return cur;
+    private void func(TreeNode root, TreeNode node) {
+        if (root == null)
+            return;
+        if (root.left == null && root.val > node.val)
+            root.left = node;
+        else if (root.right == null && root.val < node.val)
+            root.right = node;
+        else if (node.val < root.val){
+            func(root.left, node);
+        }else {
+            func(root.right, node);
         }
-
-        if (val < cur.val){
-            cur.left = InsertBST(cur.left, val);
-            return cur;
-        }
-
-        cur.right = InsertBST(cur.right, val);
-        return cur;
     }
 
     public static void main(String[] args) {
-        new Problem1008().bstFromPreorder(new int[]{8,5,1,7,10,12});
+        TreeNode node = new Problem1008().bstFromPreorder(new int[]{8, 5, 1, 7, 10, 12});
+        TreeUtil.printTree(node);
     }
 
 }

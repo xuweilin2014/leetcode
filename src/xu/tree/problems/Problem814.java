@@ -4,30 +4,34 @@ package xu.tree.problems;
 import xu.tree.problems.TreeNode;
 
 public class Problem814 {
-    public static TreeNode pruneTree(TreeNode root) {
-        root = isContainOne(root);
-        return root;
-    }
 
-    public static TreeNode isContainOne(TreeNode root){
+    public TreeNode pruneTree(TreeNode root) {
         if (root == null)
             return null;
 
-        root.left = isContainOne(root.left);
-        root.right = isContainOne(root.right);
+        return func(root) ? root : null;
+    }
 
-        if (root.left == null && root.right == null && root.val == 0){
-            return null;
+    private boolean func(TreeNode root) {
+        if (root == null)
+            return false;
+        if (root.left == null && root.right == null){
+            return root.val == 1;
         }
-        return root;
+
+        boolean left = func(root.left);
+        boolean right = func(root.right);
+        root.left = left ? root.left : null;
+        root.right = right ? root.right : null;
+
+        return left || right || root.val == 1;
     }
 
     public static void main(String[] args) {
-        Integer[] ints = new Integer[]{1,0,1,0,0,0,1};
-        TreeNode root = TreeUtil.buildTree(ints);
-        TreeUtil.printTree(root);
-        root = Problem814.pruneTree(root);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{1, 0, 1, 0, 0, 0, 1});
+        TreeUtil.printTree(new Problem814().pruneTree(node));
         System.out.println();
-        TreeUtil.printTree(root);
+        node = TreeUtil.buildTree(new Integer[]{1, null, 0, 0, 1});
+        TreeUtil.printTree(new Problem814().pruneTree(node));
     }
 }

@@ -4,25 +4,41 @@ import xu.tree.problems.TreeNode;
 
 public class Problem1315 {
 
+    private int sum;
+
     public int sumEvenGrandparent(TreeNode root) {
-        int sum = 0;
-        sum = DFS(root, null, null, sum);
+        if (root == null)
+            return 0;
+
+        func(root);
         return sum;
     }
 
-    public int DFS(TreeNode cur, TreeNode parent, TreeNode grandParent, int sum){
-        if (cur == null)
-            return sum;
-
-        if (grandParent != null && grandParent.val % 2 == 0){
-            sum += cur.val;
+    private void func(TreeNode root) {
+        if (root == null)
+            return;
+        if (root.val % 2 == 0){
+            if (root.left != null){
+                if (root.left.left != null)
+                    sum += root.left.left.val;
+                if (root.left.right != null)
+                    sum += root.left.right.val;
+            }
+            if (root.right != null){
+                if (root.right.left != null)
+                    sum += root.right.left.val;
+                if (root.right.right != null)
+                    sum += root.right.right.val;
+            }
         }
 
-        sum = DFS(cur.left, cur, parent, sum);
-        sum = DFS(cur.right, cur, parent, sum);
-
-        return sum;
+        func(root.left);
+        func(root.right);
     }
 
+    public static void main(String[] args) {
+        TreeNode node = TreeUtil.buildTree(new Integer[]{6, 7, 8, 2, 7, 1, 3, 9, null, 1, 4, null, null, null, 5});
+        System.out.println(new Problem1315().sumEvenGrandparent(node));
+    }
 
 }
