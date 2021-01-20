@@ -8,52 +8,36 @@ import java.util.List;
 import java.util.Stack;
 
 public class Problem530 {
+
+    private int min = Integer.MAX_VALUE;
+
+    private TreeNode prev;
+
     public int getMinimumDifference(TreeNode root) {
         if (root == null)
             return 0;
 
-        List<Integer> list = new ArrayList<>();
-        int min = Integer.MAX_VALUE;
-        foo(root, list);
-        for (int i = 1; i < list.size(); i++) {
-            int val = list.get(i) - list.get(i - 1);
-            if (val < min)
-                min = val;
-        }
+        func(root);
         return min;
     }
 
-    private void func(TreeNode root, List<Integer> list) {
+    private void func(TreeNode root) {
         if (root == null)
             return;
 
-        func(root.left, list);
-        list.add(root.val);
-        func(root.right, list);
-    }
-
-    public void foo(TreeNode root, List<Integer> list){
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()){
-            TreeNode node;
-            while ((node = stack.peek()) != null){
-                stack.push(node.left);
-            }
-            stack.pop();
-            if (!stack.isEmpty()) {
-                node = stack.pop();
-                list.add(node.val);
-                stack.push(node.right);
-            }
-        }
+        func(root.left);
+        if (prev != null && prev != root)
+            min = Math.min(min, Math.abs(root.val - prev.val));
+        prev = root;
+        func(root.right);
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{1,null,3,2,null});
-        int minimumDifference = new Problem530().getMinimumDifference(root);
-        System.out.println(minimumDifference);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{40, 20, 60, 10, 30, 50, 70});
+        System.out.println(new Problem530().getMinimumDifference(node));
+        node = TreeUtil.buildTree(new Integer[]{236, 104, 701, null, 227, null, 911});
+        System.out.println(new Problem530().getMinimumDifference(node));
+        node = TreeUtil.buildTree(new Integer[]{1, null, 2});
+        System.out.println(new Problem530().getMinimumDifference(node));
     }
-
-
 }

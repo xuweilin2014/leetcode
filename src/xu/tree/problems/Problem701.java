@@ -3,45 +3,37 @@ package xu.tree.problems;
 import xu.tree.problems.TreeNode;
 
 public class Problem701 {
-    public static TreeNode insertIntoBST(TreeNode root, int val) {
-        if (root == null)
-            return root;
 
-        DFSInsertTree(root, val);
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        TreeNode node = new TreeNode(val);
+        if (root == null)
+            return node;
+
+        func(root, node);
         return root;
     }
 
-    private static void DFSInsertTree(TreeNode root, int val) {
-        if (root.val > val){
-            if (root.left == null){
-                TreeNode anode = new TreeNode(val);
-                anode.left = null;
-                anode.right = null;
-                root.left = anode;
-                return;
-            }else{
-                DFSInsertTree(root.left, val);
-            }
-        }
+    private void func(TreeNode root, TreeNode node) {
+        if (root == null)
+            return;
 
-        if (root.val < val){
-            if (root.right == null) {
-                TreeNode anode = new TreeNode(val);
-                anode.left = null;
-                anode.right = null;
-                root.right = anode;
-                return;
-            }else{
-                DFSInsertTree(root.right, val);
-            }
-        }
+        if (root.right == null && root.val < node.val)
+            root.right = node;
+        else if (root.left == null && root.val > node.val)
+            root.left = node;
+        else if (root.val > node.val)
+            func(root.left, node);
+        else
+            func(root.right, node);
     }
 
     public static void main(String[] args) {
-        Integer[] ints = {4,2,7,1,3,null,null};
-        TreeNode root = TreeUtil.buildTree(ints);
-        TreeUtil.printTree(root);
-        Problem701.insertIntoBST(root, 8);
-        TreeUtil.printTree(root);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{4, 2, 7, 1, 3});
+        TreeUtil.printTree(new Problem701().insertIntoBST(node, 5));
+        System.out.println();
+        node = TreeUtil.buildTree(new Integer[]{40,20,60,10,30,50,70});
+        TreeUtil.printTree(new Problem701().insertIntoBST(node, 25));
+        System.out.println();
     }
+
 }

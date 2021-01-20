@@ -3,33 +3,36 @@ package xu.tree.problems;
 import xu.tree.problems.TreeNode;
 
 public class Problem110 {
-    private boolean isBalance = true;
+
+    private boolean balanced = true;
 
     public boolean isBalanced(TreeNode root) {
         if (root == null)
             return true;
 
-        int depth = 0;
-        func(root, depth);
-        return isBalance;
+        func(root);
+        return balanced;
     }
 
-    private int func(TreeNode root, int depth) {
+    private int func(TreeNode root) {
         if (root == null)
-            return depth;
+            return 0;
+        if (root.left == null && root.right == null)
+            return 1;
 
-        depth++;
-        int left = func(root.left, depth);
-        int right = func(root.right, depth);
-        if (left - right > 1 || right - left > 1){
-            isBalance = false;
-        }
+        int left = func(root.left);
+        int right = func(root.right);
 
-        return Math.max(left, right);
+        if (Math.abs(left - right) > 1)
+            balanced = false;
+        return Math.max(left, right) + 1;
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{3,9,20,null,null,15,7});
-        System.out.println(new Problem110().isBalanced(root));
+        TreeNode node = TreeUtil.buildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        System.out.println(new Problem110().isBalanced(node));
+        node = TreeUtil.buildTree(new Integer[]{1,2,2,3,3,null,null,4,4,null,null});
+        System.out.println(new Problem110().isBalanced(node));
     }
+
 }
