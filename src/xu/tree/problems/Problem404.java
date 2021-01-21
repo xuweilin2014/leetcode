@@ -1,31 +1,34 @@
 package xu.tree.problems;
 
+import xu.backtracking.Problem40;
 import xu.tree.problems.TreeNode;
 
 public class Problem404 {
+
+    private int sum = 0;
+
     public int sumOfLeftLeaves(TreeNode root) {
         if (root == null)
             return 0;
-        int sum = 0;
-        sum = func(root.left, sum, 0);
-        sum = func(root.right, sum, 1);
+
+        func(root);
         return sum;
     }
 
-    private int func(TreeNode root, int sum, int OP) {
+    private void func(TreeNode root) {
         if (root == null)
-            return sum;
+            return;
 
-        if (root.left == null && root.right == null){
-            if (OP == 0)
-                sum += root.val;
-            return sum;
+        if (root.left != null){
+            if (root.left.left == null && root.left.right == null)
+                sum += root.left.val;
         }
-
-        sum = func(root.left, sum, 0);
-        sum = func(root.right, sum, 1);
-        return sum;
+        func(root.left);
+        func(root.right);
     }
 
-
+    public static void main(String[] args) {
+        TreeNode node = TreeUtil.buildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        System.out.println(new Problem404().sumOfLeftLeaves(node));
+    }
 }

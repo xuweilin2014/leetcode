@@ -5,30 +5,29 @@ import xu.tree.problems.TreeNode;
 
 public class Problem654 {
 
-    public static TreeNode constructMaximumBinaryTree(int[] nums) {
-        if (nums.length == 0)
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        if (nums == null || nums.length == 0)
             return null;
 
-        return buildTree(nums, 0, nums.length - 1);
+        return func(nums, 0, nums.length - 1);
     }
 
-    private static TreeNode buildTree(int[] nums, int low, int high) {
+    private TreeNode func(int[] nums, int low, int high) {
         if (low > high)
             return null;
 
-        int maxIndex = getMaxIndex(nums, low, high);
-        TreeNode root = new TreeNode(nums[maxIndex]);
-        root.left = buildTree(nums, low, maxIndex - 1);
-        root.right = buildTree(nums, maxIndex + 1, high);
+        int index = getMaxIndex(nums, low, high);
+        TreeNode root = new TreeNode(nums[index]);
+        root.left = func(nums, low, index - 1);
+        root.right = func(nums, index + 1, high);
         return root;
     }
 
-
-    private static int getMaxIndex(int[] nums, int low, int high){
-        int max = nums[low];
+    private int getMaxIndex(int[] nums, int low, int high) {
         int index = low;
+        int max = nums[low];
         for (int i = low; i <= high; i++) {
-            if (nums[i] > max) {
+            if (nums[i] > max){
                 max = nums[i];
                 index = i;
             }
@@ -37,9 +36,7 @@ public class Problem654 {
     }
 
     public static void main(String[] args) {
-        TreeNode root = Problem654.constructMaximumBinaryTree(new int[]{3,2,1,6,0,5});
-        TreeUtil.printTree(root);
+        TreeUtil.printTree(new Problem654().constructMaximumBinaryTree(new int[]{3,2,1,6,0,5}));
     }
-
 
 }
