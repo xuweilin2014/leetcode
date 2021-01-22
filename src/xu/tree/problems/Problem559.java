@@ -1,38 +1,41 @@
 package xu.tree.problems;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Problem559 {
 
-    public static int maxDepth(Node root) {
-        int depth = 0;
-        depth = getDepth(root);
-        return depth;
-    }
+    static class Node {
+        public int val;
+        public List<Node> children;
 
-    private static int getDepth(Node root) {
+        public Node() {}
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    };
+
+    public int maxDepth(Node root) {
         if (root == null)
             return 0;
-
-        if (root.children.size() == 0)
+        if (root.children == null)
             return 1;
 
-        int[] depths = new int[root.children.size()];
-        for (int i = 0; i < root.children.size(); i++) {
-            depths[i] = getDepth(root.children.get(i));
-            depths[i] = depths[i] + 1;
+        int max = 1;
+        for (Node child : root.children) {
+            int depth = maxDepth(child);
+            max = Math.max(max, depth);
         }
 
-        return getMaxDepth(depths);
+        return max + 1;
     }
 
-    public static int getMaxDepth(int[] depths){
-        if (depths.length == 0)
-            return 0;
 
-        int max = depths[0];
-        for (int i = 0; i < depths.length; i++) {
-            if (depths[i] > max)
-                max = depths[i];
-        }
-        return max;
-    }
 }

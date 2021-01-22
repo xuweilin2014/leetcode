@@ -4,21 +4,28 @@ import xu.tree.problems.Node;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Problem589 {
+
     public List<Integer> preorder(Node root) {
-        List<Integer> prePath = new ArrayList<>();
-        preorderRecur(root, prePath);
-        return prePath;
-    }
-
-    private void preorderRecur(Node root, List<Integer> prePath) {
+        List<Integer> ans = new ArrayList<>();
         if (root == null)
-            return;
+            return ans;
 
-        prePath.add(root.val);
-        for (Node child : root.children) {
-            preorderRecur(child, prePath);
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            Node node = stack.pop();
+            ans.add(node.val);
+            if (node.children.size() > 0){
+                for (int i = node.children.size() - 1; i >= 0; i--) {
+                    stack.push(node.children.get(i));
+                }
+            }
         }
+
+        return ans;
     }
+
 }

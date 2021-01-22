@@ -4,32 +4,27 @@ import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
 public class Problem111 {
-    private int minDepth = Integer.MAX_VALUE;
+
     public int minDepth(TreeNode root) {
         if (root == null)
             return 0;
+        if (root.left == null && root.right == null)
+            return 1;
 
-        func(root, 0);
-        return minDepth;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+
+        if (left == 0 || right == 0)
+            return Math.max(left, right) + 1;
+
+        return Math.min(left, right) + 1;
     }
-
-    private void func(TreeNode root, int depth) {
-        if (root == null)
-            return ;
-
-        depth++;
-        if (root.left == null && root.right == null){
-            if (depth < minDepth)
-                minDepth = depth;
-        }
-
-        func(root.left, depth);
-        func(root.right, depth);
-    }
-
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{1,2,null});
-        System.out.println(new Problem111().minDepth(root));
+        TreeNode node = TreeUtil.buildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        System.out.println(new Problem111().minDepth(node));
+        node = TreeUtil.buildTree(new Integer[]{2,null,3,null,4,null,5,null,6});
+        System.out.println(new Problem111().minDepth(node));
     }
+
 }
