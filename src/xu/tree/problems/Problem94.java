@@ -10,35 +10,33 @@ import java.util.List;
 import java.util.Stack;
 
 public class Problem94 {
+
     public List<Integer> inorderTraversal(TreeNode root) {
         if (root == null)
             return new ArrayList<>();
 
-        List<Integer> res = new LinkedList<>();
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()){
-            TreeNode node = stack.peek();
+        List<Integer> ans = new ArrayList<>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null){
             while (node != null){
-                node = node.left;
                 stack.push(node);
+                node = node.left;
             }
-            stack.pop();
+
             if (!stack.isEmpty()){
-                TreeNode treeNode = stack.pop();
-                res.add(treeNode.val);
-                stack.push(treeNode.right);
+                node = stack.pop();
+                ans.add(node.val);
+                node = node.right;
             }
         }
 
-        return res;
+        return ans;
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtil.buildTree(new Integer[]{3,0,4,null,2,null,null,1,null});
-        List<Integer> list = new Problem94().inorderTraversal(root);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + " ");
-        }
+        TreeNode node = TreeUtil.buildTree(new Integer[]{4, 1, 6, 0, 2, 5, 7, null, null, null, 3, null, null, null, 8});
+        System.out.println(new Problem94().inorderTraversal(node));
     }
+
 }

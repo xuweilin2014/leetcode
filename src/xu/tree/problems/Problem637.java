@@ -3,36 +3,41 @@ package xu.tree.problems;
 import java.util.*;
 
 public class Problem637 {
+
     public static List<Double> averageOfLevels(TreeNode root) {
         if (root == null)
-            return null;
+            return new ArrayList<>();
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<Double> list = new ArrayList<>();
-        long sum = 0;
+        List<TreeNode> queue = new ArrayList<>();
+        List<Double> ans = new ArrayList<>();
         queue.add(root);
-        int layerLen;
-
         while (!queue.isEmpty()){
-            sum = 0;
-            layerLen = queue.size();
-            for (int i = layerLen; i > 0; i--){
-                TreeNode node = queue.poll();
+            List<TreeNode> copy = new ArrayList<>();
+            double sum = 0;
+            int counter = 0;
+            for (TreeNode node : queue) {
+                if (node.left != null){
+                    copy.add(node.left);
+                }
+                if (node.right != null){
+                    copy.add(node.right);
+                }
                 sum += node.val;
-                if (node.left != null)
-                    queue.add(node.left);
-                if (node.right != null)
-                    queue.add(node.right);
+                counter++;
             }
-            list.add(sum / (double)layerLen);
+            if (counter != 0)
+                ans.add(sum / counter);
+            queue.clear();
+            queue.addAll(copy);
         }
 
-        return list;
+        return ans;
     }
 
     public static void main(String[] args) {
         TreeNode root = TreeUtil.buildTree(new Integer[]{3,3,3});
-        List<Double> list = Problem637.averageOfLevels(root);
-        System.out.println(list);
+        System.out.println(Problem637.averageOfLevels(root));
+        root = TreeUtil.buildTree(new Integer[]{3,9,20,null,null,15,7});
+        System.out.println(Problem637.averageOfLevels(root));
     }
 }
