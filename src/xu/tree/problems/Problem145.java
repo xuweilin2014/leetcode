@@ -1,6 +1,5 @@
 package xu.tree.problems;
 
-import xu.tree.problems.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -11,26 +10,24 @@ public class Problem145 {
         if (root == null)
             return new ArrayList<>();
 
-        List<Integer> ans = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode prev = root;
-        TreeNode cur = root;
+        List<Integer> ans = new ArrayList<>();
+        TreeNode node = root;
+        TreeNode prev = null;
 
-        while (cur != null || !stack.isEmpty()){
-            while (cur != null){
-                stack.push(cur);
-                cur = cur.left;
-            }
-
-            if (!stack.isEmpty()){
-                cur = stack.pop();
-                if (cur.right == null || cur.right == prev){
-                    ans.add(cur.val);
-                    prev = cur;
-                    cur = null;
+        while (!stack.isEmpty() || node != null){
+            if (node != null){
+                stack.push(node);
+                node = node.left;
+            }else {
+                node = stack.peek();
+                if (node.right == null || node.right == prev){
+                    ans.add(node.val);
+                    stack.pop();
+                    prev = node;
+                    node = null;
                 }else {
-                    stack.push(cur);
-                    cur = cur.right;
+                    node = node.right;
                 }
             }
         }
@@ -39,7 +36,7 @@ public class Problem145 {
     }
 
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{1, 4, 2, null, 5, 3, 9, 7, 9, null, null, 10, null});
+        TreeNode node = TreeUtil.buildTree(new Integer[]{4, 1, 6, 0, 2, 5, 7, null, null, null, 3, null, null, null, 8});
         System.out.println(new Problem145().postorderTraversal(node));
     }
 
