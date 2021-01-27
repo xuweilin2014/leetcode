@@ -1,48 +1,43 @@
 package xu.tree.problems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import xu.tree.problems.TreeNode;
-/**
- * 只能暴力求解
- */
+
 
 public class Problem988 {
 
+    private List<String> ans = new ArrayList<>();
+
     public String smallestFromLeaf(TreeNode root) {
         if (root == null)
-            return "";
+            return null;
 
-        List<String> list = new ArrayList<>();
-        func(root, "", list);
-        String min = list.get(0);
-        for (int i = 0; i < list.size(); i++) {
-            String val = list.get(i);
-            if (val.compareTo(min) < 0){
-                min = val;
-            }
-        }
-        return min;
+        func(root, "");
+        Collections.sort(ans);
+        return ans.get(0);
     }
 
-    private void func(TreeNode root, String path, List<String> list) {
+    private void func(TreeNode root, String path) {
         if (root == null)
-            return ;
+            return;
 
-        path = getAlpha(root.val) + path;
-        if (root.left == null && root.right == null)
-            list.add(path);
+        if (root.left == null && root.right == null){
+            ans.add(getAlpha(root.val) + path);
+            return;
+        }
 
-        func(root.left, path, list);
-        func(root.right, path, list);
+        func(root.left, getAlpha(root.val) + path);
+        func(root.right, getAlpha(root.val) + path);
     }
 
-    private char getAlpha(int val) {
-        return (char) ('a' + val);
+    private String getAlpha(int val){
+        char ch = (char) (val + 'a');
+        return ch + "";
     }
 
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{25,1,null,0,0,1,null,null,null,0,null});
+        TreeNode node = TreeUtil.buildTree(new Integer[]{25,1,3,1,3,0,2});
         System.out.println(new Problem988().smallestFromLeaf(node));
 
     }
