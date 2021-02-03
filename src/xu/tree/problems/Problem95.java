@@ -11,44 +11,35 @@ public class Problem95 {
 
     public List<TreeNode> generateTrees(int n) {
         if (n == 0)
-            return  new ArrayList<>();
+            return new ArrayList<>();
 
-        return generate0(1, n);
+        int[] vals = new int[n];
+        for (int i = 1; i <= n; i++) {
+            vals[i - 1] = i;
+        }
+
+        return func(vals, 0, vals.length - 1);
     }
 
-    private List<TreeNode> generate0(int left, int right){
-        if (left > right)
-            return null;
-
-        if (left == right) {
-            List<TreeNode> ans = new ArrayList<>();
-            ans.add(new TreeNode(left));
-            return ans;
+    private List<TreeNode> func(int[] vals, int low, int high) {
+        List<TreeNode> list = new ArrayList<>();
+        if (low > high) {
+            list.add(null);
+            return list;
+        }
+        if (low == high){
+            list.add(new TreeNode(vals[low]));
+            return list;
         }
 
         List<TreeNode> ans = new ArrayList<>();
-        for (int i = left; i <= right; i++) {
-            List<TreeNode> ls = generate0(left, i - 1);
-            List<TreeNode> rs = generate0(i + 1, right);
-
-            if (ls != null && rs != null){
-                for (TreeNode l : ls) {
-                    for (TreeNode r : rs) {
-                        TreeNode root = new TreeNode(i);
-                        root.left = l;
-                        root.right = r;
-                        ans.add(root);
-                    }
-                }
-            } else if (ls != null){
-                for (TreeNode l : ls) {
-                    TreeNode root = new TreeNode(i);
+        for (int i = low; i <= high; i++) {
+            List<TreeNode> left = func(vals, low, i - 1);
+            List<TreeNode> right = func(vals, i + 1, high);
+            for (TreeNode l : left) {
+                for (TreeNode r : right) {
+                    TreeNode root = new TreeNode(vals[i]);
                     root.left = l;
-                    ans.add(root);
-                }
-            } else if (rs != null){
-                for (TreeNode r : rs) {
-                    TreeNode root = new TreeNode(i);
                     root.right = r;
                     ans.add(root);
                 }
@@ -59,7 +50,7 @@ public class Problem95 {
     }
 
     public static void main(String[] args) {
-        List<TreeNode> trees = new Problem95().generateTrees(4);
+        List<TreeNode> trees = new Problem95().generateTrees(3);
         for (TreeNode tree : trees) {
             TreeUtil.printTree(tree);
             System.out.println();
