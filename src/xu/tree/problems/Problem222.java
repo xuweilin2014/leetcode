@@ -1,8 +1,5 @@
 package xu.tree.problems;
 
-import xu.backtracking.Problem22;
-import xu.tree.problems.TreeNode;
-
 public class Problem222 {
 
     public int countNodes(TreeNode root) {

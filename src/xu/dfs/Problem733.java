@@ -1,7 +1,5 @@
 package xu.dfs;
 
-import xu.backtracking.Problem77;
-
 public class Problem733 {
 
     private int[][] visited;

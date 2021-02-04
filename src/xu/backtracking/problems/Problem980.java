@@ -1,6 +1,4 @@
-package xu.backtracking;
-
-import java.util.List;
+package xu.backtracking.problems;
 
 public class Problem980 {
 

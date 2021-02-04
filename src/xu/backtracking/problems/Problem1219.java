@@ -1,4 +1,4 @@
-package xu.backtracking;
+package xu.backtracking.problems;
 
 public class Problem1219 {
 

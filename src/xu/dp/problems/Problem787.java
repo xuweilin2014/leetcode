@@ -1,7 +1,5 @@
 package xu.dp.problems;
 
-import xu.backtracking.Problem78;
-
 import java.util.Arrays;
 
 public class Problem787 {

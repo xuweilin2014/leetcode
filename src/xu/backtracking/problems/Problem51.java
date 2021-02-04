@@ -1,7 +1,6 @@
-package xu.backtracking;
+package xu.backtracking.problems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Problem51 {

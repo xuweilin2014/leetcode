@@ -1,6 +1,5 @@
-package xu.backtracking;
+package xu.backtracking.problems;
 
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

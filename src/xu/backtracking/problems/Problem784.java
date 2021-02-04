@@ -1,4 +1,4 @@
-package xu.backtracking;
+package xu.backtracking.problems;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

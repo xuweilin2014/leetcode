@@ -1,4 +1,4 @@
-package xu.backtracking;
+package xu.backtracking.problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,25 +6,29 @@ import java.util.List;
 
 public class Problem90 {
 
-    private List<List<Integer>> res = new ArrayList<>();
+    private List<List<Integer>> ans = new ArrayList<>();
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return ans;
+
         Arrays.sort(nums);
-        dfs(nums, new ArrayList<>(), 0);
-        return res;
+        func(nums, new ArrayList<>(), 0);
+        return ans;
     }
 
-    private void dfs(int[] nums, List<Integer> objs, int index) {
-        if (index > nums.length)
+    private void func(int[] nums, List<Integer> path, int index) {
+        ans.add(new ArrayList<>(path));
+        if (path.size() == nums.length){
             return;
+        }
 
-        res.add(new ArrayList<>(objs));
         for (int i = index; i < nums.length; i++) {
             if (i > index && nums[i] == nums[i - 1])
                 continue;
-            objs.add(nums[i]);
-            dfs(nums,objs,i + 1);
-            objs.remove(objs.size() - 1);
+            path.add(nums[i]);
+            func(nums, path, i + 1);
+            path.remove(path.size() - 1);
         }
     }
 

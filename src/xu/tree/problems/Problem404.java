@@ -1,8 +1,5 @@
 package xu.tree.problems;
 
-import xu.backtracking.Problem40;
-import xu.tree.problems.TreeNode;
-
 public class Problem404 {
 
     private int sum = 0;
