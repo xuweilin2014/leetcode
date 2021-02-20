@@ -5,56 +5,65 @@ import java.util.List;
 
 public class Problem93 {
 
-    private List<List<Integer>> res = new ArrayList<>();
+    private List<List<Integer>> ips = new ArrayList<>();
 
     public List<String> restoreIpAddresses(String s) {
-        int[] vals = changeToInt(s);
-        List<String> stringList = new ArrayList<>();
-        dfs(vals, 0,new ArrayList<>());
-        for (List<Integer> re : res) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < re.size(); i++) {
-                sb.append(re.get(i));
-                if (i != re.size() - 1)
-                    sb.append(".");
+        if (s == null || s.length() == 0)
+            return new ArrayList<>();
+
+        func(s.toCharArray(), new ArrayList<>(), 0);
+        List<String> ans = new ArrayList<>();
+        for (List<Integer> ip : ips) {
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < ip.size(); i++) {
+                str.append(ip.get(i)).append(".");
             }
-            stringList.add(sb.toString());
+            str.deleteCharAt(str.length() - 1);
+            ans.add(str.toString());
         }
-        return stringList;
+
+        return ans;
     }
 
-    private void dfs(int[] vals, int index, List<Integer> path) {
-        if (index == vals.length && path.size() == 4){
-            res.add(new ArrayList<>(path));
+    private void func(char[] chs, List<Integer> path, int index){
+        if (path.size() > 4)
+            return;
+
+        if (index == chs.length){
+            if (path.size() == 4) {
+                ips.add(new ArrayList<>(path));
+            }
             return;
         }
 
-        if (path.size() == 4)
-            return;
+        int val = 0;
+        for (int i = index; i < chs.length; i++) {
+            val = val * 10 + chs[i] - '0';
+            if (val > 255)
+                break;
 
-        int sum = 0;
-        for (int i = index; i <= index + 2 && i < vals.length; i++){
-            sum = sum * 10 + vals[i];
-            if (sum > 255)
-                continue;
-            path.add(sum);
-            dfs(vals, i + 1, path);
+            path.add(val);
+            func(chs, path, i + 1);
             path.remove(path.size() - 1);
-            if (sum == 0)
-                return;
-        }
-    }
 
-    private int[] changeToInt(String s) {
-        int[] vals = new int[s.length()];
-        for (int i = 0; i < s.length(); i++) {
-            vals[i] = s.charAt(i) - '0';
+            if (chs[i] == '0' && val == 0){
+                break;
+            }
         }
-        return vals;
     }
 
     public static void main(String[] args) {
         List<String> lists = new Problem93().restoreIpAddresses("010010");
+        for (String list : lists) {
+            System.out.println(list);
+        }
+
+        lists = new Problem93().restoreIpAddresses("25525511135");
+        for (String list : lists) {
+            System.out.println(list);
+        }
+
+        lists = new Problem93().restoreIpAddresses("1111");
         for (String list : lists) {
             System.out.println(list);
         }

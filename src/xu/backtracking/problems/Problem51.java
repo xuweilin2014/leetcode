@@ -1,69 +1,66 @@
 package xu.backtracking.problems;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Problem51 {
 
-    private static int[] pos;
+    private List<List<String>> ans = new ArrayList<>();
+
+    private List<List<Integer[]>> coordinates = new LinkedList<>();
 
     public List<List<String>> solveNQueens(int n) {
         if (n == 0)
-            return new ArrayList<>();
+            return ans;
 
-        String str = "";
+        StringBuilder base = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            str += ".";
+            base.append(".");
         }
-        List<int[]> list = new ArrayList<>();
-        List<List<String>> result = new ArrayList<>();
-        getQueue(n, list);
-        for (int i = 0; i < list.size(); i++) {
-            List<String> solution = new ArrayList<>();
-            StringBuilder builder = new StringBuilder(str);
-            for (int j = 0; j < n; j++) {
-                int val = list.get(i)[j];
-                builder.replace(val - 1, val, "Q");
-                solution.add(builder.toString());
-                builder = new StringBuilder(str);
+
+        List<Integer[]> path = new LinkedList<>();
+        func(path, n, 0);
+        for (List<Integer[]> coordinate : coordinates) {
+            List<String> queen = new ArrayList<>();
+            for (Integer[] p : coordinate) {
+                StringBuilder tmp = new StringBuilder(base);
+                tmp.setCharAt(p[1], 'Q');
+                queen.add(tmp.toString());
             }
-            result.add(solution);
+            ans.add(queen);
         }
-        return result;
+
+        return ans;
     }
 
-    public void getQueue(int n, List<int[]> list){
-        pos = new int[n];
-        int k = 0;
-        while (k >= 0){
-            pos[k] = pos[k] + 1;
-            while (pos[k] <= n){
-                if (isValid(k)){
+    private void func(List<Integer[]> path, int n, int layer) {
+        if (layer == n){
+            coordinates.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            boolean dup = false;
+            for (Integer[] p : path) {
+                if (p[1] == i || Math.abs(layer - p[0]) == Math.abs(i - p[1])) {
+                    dup = true;
                     break;
                 }
-                pos[k]++;
             }
-            if (pos[k] <= n && k == n - 1) {
-                list.add(pos.clone());
+
+            if (!dup){
+                path.add(new Integer[]{layer, i});
+                func(path, n, layer + 1);
+                path.remove(path.size() - 1);
             }
-            if (pos[k] <= n && k < n - 1) k++;
-            else pos[k--] = 0;
         }
     }
 
-    private boolean isValid(int k) {
-        for (int i = k - 1; i >= 0; i--){
-            if (pos[i] == pos[k])
-                return false;
-
-            if (Math.abs(i - k) == Math.abs(pos[i] - pos[k]))
-                return false;
-        }
-        return true;
-    }
 
     public static void main(String[] args) {
-        List<List<String>> solveNQueens = new Problem51().solveNQueens(4);
+        List<List<String>> solveNQueens = new Problem51().solveNQueens(6);
         for (List<String> solveNQueen : solveNQueens) {
             for (int i = 0; i < solveNQueen.size(); i++) {
                 System.out.println(solveNQueen.get(i));
