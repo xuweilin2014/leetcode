@@ -1,4 +1,4 @@
-package xu.dfs;
+package xu.dfs.problems;
 
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;

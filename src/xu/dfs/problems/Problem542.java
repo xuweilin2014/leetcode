@@ -1,6 +1,4 @@
-package xu.dfs;
-
-import algorithm_analysis_and_design.backtracking.Queen;
+package xu.dfs.problems;
 
 import java.util.LinkedList;
 import java.util.Queue;

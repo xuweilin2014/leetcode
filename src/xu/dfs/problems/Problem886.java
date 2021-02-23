@@ -1,4 +1,4 @@
-package xu.dfs;
+package xu.dfs.problems;
 
 import java.util.ArrayList;
 import java.util.HashSet;

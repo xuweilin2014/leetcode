@@ -1,4 +1,4 @@
-package xu.dfs;
+package xu.dfs.problems;
 
 public class Problem695 {
 
