@@ -1,62 +1,42 @@
 package xu.dfs.problems;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Problem542 {
 
     public int[][] updateMatrix(int[][] matrix) {
-        int counter = 0;
-        Queue<int[]> queue = new LinkedList<>();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 0) {
-                    counter++;
-                    queue.offer(new int[]{i, j});
-                }else{
-                    matrix[i][j] = Integer.MAX_VALUE;
+        if (matrix == null || matrix.length == 0)
+            return null;
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        Queue<Integer[]> queue = new ArrayDeque<>();
+        int[][] visited = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0){
+                    queue.add(new Integer[]{i, j});
+                    visited[i][j] = 1;
                 }
             }
         }
 
-        int path = 1;
+        int[] drow = new int[]{1, -1, 0, 0};
+        int[] dcol = new int[]{0, 0, 1, -1};
         while (!queue.isEmpty()){
-            int tmp = 0;
-            for (int i = 0; i < counter; i++) {
-                int[] posix = queue.poll();
-                int row = posix[0], col = posix[1];
-                if (row - 1 >= 0 && matrix[row-1][col] != 0) {
-                    if (path < matrix[row-1][col]) {
-                        matrix[row-1][col] = path;
-                        queue.offer(new int[]{row-1, col});
-                        tmp++;
-                    }
-                }
-                if (row + 1 < matrix.length && matrix[row+1][col] != 0) {
-                    if (path < matrix[row+1][col]) {
-                        matrix[row+1][col] = path;
-                        queue.offer(new int[]{row+1, col});
-                        tmp++;
-                    }
-                }
-                if (col - 1 >= 0 && matrix[row][col-1] != 0) {
-                    if (path < matrix[row][col-1]) {
-                        matrix[row][col-1] = path;
-                        queue.offer(new int[]{row, col-1});
-                        tmp++;
-                    }
-                }
-                if (col + 1 < matrix[0].length && matrix[row][col+1] != 0) {
-                    if (path < matrix[row][col+1]) {
-                        matrix[row][col+1] = path;
-                        queue.offer(new int[]{row, col+1});
-                        tmp++;
-                    }
+            Integer[] point = queue.poll();
+            for (int i = 0; i < drow.length; i++) {
+                int newRow = drow[i] + point[0];
+                int newCol = dcol[i] + point[1];
+                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols &&
+                        visited[newRow][newCol] == 0){
+                    matrix[newRow][newCol] = matrix[point[0]][point[1]] + 1;
+                    queue.offer(new Integer[]{newRow, newCol});
+                    visited[newRow][newCol] = 1;
                 }
             }
-            path++;
-            counter = tmp;
         }
+
         return matrix;
     }
 
@@ -73,9 +53,9 @@ public class Problem542 {
                 {1,1,1,1,1,0,0,1,1,1},
                 {0,1,0,1,1,0,1,1,1,1},
                 {1,1,1,0,1,0,1,1,1,1}
-                /*{1,1,1},
-                {0,1,1},
-                {0,0,1}*/
+//                {0,0,0},
+//                {0,1,0},
+//                {1,1,1}
         });
         for (int i = 0; i < ints.length; i++) {
             for (int j = 0; j < ints[i].length; j++) {

@@ -1,4 +1,4 @@
-package xu.graph;
+package xu.dfs.problems;
 
 import java.util.*;
 
