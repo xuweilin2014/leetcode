@@ -1,7 +1,5 @@
 package xu.union_find;
 
-import xu.bfs.Problem994;
-
 public class Problem959 {
 
     private int[] parents;
