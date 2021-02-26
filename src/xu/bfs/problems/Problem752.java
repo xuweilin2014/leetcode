@@ -1,4 +1,4 @@
-package xu.bfs;
+package xu.bfs.problems;
 
 import java.util.*;
 

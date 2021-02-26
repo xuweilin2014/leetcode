@@ -1,8 +1,6 @@
-package xu.bfs;
+package xu.bfs.problems;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 
 public class Problem1091 {

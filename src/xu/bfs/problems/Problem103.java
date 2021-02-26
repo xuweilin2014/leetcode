@@ -1,9 +1,8 @@
-package xu.bfs;
+package xu.bfs.problems;
 
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
