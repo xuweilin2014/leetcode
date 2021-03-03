@@ -4,60 +4,68 @@ import xu.union_find.UnionFind;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 统计求封闭岛屿的方法：此题可以采用并查集、DFS、BFS的方式来写。
- * 并查集：查出grid中，0的连通分量数目，然后排除掉那些有0在边界的连通分量，剩下的就全部是由1(水)包围的岛屿的数量
- */
-
 public class Problem1254 {
+
+    private int rows;
+    private int cols;
+    private int[] dx = new int[]{1,-1,0,0};
+    private int[] dy = new int[]{0,0,1,-1};
+
     public int closedIsland(int[][] grid) {
-        if (grid.length <= 2)
+        if (grid == null || grid.length == 0)
             return 0;
 
-        int rows = grid.length;
-        int cols = grid[0].length;
-        int oneCounter = 0;
-        UnionFind uf = new UnionFind(rows * cols);
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (grid[i][j] == 1) {
-                    oneCounter++;
-                    continue;
+        rows = grid.length;
+        cols = grid[0].length;
+        int counter = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (grid[row][col] == 0){
+                    boolean[] flag = new boolean[]{true};
+                    dfs(row, col, grid, flag);
+                    if (flag[0]){
+                        counter++;
+                    }
                 }
-                int base = i * cols + j;
-                if (i + 1 < grid.length && grid[i+1][j] == 0)
-                    uf.union(base, base + cols);
-                if (j + 1 < grid[i].length && grid[i][j+1] == 0)
-                    uf.union(base, base + 1);
             }
         }
 
-        Set<Integer> borderSet = new HashSet<>();
-        int ans = 0;
-        for (int i = 0; i < uf.parents.length; i++) {
-            if (i % cols == grid[0].length - 1 ||
-                    i / cols == grid.length - 1 ||
-                    i / cols == 0 || i % cols == 0)
-                if (grid[i/cols][i%cols] == 0)
-                    borderSet.add(uf.find(i));
-            if (uf.parents[i] == i)
-                ans++;
+        return counter;
+    }
+
+    private void dfs(int row, int col, int[][] grid, boolean[] flag) {
+        if (row == 0 || col == 0 || row == rows - 1 || col == cols - 1){
+            if (grid[row][col] == 0)
+                flag[0] = false;
         }
 
-        return ans - oneCounter - borderSet.size();
+        if (grid[row][col] != 0)
+            return;
+        grid[row][col] = -1;
+
+        for (int i = 0; i < dx.length; i++) {
+            int newRow = row + dx[i];
+            int newCol = col + dy[i];
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols){
+                dfs(newRow, newCol, grid, flag);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
         System.out.println(new Problem1254().closedIsland(new int[][]{
-                /*{1,1,1,1,1,1,1},
+                {1,0},
+                {0,1}
+        }));
+        System.out.println(new Problem1254().closedIsland(new int[][]{
+                {1,1,1,1,1,1,1},
                 {1,0,0,0,0,0,1},
                 {1,0,1,1,1,0,1},
                 {1,0,1,0,1,0,1},
                 {1,0,1,1,1,0,1},
                 {1,0,0,0,0,0,1},
-                {1,1,1,1,1,1,1}*/
-                {1,0},
-                {0,1}
+                {1,1,1,1,1,1,1}
         }));
     }
 }
