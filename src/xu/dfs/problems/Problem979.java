@@ -3,34 +3,39 @@ package xu.dfs.problems;
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
-/**
- * 此题对树采用后序遍历。基本思想是在每个结点判断结点上硬币的数目，如果大于1，则把多出来的硬币向父结点移动
- * ，如果小于1，则把少的硬币向父结点移动，比如为0，则向父结点移动-1个硬币。
- */
-
 public class Problem979 {
 
     private int counter = 0;
 
     public int distributeCoins(TreeNode root) {
-        dfs(root);
-        return counter;
-    }
-
-    private int dfs(TreeNode root) {
         if (root == null)
             return 0;
 
-        int left = dfs(root.left);
-        int right = dfs(root.right);
+        func(root);
+        return counter;
+    }
 
-        counter += Math.abs(root.val + left + right - 1);
+    private int func(TreeNode root){
+        if (root == null)
+            return 0;
 
-        return left + right + root.val - 1;
+        if (root.left == null && root.right == null){
+            return root.val - 1;
+        }
+
+        int left = func(root.left);
+        int right = func(root.right);
+
+        counter = counter + Math.abs(left) + Math.abs(right);
+        int remain = left + right + root.val;
+
+        return remain - 1;
     }
 
     public static void main(String[] args) {
         TreeNode node = TreeUtil.buildTree(new Integer[]{3,0,0,null,null,null,null});
+        System.out.println(new Problem979().distributeCoins(node));
+        node = TreeUtil.buildTree(new Integer[]{1,0,0,null,3,null,null});
         System.out.println(new Problem979().distributeCoins(node));
     }
 
