@@ -1,4 +1,4 @@
-package offer.question11_20;
+package offer.question11_20.questions;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

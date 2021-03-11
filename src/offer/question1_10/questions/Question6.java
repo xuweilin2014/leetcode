@@ -1,4 +1,4 @@
-package offer.question1_10;
+package offer.question1_10.questions;
 
 import xu.linkedlist.problems.ListNode;
 

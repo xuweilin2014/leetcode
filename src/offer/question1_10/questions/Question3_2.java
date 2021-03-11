@@ -1,4 +1,4 @@
-package offer.question1_10;
+package offer.question1_10.questions;
 
 /**
  * 在一个长度为 n+1 的数组中，所有的数字都在 1~n 范围内，所以数组中肯定有一个数字是重复的。请找出这个数字

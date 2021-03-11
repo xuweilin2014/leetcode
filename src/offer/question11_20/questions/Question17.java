@@ -1,4 +1,4 @@
-package offer.question11_20;
+package offer.question11_20.questions;
 
 // 考虑大数问题
 public class Question17 {

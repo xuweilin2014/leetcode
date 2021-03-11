@@ -1,4 +1,4 @@
-package offer.question1_10;
+package offer.question1_10.questions;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,11 @@
-package xu.tree.problems;
+package offer.question1_10.questions;
+
+import xu.tree.problems.TreeNode;
+import xu.tree.problems.TreeUtil;
 
 import java.util.HashMap;
 
-public class Problem105 {
+public class Question7 {
 
     private HashMap<Integer, Integer> indexMap = new HashMap<>();
 
@@ -34,12 +37,12 @@ public class Problem105 {
     }
 
     public static void main(String[] args) {
-        TreeNode tree = new Problem105().buildTree(new int[]{3, 9, 6, 10, 20, 15, 7}, new int[]{6, 10, 9, 15, 7, 20, 3});
-        TreeUtil.printTree(tree);
+        TreeNode treeNode = new Question7().buildTree(new int[]{1,2,3,4}, new int[]{1,2,3,4});
+        TreeUtil.printTree(treeNode);
         System.out.println();
 
-        tree = new Problem105().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
-        TreeUtil.printTree(tree);
+        treeNode = new Question7().buildTree(new int[]{3,9,20,15,7}, new int[]{9,3,15,20,7});
+        TreeUtil.printTree(treeNode);
     }
 
 }

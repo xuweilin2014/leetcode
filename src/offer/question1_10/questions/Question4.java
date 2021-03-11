@@ -1,4 +1,4 @@
-package offer.question1_10;
+package offer.question1_10.questions;
 
 //从数组的右上角开始查找
 public class Question4 {
