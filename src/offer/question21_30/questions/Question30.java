@@ -1,6 +1,5 @@
-package offer.question21_30;
+package offer.question21_30.questions;
 
-import java.util.Map;
 import java.util.Stack;
 
 public class Question30 {

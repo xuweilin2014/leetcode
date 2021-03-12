@@ -2,35 +2,39 @@ package offer.question11_20.questions;
 
 public class Question16 {
 
-    public static void main(String[] args) {
-        System.out.println(myPow(4, 5));
+    private boolean isNegative = false;
+
+    public double myPow(double x, int n) {
+        if (n == 0)
+            return 1;
+        if (n == 1)
+            return x;
+        if (n < 0) {
+            isNegative = true;
+            n = -n;
+        }
+
+        double ans = func(x, n);
+
+        return isNegative ? 1 / ans : ans;
     }
 
-    public static double myPow(double x, int n) {
+    private double func(double x, int n){
         if (n == 0)
             return 1;
         if (n == 1)
             return x;
 
-        int absExp = n > 0 ? n : -n;
-        double pow = doPow(x, absExp);
+        boolean isEven = n % 2 == 0;
+        double v = func(x, n / 2);
 
-        return n < 0 ? 1 / pow : pow;
+        return isEven ? v * v : v * v * x;
     }
 
-    public static double doPow(double x, int absExp){
-        if (absExp == 1)
-            return x;
-        if (absExp == 0)
-            return 1;
-
-        if (absExp % 2 == 0) {
-            double res = doPow(x, absExp / 2);
-            return res * res;
-        }else{
-            double res = doPow(x, absExp / 2);
-            return res * res * x;
-        }
+    public static void main(String[] args) {
+        System.out.println(new Question16().myPow(8.84372, -5));
+        System.out.println(new Question16().myPow(4, 5));
+        System.out.println(new Question16().myPow(4, -2));
     }
 
 }
