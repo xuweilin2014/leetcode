@@ -1,8 +1,6 @@
-package offer.question31_40;
+package offer.question31_40.questions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Question40 {
 

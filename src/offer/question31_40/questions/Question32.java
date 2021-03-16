@@ -1,4 +1,4 @@
-package offer.question31_40;
+package offer.question31_40.questions;
 
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;

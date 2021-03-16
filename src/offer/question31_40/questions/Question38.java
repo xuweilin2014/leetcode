@@ -1,4 +1,4 @@
-package offer.question31_40;
+package offer.question31_40.questions;
 
 import java.util.*;
 
