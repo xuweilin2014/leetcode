@@ -1,8 +1,6 @@
-package offer.question41_50;
+package offer.question41_50.questions;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Question45 {

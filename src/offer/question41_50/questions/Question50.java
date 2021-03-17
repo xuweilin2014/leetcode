@@ -1,7 +1,6 @@
-package offer.question41_50;
+package offer.question41_50.questions;
 
 import java.util.*;
-import java.util.function.BiFunction;
 
 // 哈希表 + 2次遍历
 public class Question50 {

@@ -1,52 +1,50 @@
 package offer.question31_40.questions;
 
+import xu.tree.problems.Node;
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
 public class Question36 {
 
-    // 递归要用到一个全局变量
-    public TreeNode prev;
+    private TreeNode prev;
 
-    public TreeNode Convert(TreeNode root){
+    public TreeNode treeToDoublyList(TreeNode root) {
         if (root == null)
             return null;
 
-        doConvert(root);
+        func(root);
 
-        TreeNode last = root;
-        TreeNode head = root;
-
-        while (last.right != null)
-            last = last.right;
-
-        while (head.left != null)
+        TreeNode head = root, tail = root;
+        while (head.left != null){
             head = head.left;
+        }
 
-        head.left = last;
-        last.right = head;
+        while (tail.right != null){
+            tail = tail.right;
+        }
+
+        head.left = tail;
+        tail.right = head;
 
         return head;
     }
 
-    public void doConvert(TreeNode root) {
+    private void func(TreeNode root) {
         if (root == null)
             return;
 
-        doConvert(root.left);
-
-        root.left = prev;
+        func(root.left);
         if (prev != null) {
             prev.right = root;
         }
+        root.left = prev;
         prev = root;
-
-        doConvert(root.right);
+        func(root.right);
     }
 
     public static void main(String[] args) {
         TreeNode node = TreeUtil.buildTree(new Integer[]{2,1,3});
-        TreeNode treeNode = new Question36().Convert(node);
+        TreeNode treeNode = new Question36().treeToDoublyList(node);
         if (treeNode != null){
             while (treeNode.right != null){
                 System.out.print(treeNode.val + " ");
@@ -63,5 +61,4 @@ public class Question36 {
             System.out.print(treeNode.val + " ");
         }
     }
-
 }

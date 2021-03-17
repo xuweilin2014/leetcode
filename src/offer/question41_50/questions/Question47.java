@@ -1,4 +1,4 @@
-package offer.question41_50;
+package offer.question41_50.questions;
 
 public class Question47 {
 
