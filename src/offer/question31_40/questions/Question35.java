@@ -17,75 +17,36 @@ public class Question35 {
         }
     }
 
-    // 使用哈希的解法，时间复杂度 O(N)，空间复杂度 O(N)
     public Node copyRandomList(Node head) {
         if (head == null)
             return null;
 
-        Map<Node, Node> func = new HashMap<>();
-        Node ph = head;
-        Node dummy = new Node(0);
-        Node prev = dummy;
-        Node p = dummy;
-        while (ph != null){
-            p = new Node(ph.val);
-            prev.next = p;
-            prev = p;
-
-            func.put(ph, p);
-
-            ph = ph.next;
-        }
-
-        p.next = null;
-        p = dummy.next;
-        ph = head;
-        while (ph != null){
-            if (ph.random == null)
-                p.random = null;
-            else
-                p.random = func.get(ph.random);
-            p = p.next;
-            ph = ph.next;
-        }
-
-        return dummy.next;
-    }
-
-    // 使用修改原链表的方法，时间复杂度 O(N) 空间复杂度 O(1)
-    public Node copyRandomList1(Node head) {
-        if (head == null)
-            return null;
-
-        // 复制节点
         Node p = head;
-        Node pnew;
-        while (p != null){
-            pnew = new Node(p.val);
-            pnew.next = p.next;
-            p.next = pnew;
-            p = pnew.next;
-        }
-
-        // 复制原始节点的 random 值
-        p = head;
-        while (p != null){
-            pnew = p.next;
-            if (p.random == null)
-                pnew.random = null;
-            else
-                pnew.random = p.random.next;
-            p = pnew.next;
-        }
-
-        // 将链表一分为二
         Node dummy = new Node(0);
-        p = head;
-        pnew = dummy;
+        Node pc;
+        Node prev = null;
+        Map<Node, Node> map = new HashMap<>();
+
         while (p != null){
-            pnew.next = p.next;
-            pnew = p.next;
-            p.next = pnew.next;
+            pc = new Node(p.val);
+            if (prev != null){
+                prev.next = pc;
+            }
+            if (dummy.next == null){
+                dummy.next = pc;
+            }
+            map.put(p, pc);
+            prev = pc;
+            p = p.next;
+        }
+
+        pc = dummy.next;
+        p = head;
+        while (p != null){
+            Node random = p.random;
+            if (random != null)
+                pc.random = map.get(random);
+            pc = pc.next;
             p = p.next;
         }
 
@@ -111,7 +72,7 @@ public class Question35 {
         node4.random = node3;
         node5.random = node1;
 
-        System.out.println(new Question35().copyRandomList1(node1));
+        System.out.println(new Question35().copyRandomList(node1));
     }
 
 }
