@@ -4,42 +4,42 @@ import java.util.*;
 
 public class Question38 {
 
-    private List<String> res = new LinkedList<>();
-
-    private char[] c;
-
     public String[] permutation(String s) {
-       c = s.toCharArray();
-       dfs(0);
-       return res.toArray(new String[0]);
+        if (s == null || s.length() == 0)
+            return new String[0];
+
+        char[] chs = s.toCharArray();
+        int[] times = new int[s.length()];
+
+        StringBuilder path = new StringBuilder();
+        List<String> list = new ArrayList<>();
+        func(path, chs, times, list);
+
+        return list.toArray(new String[0]);
     }
 
-    private void dfs(int x) {
-        if (x == c.length){
-            res.add(String.valueOf(c));
+    private void func(StringBuilder path, char[] chs, int[] times, List<String> list) {
+        if (path.length() == chs.length){
+            list.add(path.toString());
             return;
         }
 
-        Set<Character> dup = new HashSet<>();
-        for (int i = x; i < c.length; i++) {
-            if (dup.contains(c[i]))
+        Set<Character> sets = new HashSet<>();
+        for (int i = 0; i < chs.length; i++) {
+            if (times[i] == 1 || sets.contains(chs[i]))
                 continue;
-            dup.add(c[i]);
-            swap(x, i);
-            dfs(x + 1);
-            swap(i, x);
+
+            sets.add(chs[i]);
+            times[i] = 1;
+            path.append(chs[i]);
+            func(path, chs, times, list);
+            path.deleteCharAt(path.length() - 1);
+            times[i] = 0;
         }
     }
 
-    private void swap(int a, int b) {
-        char tmp = c[a];
-        c[a] = c[b];
-        c[b] = tmp;
-    }
-
-
-
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(new Question38().permutation("aab")));
         System.out.println(Arrays.toString(new Question38().permutation("abc")));
     }
 
