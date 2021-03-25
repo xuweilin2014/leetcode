@@ -1,4 +1,4 @@
-package offer.Question51_60;
+package offer.Question51_60.questions;
 
 /**
  * 同样使用二分查找法，找到排序数组中第一个数值和下标不相等的下标

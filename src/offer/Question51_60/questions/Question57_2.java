@@ -1,4 +1,4 @@
-package offer.Question51_60;
+package offer.Question51_60.questions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

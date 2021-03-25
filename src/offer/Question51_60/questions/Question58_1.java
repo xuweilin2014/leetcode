@@ -1,8 +1,4 @@
-package offer.Question51_60;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+package offer.Question51_60.questions;
 
 /**
  * 翻转两次，第一次对字符串全体进行翻转，第二次对字符串中的每一个单词进行翻转

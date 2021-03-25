@@ -1,4 +1,4 @@
-package offer.Question51_60;
+package offer.Question51_60.questions;
 
 /**
  * 分别使用二分查找去找到数组中第一个和最后一个 target 值，最后算出来数字出现的次数

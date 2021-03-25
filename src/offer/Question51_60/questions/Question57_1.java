@@ -1,8 +1,6 @@
-package offer.Question51_60;
+package offer.Question51_60.questions;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 双指针，从数组的两头向中间移动

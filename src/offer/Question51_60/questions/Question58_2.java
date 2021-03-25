@@ -1,4 +1,4 @@
-package offer.Question51_60;
+package offer.Question51_60.questions;
 
 /**
  * 将待旋转的字符串分为 2 部分，分别进行翻转，一共翻转 3 次

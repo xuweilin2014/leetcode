@@ -1,6 +1,4 @@
-package offer.Question61_68.problems;
-
-import java.util.Arrays;
+package offer.Question61_68.questions;
 
 public class Question61 {
 
