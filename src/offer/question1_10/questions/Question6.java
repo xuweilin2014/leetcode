@@ -1,28 +1,36 @@
 package offer.question1_10.questions;
 
 import xu.linkedlist.problems.ListNode;
+import xu.linkedlist.problems.SinglyLinkedListUtil;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Question6 {
 
-    public int[] reversePrint(ListNode head) {
-        List<Integer> arr = new LinkedList<>();
-        doReverse(head, arr);
-        int[] vals = new int[arr.size()];
-        for (int i = 0; i < vals.length; i++) {
-            vals[i] = arr.get(i);
-        }
-        return vals;
+    private ArrayList<Integer> ans = new ArrayList<>();
+
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        if (listNode == null)
+            return ans;
+
+        func(listNode);
+        return ans;
     }
 
-    public void doReverse(ListNode head, List<Integer> arr){
-        if (head == null)
+    private void func(ListNode node) {
+        if (node.next == null){
+            ans.add(node.val);
             return;
+        }
 
-        doReverse(head.next, arr);
-        arr.add(head.val);
+        func(node.next);
+        ans.add(node.val);
     }
 
+    public static void main(String[] args) {
+        ListNode node = SinglyLinkedListUtil.buildLinkedList(new int[]{1, 2, 3, 4});
+        System.out.println(new Question6().printListFromTailToHead(node));
+    }
 }

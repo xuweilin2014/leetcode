@@ -4,25 +4,30 @@ package offer.question1_10.questions;
 public class Question4 {
 
     public static void main(String[] args) {
-        System.out.println(new Question4().findNumberIn2DArray(new int[][]{
-        }, 0));
+        System.out.println(new Question4().Find(0, new int[][]{
+        }));
+        System.out.println(new Question4().Find(3, new int[][]{
+                {1,2,8,9},
+                {2,4,9,12},
+                {4,7,10,13},
+                {6,8,11,15}
+        }));
     }
 
-    public boolean findNumberIn2DArray(int[][] matrix, int target) {
-        int rows = matrix.length;
-
-        if (rows == 0)
+    public boolean Find(int target, int [][] array) {
+        if (array == null || array.length == 0)
             return false;
 
-        int cols = matrix[0].length;
-
-        for (int i = 0; i < rows; i++){
-            for (int j = cols - 1; j >= 0; j--){
-                if (matrix[i][j] == target)
+        int rows = array.length;
+        int cols = array[0].length;
+        int begin = 0;
+        for (int j = cols - 1; j >= 0; j--) {
+            for (int i = begin; i < rows; i++) {
+                if (target == array[i][j])
                     return true;
-                else if (matrix[i][j] > target){
-                    cols--;
-                }else{
+
+                if (target < array[i][j]){
+                    begin = i;
                     break;
                 }
             }
