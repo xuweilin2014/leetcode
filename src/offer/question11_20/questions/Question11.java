@@ -5,21 +5,32 @@ import java.util.List;
 
 public class Question11 {
 
-    public int numWays(int n) {
-        if (n == 0 || n == 1)
-            return 1;
+    public int minNumberInRotateArray(int [] array) {
+        if (array == null || array.length == 0)
+            return 0;
 
-        List<Long> fibs = new ArrayList<>();
-        long  res = 0;
-        fibs.add(0,1L);
-        fibs.add(1,1L);
-        for (int i = 2; i <= n; i++) {
-            res = fibs.get(i - 1) + fibs.get(i - 2);
-            res %= 1000000007;
-            fibs.add(i, res);
+        return func(array, 0, array.length - 1);
+    }
+
+    private int func(int[] array, int low, int high) {
+        if (low == high - 1)
+            return Math.min(array[low], array[high]);
+
+        int mid = (low + high) / 2;
+
+        if (array[mid] < array[high]){
+            return func(array, low, mid);
+        }else {
+            return func(array, mid, high);
         }
+    }
 
-        return (int) (res % 1000000007);
+    public static void main(String[] args) {
+        System.out.println(new Question11().minNumberInRotateArray(new int[]{4, 5, 6, 7, 8, 9, 1, 2, 3}));
+        System.out.println(new Question11().minNumberInRotateArray(new int[]{2, 3, 4, 5, 6, 7, 1}));
+        System.out.println(new Question11().minNumberInRotateArray(new int[]{5, 1, 2, 3, 4}));
+        System.out.println(new Question11().minNumberInRotateArray(new int[]{6, 7, 1, 2, 3, 4, 5}));
+        System.out.println(new Question11().minNumberInRotateArray(new int[]{3, 4, 5, 6, 7, 1, 2}));
     }
 
 }
