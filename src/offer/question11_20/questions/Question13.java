@@ -5,57 +5,52 @@ import java.util.Queue;
 
 public class Question13 {
 
-    int[][] direct = new int[][]{
+    private int[][] directs = new int[][]{
             {1,0},{0,1},{-1,0},{0,-1}
     };
+    private int rows;
+    private int cols;
+    private int counter = 0;
 
-    public static void main(String[] args) {
-        System.out.println(new Question13().movingCount(2, 3, 1));
-    }
+    public int movingCount(int threshold, int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
 
-    public int movingCount(int m, int n, int k) {
-        if (k < 0)
-            return 0;
+        int[][] visited = new int[rows][cols];
+        func(threshold, 0, 0, visited);
 
-        int[][] visited = new int[m][n];
-        visited[0][0] = 1;
-        Queue<Pair> queue = new ArrayDeque<>();
-        queue.add(new Pair(0,0));
-        int counter = 1;
-        while (!queue.isEmpty()){
-            Pair pair = queue.poll();
-            for (int z = 0; z < direct.length; z++) {
-                int row = direct[z][0] + pair.row;
-                int col = direct[z][1] + pair.col;
-
-                if (row <= m - 1 && row >= 0 && col >= 0 &&
-                        col <= n - 1 && visited[row][col] == 0 && bitSum(row) + bitSum(col) <= k){
-                    queue.offer(new Pair(row, col));
-                    visited[row][col] = 1;
-                    counter++;
-                }
-            }
-        }
         return counter;
     }
 
-    public int bitSum(int val){
+    private void func(int threshold, int row, int col, int[][] visited) {
+        if (row < 0 || row >= rows || col < 0 || col >= cols || visited[row][col] == 1)
+            return;
+
+        if ((digitSum(row) + digitSum(col)) > threshold)
+            return;
+
+        counter++;
+        visited[row][col] = 1;
+        for (int[] direct : directs) {
+            int newRow = row + direct[0];
+            int newCol = col + direct[1];
+            func(threshold, newRow, newCol, visited);
+        }
+    }
+
+    private int digitSum(int num) {
         int sum = 0;
-        while (val != 0){
-            sum += val % 10;
-            val /= 10;
+        while (num % 10 != 0){
+            sum += num % 10;
+            num /= 10;
         }
 
         return sum;
     }
 
-    static class Pair{
-        int row;
-        int col;
 
-        public Pair(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
+    public static void main(String[] args) {
+        System.out.println(new Question13().movingCount(5, 10, 10));
     }
+
 }

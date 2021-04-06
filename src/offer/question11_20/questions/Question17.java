@@ -1,5 +1,7 @@
 package offer.question11_20.questions;
 
+import xu.linkedlist.problems.ListNode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,35 +10,42 @@ import java.util.List;
 public class Question17 {
 
     public int[] printToMaxOfNDigits(int n) {
-        StringBuilder num = new StringBuilder("1");
+        StringBuilder sb = new StringBuilder("1");
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            ans.append('9');
+        }
 
-        List<Integer> list = new ArrayList<>();
-        while (num.length() < n + 1){
-            list.add(Integer.parseInt(num.toString()));
+        List<Integer> res = new ArrayList<>();
+        res.add(1);
+        while (!sb.toString().equals(ans.toString())){
+            int carry = 0;
+            int bitAdd = 1;
+            int len = sb.toString().length();
+            for (int i = len - 1; i >= 0; i--) {
+                int ch = sb.charAt(i) - '0';
+                int newChar = ((ch + bitAdd + carry) % 10);
+                carry = (ch + bitAdd + carry) / 10;
+                bitAdd = 0;
+                sb.setCharAt(i, (char) (newChar + '0'));
 
-            int length = num.length() - 1;
-            int carry;
-            int lastBit;
-
-            do {
-                int val = num.charAt(length) - '0';
-                lastBit = (val + 1) % 10;
-                carry = (val + 1) / 10;
-                num.setCharAt(length, (char) (lastBit + '0'));
-                length--;
-            }while (length >= 0 && carry > 0);
+                if (carry == 0)
+                    break;
+            }
 
             if (carry > 0){
-                num = new StringBuilder("1").append(num);
+                sb = new StringBuilder(String.valueOf(carry)).append(sb);
             }
+
+            res.add(Integer.parseInt(sb.toString()));
         }
 
-        int[] ans = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            ans[i] = list.get(i);
+        int[] nums = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            nums[i] = res.get(i);
         }
 
-        return ans;
+        return nums;
     }
 
     public static void main(String[] args) {

@@ -10,4 +10,33 @@ public class QSolution16 {
      * 这道题目还需特别注意指数为负数的情况。
      */
 
+    private boolean isNegative = false;
+
+    public double myPow(double x, int n) {
+        if (n == 0)
+            return 1;
+        if (n == 1)
+            return x;
+        if (n < 0) {
+            isNegative = true;
+            n = -n;
+        }
+
+        double ans = func(x, n);
+
+        return isNegative ? 1 / ans : ans;
+    }
+
+    private double func(double x, int n){
+        if (n == 0)
+            return 1;
+        if (n == 1)
+            return x;
+
+        boolean isEven = n % 2 == 0;
+        double v = func(x, n / 2);
+
+        return isEven ? v * v : v * v * x;
+    }
+
 }

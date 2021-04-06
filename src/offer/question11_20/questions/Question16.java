@@ -2,39 +2,30 @@ package offer.question11_20.questions;
 
 public class Question16 {
 
-    private boolean isNegative = false;
-
-    public double myPow(double x, int n) {
-        if (n == 0)
+    public double Power(double base, int exponent) {
+        if (base == 0)
+            return base;
+        if (exponent == 0)
             return 1;
-        if (n == 1)
-            return x;
-        if (n < 0) {
-            isNegative = true;
-            n = -n;
-        }
 
-        double ans = func(x, n);
-
-        return isNegative ? 1 / ans : ans;
+        double ans = func(base, exponent);
+        return exponent < 0 ? 1 / ans : ans;
     }
 
-    private double func(double x, int n){
-        if (n == 0)
+    private double func(double base, int exp) {
+        if (exp == 1)
+            return base;
+        if (exp == 0)
             return 1;
-        if (n == 1)
-            return x;
 
-        boolean isEven = n % 2 == 0;
-        double v = func(x, n / 2);
-
-        return isEven ? v * v : v * v * x;
+        double val = func(base, exp / 2);
+        return exp % 2 == 0 ? val * val : val * val * base;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Question16().myPow(8.84372, -5));
-        System.out.println(new Question16().myPow(4, 5));
-        System.out.println(new Question16().myPow(4, -2));
+        System.out.println(new Question16().Power(8.84372, -5));
+        System.out.println(new Question16().Power(4, 5));
+        System.out.println(new Question16().Power(4, -2));
     }
 
 }
