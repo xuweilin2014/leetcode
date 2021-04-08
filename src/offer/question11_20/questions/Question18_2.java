@@ -11,7 +11,7 @@ import xu.linkedlist.problems.SinglyLinkedListUtil;
 public class Question18_2 extends SinglyLinkedListUtil {
 
     public static void main(String[] args) {
-        ListNode head = Question18_2.buildLinkedList(new int[]{1,3, 3, 4, 4, 5});
+        ListNode head = Question18_2.buildLinkedList(new int[]{1,2,3,3,4,4,5});
         Question18_2.printList(head);
         head = Question18_2.deleteDuplication(head);
         Question18_2.printList(head);
@@ -31,7 +31,7 @@ public class Question18_2 extends SinglyLinkedListUtil {
         head = Question18_2.deleteDuplication(head);
         Question18_2.printList(head);
 
-        head = Question18_2.buildLinkedList(new int[]{1,1,1,1,1,1});
+        head = Question18_2.buildLinkedList(new int[]{1,1,1,1,1,1,2,2,2});
         Question18_2.printList(head);
         head = Question18_2.deleteDuplication(head);
         Question18_2.printList(head);
@@ -44,25 +44,23 @@ public class Question18_2 extends SinglyLinkedListUtil {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy;
-        ListNode node = head;
-        boolean isDuplicate;
-        while (node != null){
-            isDuplicate = false;
-            while (node.next != null && node.next.val == node.val) {
-                node = node.next;
-                isDuplicate = true;
+        ListNode p1 = head;
+        ListNode p2;
+
+        while (p1 != null){
+            boolean flag = false;
+            p2 = p1.next;
+
+            while (p2 != null && p1.val == p2.val) {
+                p2 = p2.next;
+                flag = true;
             }
 
-            if (isDuplicate){
-                node = node.next;
-                prev.next = node;
-            }else{
-                if (node.next != null && node.next.val > node.val){
-                    prev = node;
-                }
-
-                node = node.next;
+            if (!flag){
+                prev = p1;
             }
+            prev.next = p2;
+            p1 = p2;
         }
 
         return dummy.next;
