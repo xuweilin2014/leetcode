@@ -1,65 +1,79 @@
 package offer.question21_30.questions;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 public class Question21 {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,3,4,5,6,7};
-        exchange(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
+        System.out.println(Arrays.toString(new Question21().reOrderArray(arr)));
+
+        arr = new int[]{2,4,6,1,3,5};
+        System.out.println(Arrays.toString(new Question21().reOrderArray(arr)));
+
+        arr = new int[]{1,3,5,2,4,6};
+        System.out.println(Arrays.toString(new Question21().reOrderArray(arr)));
+
+        arr = new int[]{1,3,5};
+        System.out.println(Arrays.toString(new Question21().reOrderArray(arr)));
     }
 
-    public static void reOrderArray(int [] array) {
-        int pivot = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                pivot = i;
+    // 不保持数字之间的相对位置，使用快速排序的思想
+    public int[] exchange(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return new int[0];
+
+        int low;
+        for (low = 0;  low < nums.length; low++) {
+            if (nums[low] % 2 == 0)
                 break;
+        }
+
+        if (low == nums.length)
+            return nums;
+
+        int pivot = nums[low];
+        int high = nums.length - 1;
+        while (low < high){
+            while (low < high && nums[high] % 2 == 0)
+                high--;
+            if (low < high){
+                nums[low] = nums[high];
+            }
+            while (low < high && nums[low] % 2 != 0)
+                low++;
+            if (low < high){
+                nums[high] = nums[low];
             }
         }
-        int val = array[pivot];
-        int low = pivot;
-        int high = array.length - 1;
 
-        while (low < high){
-            while (low < high && array[high] % 2 == 0)
-                high--;
+        nums[low] = pivot;
 
-            if (low < high)
-                array[low] = array[high];
-
-            while (low < high && array[low] % 2 != 0)
-                low++;
-
-            if (low < high)
-                array[high] = array[low];
-        }
-
-        array[high] = val;
+        return nums;
     }
 
-    public static void exchange(int[] nums) {
-        if (nums == null || nums.length == 0 || nums.length == 1)
-            return;
+    // 保持数字之间的相对位置，使用类似于插入排序的方法
+    public int[] reOrderArray (int[] nums) {
+        if (nums == null || nums.length == 0)
+            return new int[0];
 
-        int[] vals = new int[nums.length];
-        int counter = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 != 0)
-                vals[counter++] = nums[i];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] % 2 != 0){
+                int val = nums[i];
+                int j = i - 1;
+                for (; j >= 0; j--) {
+                    if (nums[j] % 2 == 0){
+                        nums[j + 1] = nums[j];
+                    }else {
+                        break;
+                    }
+                }
+
+                nums[j + 1] = val;
+            }
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 == 0)
-                vals[counter++] = nums[i];
-        }
-
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = vals[i];
-        }
+        return nums;
     }
 
 }

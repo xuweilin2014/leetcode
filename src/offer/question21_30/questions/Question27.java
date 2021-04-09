@@ -9,20 +9,18 @@ public class Question27 {
 
     public static void main(String[] args) {
         TreeNode root = TreeUtil.buildTree(new Integer[]{8, 6, 10, 5, 7, 9, 11});
-        Mirror(root);
+        new Question27().Mirror(root);
         TreeUtil.printTree(root);
     }
 
-    public static TreeNode Mirror(TreeNode root) {
+    public TreeNode Mirror(TreeNode root) {
         if (root == null)
             return null;
 
-        if (root.left == null && root.right == null)
-            return root;
-
-        TreeNode tmp = root.left;
+        TreeNode node = root.left;
         root.left = root.right;
-        root.right = tmp;
+        root.right = node;
+
         Mirror(root.left);
         Mirror(root.right);
 

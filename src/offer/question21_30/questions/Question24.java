@@ -6,28 +6,25 @@ import xu.linkedlist.problems.SinglyLinkedListUtil;
 public class Question24 {
 
     public static void main(String[] args) {
-        ListNode head = SinglyLinkedListUtil.buildLinkedList(new int[]{1,2,3});
-        head = ReverseList(null);
+        ListNode head = SinglyLinkedListUtil.buildLinkedList(new int[]{1,2});
+        head = new Question24().ReverseList(head);
         SinglyLinkedListUtil.printList(head);
     }
 
-    public static ListNode ReverseList(ListNode head) {
+    public ListNode ReverseList(ListNode head) {
         if (head == null || head.next == null)
             return head;
 
-        ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode p = head;
         ListNode prev = null;
-        while (fast != null){
-            slow.next = prev;
-            prev = slow;
-            slow = fast;
-            fast = fast.next;
+        while (p != null){
+            ListNode tmp = p.next;
+            p.next = prev;
+            prev = p;
+            p = tmp;
         }
 
-        slow.next = prev;
-
-        return slow;
+        return prev;
     }
 
 }
