@@ -9,22 +9,17 @@ public class Question30 {
     private Stack<Integer> minStack = new Stack<>();
 
     public void push(int node) {
-        if (stack.isEmpty()) {
-            minStack.push(node);
-        }else{
-            minStack.push(Math.min(minStack.peek(), node));
-        }
-
         stack.push(node);
+        if (!minStack.isEmpty()){
+            minStack.push(Math.min(minStack.peek(), node));
+        }else {
+            minStack.push(node);
+        }
     }
 
     public void pop() {
-        if (!stack.isEmpty()){
-            stack.pop();
-        }
-        if (!minStack.isEmpty()){
-            minStack.pop();
-        }
+        stack.pop();
+        minStack.pop();
     }
 
     public int top() {

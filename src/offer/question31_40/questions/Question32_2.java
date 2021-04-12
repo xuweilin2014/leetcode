@@ -10,28 +10,32 @@ import java.util.regex.Pattern;
 
 public class Question32_2 {
 
-    public static ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
-        if (pRoot == null)
+    public ArrayList<ArrayList<Integer>> Print(TreeNode root) {
+        if (root == null)
             return new ArrayList<>();
 
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        queue.add(pRoot);
-        while (!queue.isEmpty()){
-            Queue<TreeNode> newQueue = new ArrayDeque<>();
-            ArrayList<Integer> line = new ArrayList<>();
-            for (TreeNode node : queue) {
-                line.add(node.val);
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<TreeNode> layer = new ArrayList<>();
+        layer.add(root);
+
+        while (!layer.isEmpty()){
+            ArrayList<Integer> copy = new ArrayList<>();
+            ArrayList<TreeNode> trees = new ArrayList<>();
+
+            for (TreeNode node : layer) {
+                copy.add(node.val);
                 if (node.left != null)
-                    newQueue.add(node.left);
+                    trees.add(node.left);
                 if (node.right != null)
-                    newQueue.add(node.right);
+                    trees.add(node.right);
             }
-            queue = newQueue;
-            res.add(line);
+
+            ans.add(copy);
+            layer.clear();
+            layer.addAll(trees);
         }
 
-        return res;
+        return ans;
     }
 
 }

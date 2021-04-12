@@ -3,10 +3,7 @@ package offer.question31_40.questions;
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Question32_3 {
 
@@ -15,40 +12,36 @@ public class Question32_3 {
         System.out.println(Print(node));
     }
 
-    public static ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
-        if (pRoot == null)
+    public static ArrayList<ArrayList<Integer>> Print(TreeNode root) {
+        if (root == null)
             return new ArrayList<>();
 
-        boolean left = false;
-        List<TreeNode> queue = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        queue.add(pRoot);
-        while (!queue.isEmpty()){
-            List<TreeNode> newQueue = new ArrayList<>();
-            ArrayList<Integer> line = new ArrayList<>();
-            if (left){
-                for (int i = queue.size() - 1; i >= 0; i--) {
-                    line.add(queue.get(i).val);
-                }
-            }else{
-                for (int i = 0; i < queue.size(); i++) {
-                    line.add(queue.get(i).val);
-                }
+        ArrayList<TreeNode> layer = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        layer.add(root);
+        boolean left = true;
+
+        while (!layer.isEmpty()){
+            ArrayList<TreeNode> trees = new ArrayList<>();
+            ArrayList<Integer> copy = new ArrayList<>();
+            for (TreeNode node : layer) {
+                copy.add(node.val);
+                if (node.left != null)
+                    trees.add(node.left);
+                if (node.right != null)
+                    trees.add(node.right);
+            }
+
+            if (!left){
+                Collections.reverse(copy);
             }
             left = !left;
-            res.add(line);
-
-            // queue 始终按照正常顺序保存下一层的子节点，line则按照从左到右或者从右到左的顺序读取
-            for (TreeNode node : queue) {
-                if (node.left != null)
-                    newQueue.add(node.left);
-                if (node.right != null)
-                    newQueue.add(node.right);
-            }
-            queue = newQueue;
+            layer.clear();
+            layer.addAll(trees);
+            ans.add(copy);
         }
 
-        return res;
+        return ans;
     }
 
 }

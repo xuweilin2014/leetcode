@@ -3,42 +3,42 @@ package offer.question31_40.questions;
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Question32 {
 
     public static void main(String[] args) {
         TreeNode node = TreeUtil.buildTree(new Integer[]{8, 8, 7, 9, 2, null, null, null, null, 4, 7});
-        System.out.println(PrintFromTopToBottom(node));
+        System.out.println(Arrays.toString(new Question32().PrintFromTopToBottom(node)));
     }
 
-    public static int[] PrintFromTopToBottom(TreeNode root) {
+    public int[] PrintFromTopToBottom(TreeNode root) {
         if (root == null)
-            return null;
+            return new int[0];
 
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        ArrayList<Integer> res = new ArrayList<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            Queue<TreeNode> newQueue = new ArrayDeque<>();
-            for (TreeNode node : queue) {
-                res.add(node.val);
+        List<TreeNode> layer = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+        layer.add(root);
+
+        while (!layer.isEmpty()){
+            List<TreeNode> trees = new ArrayList<>();
+            for (TreeNode node : layer) {
+                ans.add(node.val);
                 if (node.left != null)
-                    newQueue.add(node.left);
+                    trees.add(node.left);
                 if (node.right != null)
-                    newQueue.add(node.right);
+                    trees.add(node.right);
             }
-            queue = newQueue;
+            layer.clear();
+            layer.addAll(trees);
         }
 
-        int[] vals = new int[res.size()];
-        for (int i = 0; i < vals.length; i++) {
-            vals[i] = res.get(i);
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = ans.get(i);
         }
-        return vals;
+
+        return res;
     }
 
 }
