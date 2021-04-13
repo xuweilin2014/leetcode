@@ -13,8 +13,7 @@ public class QSolution36 {
      * treeToDoublyList 的算法流程：
      * 1.如果 root 为 null，则直接返回 null，表示遍历到的树为空
      * 2.调用 func 方法对二叉树进行遍历，并且将二叉树转为双向排序链表
-     * 3.从 root 节点分别向前和向后进行遍历，遍历到头结点 head 和尾结点 tail（因为是双向链表）
-     * 4.将头结点和尾结点连接起来
+     * 3.从 root 节点向前，遍历到头结点 head，然后将头结点返回
      *
      * func 的算法流程：
      * 1.如果 root 为 null，直接返回
@@ -25,42 +24,35 @@ public class QSolution36 {
      */
 
     // 递归要用到一个全局变量
-    public TreeNode prev;
+    private TreeNode prev;
 
-    public TreeNode treeToDoublyList(TreeNode root){
+    public TreeNode Convert(TreeNode root) {
         if (root == null)
             return null;
 
-        func(root);
 
-        TreeNode last = root;
-        TreeNode head = root;
+        TreeNode node = func(root);
+        while (node.left != null){
+            node = node.left;
+        }
 
-        while (last.right != null)
-            last = last.right;
-
-        while (head.left != null)
-            head = head.left;
-
-        head.left = last;
-        last.right = head;
-
-        return head;
+        return node;
     }
 
-    public void func(TreeNode root) {
+    private TreeNode func(TreeNode root){
         if (root == null)
-            return;
+            return null;
 
         func(root.left);
 
         root.left = prev;
-        if (prev != null) {
+        if (prev != null){
             prev.right = root;
         }
-        prev = root;
 
+        prev = root;
         func(root.right);
+        return root;
     }
 
 }

@@ -8,43 +8,38 @@ public class Question36 {
 
     private TreeNode prev;
 
-    public TreeNode treeToDoublyList(TreeNode root) {
+    public TreeNode Convert(TreeNode root) {
         if (root == null)
             return null;
 
-        func(root);
 
-        TreeNode head = root, tail = root;
-        while (head.left != null){
-            head = head.left;
+        TreeNode node = func(root);
+        while (node.left != null){
+            node = node.left;
         }
 
-        while (tail.right != null){
-            tail = tail.right;
-        }
-
-        head.left = tail;
-        tail.right = head;
-
-        return head;
+        return node;
     }
 
-    private void func(TreeNode root) {
+    private TreeNode func(TreeNode root){
         if (root == null)
-            return;
+            return null;
 
         func(root.left);
-        if (prev != null) {
+
+        if (prev != null){
             prev.right = root;
+            root.left = prev;
         }
-        root.left = prev;
+
         prev = root;
         func(root.right);
+        return root;
     }
 
     public static void main(String[] args) {
-        TreeNode node = TreeUtil.buildTree(new Integer[]{2,1,3});
-        TreeNode treeNode = new Question36().treeToDoublyList(node);
+        TreeNode node = TreeUtil.buildTree(new Integer[]{10,6,14,4,8,12,16});
+        TreeNode treeNode = new Question36().Convert(node);
         if (treeNode != null){
             while (treeNode.right != null){
                 System.out.print(treeNode.val + " ");
@@ -52,6 +47,7 @@ public class Question36 {
             }
             System.out.print(treeNode.val + " ");
         }
+
         System.out.println();
         if (treeNode != null) {
             while (treeNode.left != null) {

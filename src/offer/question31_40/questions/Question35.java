@@ -5,60 +5,49 @@ import java.util.Map;
 
 public class Question35 {
 
-    static class Node{
-        int val;
-        Node next;
-        Node random;
+    public static class RandomListNode {
+        int label;
+        RandomListNode next = null;
+        RandomListNode random = null;
 
-        public Node(int val) {
-            this.val = val;
-            this.next = null;
-            this.random = null;
+        RandomListNode(int label) {
+            this.label = label;
         }
     }
 
-    public Node copyRandomList(Node head) {
+    public RandomListNode Clone(RandomListNode head) {
         if (head == null)
             return null;
 
-        Node p = head;
-        Node dummy = new Node(0);
-        Node pc;
-        Node prev = null;
-        Map<Node, Node> map = new HashMap<>();
-
+        RandomListNode p = head;
+        RandomListNode prev = null;
+        Map<RandomListNode, RandomListNode> map = new HashMap<>();
         while (p != null){
-            pc = new Node(p.val);
-            if (prev != null){
-                prev.next = pc;
-            }
-            if (dummy.next == null){
-                dummy.next = pc;
-            }
-            map.put(p, pc);
-            prev = pc;
+            RandomListNode node = new RandomListNode(p.label);
+
+            if (prev != null)
+                prev.next = node;
+
+            map.put(p, node);
             p = p.next;
+            prev = node;
         }
 
-        pc = dummy.next;
         p = head;
         while (p != null){
-            Node random = p.random;
-            if (random != null)
-                pc.random = map.get(random);
-            pc = pc.next;
+            map.get(p).random = map.get(p.random);
             p = p.next;
         }
 
-        return dummy.next;
+        return map.get(head);
     }
 
     public static void main(String[] args) {
-        Node node1 = new Node(7);
-        Node node2 = new Node(13);
-        Node node3 = new Node(11);
-        Node node4 = new Node(10);
-        Node node5 = new Node(1);
+        RandomListNode node1 = new RandomListNode(7);
+        RandomListNode node2 = new RandomListNode(13);
+        RandomListNode node3 = new RandomListNode(11);
+        RandomListNode node4 = new RandomListNode(10);
+        RandomListNode node5 = new RandomListNode(1);
 
         node1.next = node2;
         node2.next = node3;
@@ -72,7 +61,7 @@ public class Question35 {
         node4.random = node3;
         node5.random = node1;
 
-        System.out.println(new Question35().copyRandomList(node1));
+        System.out.println(new Question35().Clone(node1));
     }
 
 }
