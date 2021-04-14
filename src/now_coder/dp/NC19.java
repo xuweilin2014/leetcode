@@ -1,13 +1,8 @@
-package offer.question41_50.questions;
+package now_coder.dp;
 
-public class Question42 {
+public class NC19 {
 
-    public static void main(String[] args) {
-        System.out.println(new Question42().maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
-        System.out.println(new Question42().maxSubArray(new int[]{-2,2,1}));
-    }
-
-    public int maxSubArray(int[] nums) {
+    public int maxsumofSubarray (int[] nums) {
         if (nums == null || nums.length == 0)
             return 0;
 

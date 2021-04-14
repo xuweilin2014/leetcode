@@ -25,27 +25,34 @@ public class QSolution39 {
 
     // 摩尔投票法
     public int majorityElement(int[] array) {
-        if (array.length == 1)
-            return array[0];
+        if (array == null || array.length == 0)
+            return 0;
 
         int counter = 1;
         int val = array[0];
-
         for (int i = 1; i < array.length; i++) {
-            if (counter == 0){
+            if (array[i] == array[i - 1]){
                 counter++;
-                val = array[i];
-                continue;
-            }
-
-            if (array[i] == val){
-                counter++;
-            }else{
+            }else {
                 counter--;
+                if (counter == 0) {
+                    counter = 1;
+                    val = array[i];
+                }
             }
         }
 
-        return val;
+        // 判断 val 是否真的在数组中出现超过数组长度的一半
+        int times = 0;
+        for (int value : array) {
+            if (value == val)
+                times++;
+        }
+
+        if (times > array.length / 2)
+            return val;
+        else
+            return 0;
     }
 
 }

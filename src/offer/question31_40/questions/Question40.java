@@ -1,58 +1,58 @@
 package offer.question31_40.questions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Question40 {
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Question40().getLeastNumbers(new int[]{0,0,2,3,2,1,1,2,0,4}, 1)));
-        System.out.println(Arrays.toString(new Question40().getLeastNumbers(new int[]{0,0,2,3,2,1,1,2,0,4}, 10)));
+        System.out.println(new Question40().GetLeastNumbers_Solution(new int[]{0,0,2,3,2,1,1,2,0,4}, 1));
+        System.out.println(new Question40().GetLeastNumbers_Solution(new int[]{0,0,2,3,2,1,1,2,0,4}, 10));
     }
 
     // 使用快排的思想
-    public int[] getLeastNumbers(int[] arr, int k) {
-        if (k == 0 || arr == null || arr.length == 0)
-            return new int[]{};
+    public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
+        if (k > input.length)
+            return new ArrayList<>();
 
-        func(arr, 0, arr.length - 1, k);
-        int[] ans = new int[k];
+        func(input, 0, input.length - 1, k);
+        ArrayList<Integer> ans = new ArrayList<>();
         for (int i = 0; i < k; i++) {
-            ans[i] = arr[i];
+            ans.add(input[i]);
         }
 
         return ans;
     }
 
-    private void func(int[] arr, int left, int right, int k) {
-        if (left > right)
+    private void func(int[] input, int left, int right, int k) {
+        if (left >= right)
             return;
 
+        int pivot = input[left];
         int low = left;
         int high = right;
-        int key = arr[low];
         while (low < high){
-            while (low < high && arr[high] > key)
+            while (low < high && input[high] >= pivot)
                 high--;
-
             if (low < high){
-                arr[low] = arr[high];
+                input[low] = input[high];
                 low++;
             }
-
-            while (low < high && arr[low] < key)
+            while (low < high && input[low] <= pivot)
                 low++;
-
             if (low < high){
-                arr[high] = arr[low];
+                input[high] = input[low];
                 high--;
             }
         }
-        arr[low] = key;
+        input[low] = pivot;
 
-        if (low > k)
-            func(arr, left, low - 1, k);
         if (low < k)
-            func(arr, low + 1, right, k);
+            func(input, low + 1, right, k);
+        if (low > k)
+            func(input, left, low - 1, k);
+
     }
 
 
