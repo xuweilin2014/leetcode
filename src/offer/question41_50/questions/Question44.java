@@ -2,44 +2,34 @@ package offer.question41_50.questions;
 
 public class Question44 {
 
-    public static void main(String[] args) {
-        System.out.println(findNthDigit(498));
-    }
+    public int findNthDigit(int n) {
+        if (n <= 9)
+            return n;
 
-    public static int findNthDigit(int n) {
-        if (n == 0)
-            return 0;
-
-        int counter = 1;
         int val = n;
-        while (true){
-            int nums = digitNums(counter);
+        int prev = val;
+        int counter = 0;
 
-            if (val <= nums){
-                return doFindDigit(val, counter);
-            }
-
+        while (val > 0){
+            prev = val;
+            val -= Math.pow(10, counter) * 9 * (counter + 1);
             counter++;
-            val -= nums;
         }
+
+        int ans = (int) Math.pow(10, counter - 1);
+        val = prev;
+
+        ans += (val - 1) / counter;
+        val = (val - 1) % counter;
+
+        return String.valueOf(ans).charAt(val) - '0';
     }
 
-    private static int doFindDigit(int val, int digit) {
-        int len = val / digit;
-        int remainder = val % digit;
-        int base = (int) Math.pow(10, digit - 1);
-
-        char ch;
-        if (remainder == 0)
-            ch = String.valueOf(base + len - 1).charAt(digit - 1);
-        else
-            ch = String.valueOf(base + len).charAt(remainder - 1);
-
-        return ch - '0';
-    }
-
-    private static int digitNums(int counter) {
-        return (int) (9 * Math.pow(10, counter - 1) * counter);
+    public static void main(String[] args) {
+        System.out.println(new Question44().findNthDigit(2901));
+        System.out.println(new Question44().findNthDigit(19));
+        System.out.println(new Question44().findNthDigit(1001));
+        System.out.println(new Question44().findNthDigit(498));
     }
 
 }
