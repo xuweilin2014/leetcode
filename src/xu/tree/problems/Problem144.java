@@ -1,11 +1,10 @@
 package xu.tree.problems;
 
-import xu.tree.problems.TreeNode;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+// 二叉树前序遍历
 public class Problem144 {
 
     public List<Integer> preorderTraversal(TreeNode root) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+// 二叉树的后序遍历
 public class Problem145 {
 
     public List<Integer> postorderTraversal(TreeNode root) {

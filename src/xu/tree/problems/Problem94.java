@@ -1,14 +1,10 @@
 package xu.tree.problems;
 
-
-import xu.tree.problems.TreeNode;
-import xu.tree.problems.TreeUtil;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+// 二叉树的中序遍历
 public class Problem94 {
 
     public List<Integer> inorderTraversal(TreeNode root) {
