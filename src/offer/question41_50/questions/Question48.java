@@ -5,23 +5,38 @@ import java.util.*;
 public class Question48 {
 
     public int lengthOfLongestSubstring(String s) {
-        char[] chs = s.toCharArray();
-        Map<Character, Integer> map = new HashMap<>();
-        int low = 0;
-        int maxLength = 0;
+        if (s == null || s.length() == 0)
+            return 0;
 
-        for (int i = 0; i < chs.length; i++) {
-            if (map.containsKey(chs[i]))
-                low = Math.max(map.get(chs[i]) + 1, low);
-            map.put(chs[i], i);
-            maxLength = Math.max(i - low + 1, maxLength);
+        Map<Character, Integer> map = new HashMap<>();
+        int max = Integer.MIN_VALUE;
+        int[] dp = new int[s.length()];
+        dp[0] = 1;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (i > 0){
+                if (!map.containsKey(ch))
+                    dp[i] = dp[i - 1] + 1;
+                else {
+                    int d = i - map.get(ch);
+                    if (d > dp[i - 1])
+                        dp[i] = dp[i - 1] + 1;
+                    else
+                        dp[i] = d;
+                }
+            }
+
+            map.put(ch, i);
+            max = Math.max(max, dp[i]);
         }
 
-        return maxLength;
+        return max;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Question48().lengthOfLongestSubstring("abba"));
+        System.out.println(new Question48().lengthOfLongestSubstring(" "));
         System.out.println(new Question48().lengthOfLongestSubstring("dvdf"));
         System.out.println(new Question48().lengthOfLongestSubstring("pwwkew"));
     }

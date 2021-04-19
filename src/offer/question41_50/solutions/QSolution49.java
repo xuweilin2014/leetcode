@@ -16,12 +16,15 @@ public class QSolution49 {
      * 8.返回第 n 个丑数
      */
 
-    public static int nthUglyNumber(int n) {
-        int[] dp = new int[n];
+    public int GetUglyNumber_Solution(int index) {
+        if (index <= 1)
+            return index;
 
-        int p2 = 0, p3 = 0, p5 = 0;
-        dp[0] = 1;
-        for (int i = 1; i < dp.length; i++) {
+        int[] dp = new int[index + 1];
+        dp[1] = 1;
+        int p2 = 1, p3 = 1, p5 = 1;
+
+        for (int i = 2; i <= index; i++) {
             dp[i] = Math.min(dp[p2] * 2, Math.min(dp[p3] * 3, dp[p5] * 5));
             if (dp[i] == dp[p2] * 2)
                 p2++;
@@ -31,7 +34,7 @@ public class QSolution49 {
                 p5++;
         }
 
-        return dp[n-1];
+        return dp[dp.length - 1];
     }
 
 }

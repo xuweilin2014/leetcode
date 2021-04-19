@@ -1,5 +1,7 @@
 package offer.Question51_60.solutions;
 
+import xu.linkedlist.problems.ListNode;
+
 public class QSolution52 {
     /*
      * 两个链表的第一个公共节点
@@ -12,5 +14,25 @@ public class QSolution52 {
      * 所以具体的策略就是指针 pa 与 pb 分别在 l1 和 l2 上遍历，如果遍历到链表的尾结点，那么 pa 就从 l2 的头结点开始遍历，
      * pb 从 l1 的头结点开始遍历，最后如果相交，那么pa 与 pb 相遇的节点就是相交节点；如果不相交，那么 pa 与 pb 最后都会为 null
      */
+
+    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        ListNode p1 = pHead1;
+        ListNode p2 = pHead2;
+
+        while (p1 != p2){
+            if (p1 == null){
+                p1 = pHead2;
+            }else {
+                p1 = p1.next;
+            }
+            if (p2 == null){
+                p2 = pHead1;
+            }else {
+                p2 = p2.next;
+            }
+        }
+
+        return p1;
+    }
 
 }

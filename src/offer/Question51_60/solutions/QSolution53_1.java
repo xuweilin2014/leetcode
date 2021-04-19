@@ -1,9 +1,13 @@
-package offer.Question51_60.questions;
+package offer.Question51_60.solutions;
 
-/**
- * 分别使用二分查找去找到数组中第一个和最后一个 target 值，最后算出来数字出现的次数
- */
-public class Question53_1 {
+public class QSolution53_1 {
+
+    /*
+     * 数字在排序数组中出现的次数
+     *
+     * 这道题目需要使用二分查找，在排序数组中分别找到 target 第一次出现的位置 low，以及 target 最后一次出现的位置 high，
+     * 最后，high - low + 1 得到的结果就是 target 出现的次数
+     */
 
     public int GetNumberOfK(int [] array , int k) {
         if (array == null || array.length == 0)
@@ -51,11 +55,6 @@ public class Question53_1 {
         }
 
         return -1;
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println(new Question53_1().GetNumberOfK(new int[]{1,2,3,3,3,3,4,5}, 3));
     }
 
 }

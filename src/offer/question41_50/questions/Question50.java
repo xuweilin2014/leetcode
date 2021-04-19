@@ -2,34 +2,38 @@ package offer.question41_50.questions;
 
 import java.util.*;
 
-// 哈希表 + 2次遍历
 public class Question50 {
 
-    private Map<Character, Integer> map = new LinkedHashMap<>();
+    public int FirstNotRepeatingChar(String str) {
+        int[] indices = new int[52];
 
-    public char firstUniqChar(String s) {
-        if (s == null || s.length() == 0)
-            return ' ';
-
-        if (s.length() == 1)
-            return s.charAt(0);
-
-        char[] chs = s.toCharArray();
-        int[] counter = new int[256];
-        for (int i = 0; i < chs.length; i++) {
-            counter[chs[i]]++;
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch >= 'a' && ch <= 'z')
+                indices[ch - 'a']++;
+            if (ch >= 'A' && ch <= 'Z')
+                indices[ch - 'A' + 26]++;
         }
 
-        for (char ch : chs) {
-            if (counter[ch] == 1)
-                return ch;
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch >= 'a' && ch <= 'z'){
+                if (indices[ch - 'a'] == 1){
+                    return i;
+                }
+            }
+            if (ch >= 'A' && ch <= 'Z'){
+                if (indices[ch - 'A' + 26] == 1){
+                    return i;
+                }
+            }
         }
 
-        return ' ';
+        return -1;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Question50().firstUniqChar("abaccdefbf"));
+        System.out.println(new Question50().FirstNotRepeatingChar("abaccdefbf"));
     }
 
 }

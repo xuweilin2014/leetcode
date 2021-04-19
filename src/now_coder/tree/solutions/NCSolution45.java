@@ -65,6 +65,8 @@ public class NCSolution45 {
                 p = p.left;
             } else {
                 p = stack.peek();
+                // 判断返回的结点是左结点还是右节点
+                // 如果是右节点的话，说明当前结点的左子树和右子树已经被遍历完成，可以进行访问，并且可以把它从 stack 中移除
                 if (p.right == null || p.right == prev){
                     prev = p;
                     stack.pop();
