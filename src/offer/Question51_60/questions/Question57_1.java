@@ -1,30 +1,45 @@
 package offer.Question51_60.questions;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * 双指针，从数组的两头向中间移动
- */
 public class Question57_1 {
 
-    public int[] twoSum(int[] nums, int target) {
-        int low = 0;
-        int high = nums.length - 1;
-        int res = nums[low] + nums[high];
+    public ArrayList<Integer> FindNumbersWithSum(int[] array, int sum) {
+        if (array == null || array.length == 0)
+            return new ArrayList<>();
 
-        while (res != target){
-            if (res > target && high > 0)
+        int low = 0;
+        int high = array.length - 1;
+        List<ArrayList<Integer>> arr = new ArrayList<>();
+        int multi = Integer.MAX_VALUE;
+
+        while (low < high){
+            int val = array[low] + array[high];
+            if (val > sum)
                 high--;
-            if (res < target)
+            else if (val == sum){
+                ArrayList<Integer> copy = new ArrayList<>();
+                copy.add(array[low]);
+                copy.add(array[high]);
+                arr.add(copy);
+                multi = Math.min(array[low] * array[high], multi);
+                high--;
+            }else {
                 low++;
-            res = nums[low] + nums[high];
+            }
         }
 
-        return new int[]{nums[low], nums[high]};
+        for (ArrayList<Integer> vals : arr) {
+            if (vals.get(0) * vals.get(1) == multi)
+                return vals;
+        }
+
+        return new ArrayList<>();
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Question57_1().twoSum(new int[]{5,5,10}, 10)));
+        System.out.println((new Question57_1().FindNumbersWithSum(new int[]{5,5,10}, 10)));
     }
 
 }

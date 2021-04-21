@@ -6,27 +6,26 @@ public class Question56_2 {
         if (nums == null || nums.length == 0)
             return 0;
 
-        int[] vals = new int[32];
+        int[] bits = new int[32];
         for (int num : nums) {
-            int mask = 1;
-            for (int i = 0; i < vals.length; i++) {
-                if ((mask & num) != 0){
-                    vals[i]++;
-                }
-                mask = mask << 1;
+            int counter = 1;
+            for (int i = 0; i < 32; i++) {
+                if ((counter & num) != 0)
+                    bits[i]++;
+                counter <<= 1;
             }
         }
 
-        int mask = 1;
-        int val = 0;
-        for (int v : vals) {
-            if (v % 3 != 0){
-                val = val | mask;
+        int counter = 1;
+        int ans = 0;
+        for (int bit : bits) {
+            if (bit % 3 != 0){
+                ans |= counter;
             }
-            mask <<= 1;
+            counter <<= 1;
         }
 
-        return val;
+        return ans;
     }
 
     public static void main(String[] args) {

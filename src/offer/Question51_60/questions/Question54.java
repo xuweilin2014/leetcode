@@ -5,31 +5,38 @@ import xu.tree.problems.TreeUtil;
 
 public class Question54 {
 
-    private int val;
-
     private int counter = 0;
 
-    public int kthLargest(TreeNode root, int k) {
-        doFind(root, k);
-        return val;
+    private TreeNode ans;
+
+    public TreeNode KthNode(TreeNode root, int k) {
+        if (root == null)
+            return null;
+
+        func(root, k);
+        return ans;
     }
 
-    public void doFind(TreeNode root, int k){
+    private void func(TreeNode root, int k) {
         if (root == null)
             return;
 
-        doFind(root.right, k);
+        if (ans == null)
+            func(root.left, k);
+
         counter++;
-        if (k == counter){
-            val = root.val;
+        if (counter == k) {
+            ans = root;
             return;
         }
-        doFind(root.left, k);
+
+        if (ans == null)
+            func(root.right, k);
     }
 
     public static void main(String[] args) {
         TreeNode tree = TreeUtil.buildTree(new Integer[]{5, 3, 6, 2, 4, null, null, 1, null, null, null});
-        System.out.println(new Question54().kthLargest(tree, 2));
+        System.out.println(new Question54().KthNode(tree, 2));
     }
 
 }

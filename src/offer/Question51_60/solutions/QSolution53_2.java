@@ -1,6 +1,16 @@
-package offer.Question51_60.questions;
+package offer.Question51_60.solutions;
 
-public class Question53_2 {
+public class QSolution53_2 {
+
+    /*
+     * 0～n-1中缺失的数字
+     *
+     * 这道题目递归的使用二分查找法，因为 0~n-1 这 n 个数字分布在大小为 n-1 的数组中，所以当 nums[i] == i 的时候，这个数字就不是缺失的，
+     * 据此，我们可以使用二分查找法：
+     *
+     * 1.当 nums[mid] == mid 时，缺失的数字就在 [mid + 1, high] 这个区间
+     * 2.当 nums[mid] != mid 时，缺失的数字就在 [low, mid - 1] 这个区间
+     */
 
     public int missingNumber(int[] nums) {
         if (nums == null || nums.length == 0)
@@ -22,12 +32,4 @@ public class Question53_2 {
             return func(nums, low, mid - 1);
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Question53_2().missingNumber(new int[]{1,2,3,4,5,6,7,8,9}));
-        System.out.println(new Question53_2().missingNumber(new int[]{0,1,2,3,4,5,6,7,8}));
-        System.out.println(new Question53_2().missingNumber(new int[]{0,1}));
-    }
-
-
 }
