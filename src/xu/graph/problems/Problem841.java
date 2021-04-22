@@ -1,4 +1,4 @@
-package xu.graph;
+package xu.graph.problems;
 
 import java.util.ArrayList;
 import java.util.HashSet;

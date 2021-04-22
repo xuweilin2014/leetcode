@@ -1,4 +1,4 @@
-package xu.graph;
+package xu.graph.problems;
 
 import xu.union_find.UnionFind;
 
