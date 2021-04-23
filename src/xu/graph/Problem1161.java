@@ -1,4 +1,4 @@
-package xu.graph.problems;
+package xu.graph;
 
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;

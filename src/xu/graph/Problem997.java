@@ -1,4 +1,4 @@
-package xu.graph.problems;
+package xu.graph;
 
 public class Problem997 {
     public int findJudge(int N, int[][] trust) {
