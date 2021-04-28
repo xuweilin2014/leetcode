@@ -1,4 +1,4 @@
-package now_coder.dp;
+package now_coder.dp.ncs;
 
 public class NC19 {
 
