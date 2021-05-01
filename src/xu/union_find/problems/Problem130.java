@@ -1,7 +1,5 @@
 package xu.union_find.problems;
 
-import sun.security.krb5.internal.PAData;
-import xu.union_find.UnionFind;
 
 import java.util.*;
 

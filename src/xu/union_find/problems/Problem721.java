@@ -1,6 +1,5 @@
 package xu.union_find.problems;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Union;
 import xu.union_find.UnionFind;
 
 import java.util.*;

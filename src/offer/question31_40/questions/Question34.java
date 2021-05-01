@@ -1,7 +1,5 @@
 package offer.question31_40.questions;
 
-import com.sun.org.apache.regexp.internal.RE;
-import xu.linkedlist.problems.ListNode;
 import xu.tree.problems.TreeNode;
 import xu.tree.problems.TreeUtil;
 
