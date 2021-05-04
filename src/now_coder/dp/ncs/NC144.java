@@ -6,18 +6,13 @@ public class NC144 {
         if (array == null || array.length == 0)
             return 0;
 
-        int[] dp = new int[n];
-        System.arraycopy(array, 0, dp, 0, array.length);
+        int[] dp = new int[n + 2];
 
-        for (int i = 1; i < array.length; i++) {
-            if (i == 1){
-                dp[i] = Math.max(dp[i], dp[i - 1]);
-            }else {
-                dp[i] = Math.max(dp[i], Math.max(dp[i - 1], dp[i - 2] + array[i]));
-            }
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i] = Math.max(dp[i + 1], array[i] + dp[i + 2]);
         }
 
-        return dp[n - 1];
+        return dp[0];
     }
 
     public static void main(String[] args) {
