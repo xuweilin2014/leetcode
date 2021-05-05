@@ -80,11 +80,12 @@ public class NCSolution140 {
 
         // 将大根堆的第一个元素和【无序数组】最后一个元素进行交换，然后再对大根堆从第一个元素开始调整，不断重复
         // 就可以得到一个排好序的数组
-        for (int i = arr.length - 1; i >= 1; i--) {
-            int temp = arr[i];
-            arr[i] = arr[0];
+        for (int i = arr.length; i >= 1; i--) {
+            int temp = arr[i - 1];
+            arr[i - 1] = arr[0];
             arr[0] = temp;
-            heapAdjust(arr, 1, i);
+            // i - 1 需要将已经排好序的部分排除在外
+            heapAdjust(arr, 1, i - 1);
         }
     }
 
