@@ -6,45 +6,47 @@ public class NC140 {
 
     public int[] MySort (int[] arr) {
         // write code here
-        // 冒泡排序
-        quickSort(arr, 0, arr.length - 1);
-
+        // 堆排序
+        heapSort(arr);
         return arr;
     }
 
-    // 快速排序
-    private void quickSort(int[] arr, int left, int right){
-        if (left >= right)
+    private void heapSort(int[] arr){
+        if (arr == null || arr.length == 0)
             return;
 
-        int low = left;
-        int high = right;
-        int key = arr[left];
-
-        while (low < high){
-            while (low < high && arr[high] >= key)
-                high--;
-
-            if (low < high){
-                arr[low] = arr[high];
-            }
-
-            while (low < high && arr[low] <= key)
-                low++;
-
-            if (low < high){
-                arr[high] = arr[low];
-            }
+        for (int i = arr.length / 2; i >= 1; i--) {
+            heapAdjust(arr, i, arr.length);
         }
 
-        arr[low] = key;
-        quickSort(arr, left, low - 1);
-        quickSort(arr, low + 1, right);
+        for (int i = arr.length - 1; i >= 1; i--) {
+            int temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            heapAdjust(arr, 1, i);
+        }
+    }
+
+    private void heapAdjust(int[] arr, int low, int high){
+        int j = low;
+        int key = arr[low - 1];
+
+        for (int i = low * 2; i <= high; i = i * 2) {
+            if (i + 1 <= high && arr[i - 1] < arr[i])
+                i++;
+            if (key >= arr[i - 1])
+                break;
+
+            arr[j - 1] = arr[i - 1];
+            j = i;
+        }
+
+        arr[j - 1] = key;
     }
 
     public static void main(String[] args) {
-        int[] array = SortTestHelper.generateRandomArray(10, -100, 100);
+        int[] array = SortTestHelper.generateRandomArray(7, 0, 100);
         System.out.println(Arrays.toString(array));
-        System.out.println(Arrays.toString(new NC140().MySort(array)));
+        System.out.println(Arrays.toString(new NC140().MySort(new int[]{32, 62, 4, 61, 56, 18, 70})));
     }
 }

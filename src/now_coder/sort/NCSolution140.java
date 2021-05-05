@@ -66,4 +66,42 @@ public class NCSolution140 {
         quickSort(arr, left, low - 1);
         quickSort(arr, low + 1, right);
     }
+
+    // 堆排序
+    private void heapSort(int[] arr){
+        if (arr == null || arr.length == 0)
+            return;
+
+        // 对无序数组进行调整，使其变成一个大根堆
+        // 从 length / 2 开始调整，这是完全二叉树中第一个非叶子结点，一直调整到第一个结点
+        for (int i = arr.length / 2; i >= 1; i--) {
+            heapAdjust(arr, i, arr.length);
+        }
+
+        // 将大根堆的第一个元素和【无序数组】最后一个元素进行交换，然后再对大根堆从第一个元素开始调整，不断重复
+        // 就可以得到一个排好序的数组
+        for (int i = arr.length - 1; i >= 1; i--) {
+            int temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            heapAdjust(arr, 1, i);
+        }
+    }
+
+    private void heapAdjust(int[] arr, int low, int high){
+        int j = low;
+        int key = arr[low - 1];
+
+        for (int i = low * 2; i <= high; i = i * 2) {
+            if (i + 1 <= high && arr[i - 1] < arr[i])
+                i++;
+            if (key >= arr[i - 1])
+                break;
+
+            arr[j - 1] = arr[i - 1];
+            j = i;
+        }
+
+        arr[j - 1] = key;
+    }
 }
